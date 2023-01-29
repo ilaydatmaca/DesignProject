@@ -481,18 +481,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d904ebbea853c4491b28af20a813f7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 9
   width: 7
+  height: 9
   borderSize: 1
-  tilePrefab: {fileID: 2955991602202354804, guid: f1d4d6601c1b8422baf0a64ee404f9e5, type: 3}
+  tilePrefab: {fileID: 187378, guid: f1d4d6601c1b8422baf0a64ee404f9e5, type: 3}
   gamePiecePrefabs:
   - {fileID: 713420399113737490, guid: 63f817c785c8245a0be92a3276b8f82b, type: 3}
   - {fileID: 2419699633511248968, guid: 26d8d053bec234d8c8ca724b09ea0342, type: 3}
   - {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
   - {fileID: 2861016000476985035, guid: 2fd2def334974430d8f9d3a3e8cf311e, type: 3}
   - {fileID: 2475221528682096355, guid: b4b6a6b241599447cb5b7ae8d21ec362, type: 3}
-  m_clickedTile: {fileID: 0}
-  m_targetTile: {fileID: 0}
+  swapTime: 0.5
 --- !u!4 &1952387142
 Transform:
   m_ObjectHideFlags: 0
