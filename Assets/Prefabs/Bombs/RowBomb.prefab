@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1385bf4afb3e64137afc92e22501e053, type: 3}
-  m_Color: {r: 0.41960788, g: 0.5372549, b: 0.8235295, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   xIndex: 0
   yIndex: 0
   interpolation: 4
-  matchValue: 1
+  matchValue: 8
   bombType: 1
 --- !u!1001 &3056198586455033661
 PrefabInstance:

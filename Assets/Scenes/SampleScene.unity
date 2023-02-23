@@ -327,7 +327,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -493,22 +493,33 @@ MonoBehaviour:
   - {fileID: 2861016000476985035, guid: 2fd2def334974430d8f9d3a3e8cf311e, type: 3}
   - {fileID: 2475221528682096355, guid: b4b6a6b241599447cb5b7ae8d21ec362, type: 3}
   adjacentBombPrefab: {fileID: 3056198587870010144, guid: a8e75d44e368b4bf8a7d535e1b83d479, type: 3}
-  rowBombPrefab: {fileID: 3056198587870010144, guid: 714ee8b4e7c7f49ec9cd22e189609652, type: 3}
   columnBombPrefab: {fileID: 3056198587870010144, guid: cdab357f15ce74fb1a34a1b8b71c3f5d, type: 3}
-  swapTime: 0.5
+  rowBombPrefab: {fileID: 3056198587870010144, guid: 714ee8b4e7c7f49ec9cd22e189609652, type: 3}
+  colorBombPrefab: {fileID: 1000013338762844, guid: 4a9ee0b5742c442aeb42653755006ff4, type: 3}
+  maxCollectibles: 3
+  collectibleCount: 0
+  chanceForCollectible: 0.25
+  collectiblePrefabs:
+  - {fileID: 1665201241071484, guid: 7a2dd4e1deceb4a38991d93bd7289729, type: 3}
+  - {fileID: 1583640311145312, guid: 5bd35735630694091b6c1079936da3f9, type: 3}
+  swapTime: 0.25
   startingTiles: []
   startingGamePieces:
-  - prefab: {fileID: 2419699633511248968, guid: 26d8d053bec234d8c8ca724b09ea0342, type: 3}
-    x: 1
-    y: 0
+  - prefab: {fileID: 1583640311145312, guid: 5bd35735630694091b6c1079936da3f9, type: 3}
+    x: 4
+    y: 8
     z: 0
-  - prefab: {fileID: 2419699633511248968, guid: 26d8d053bec234d8c8ca724b09ea0342, type: 3}
-    x: 1
-    y: 1
+  - prefab: {fileID: 1949934371936278, guid: 590bffa9ea54844378825fc68d92c62d, type: 3}
+    x: 4
+    y: 5
     z: 0
-  - prefab: {fileID: 3056198587870010144, guid: a8e75d44e368b4bf8a7d535e1b83d479, type: 3}
-    x: 2
-    y: 2
+  - prefab: {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
+    x: 4
+    y: 4
+    z: 0
+  - prefab: {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
+    x: 5
+    y: 6
     z: 0
   fillYOffset: 10
   fillMoveTime: 0.5
@@ -559,6 +570,7 @@ MonoBehaviour:
   clearFXPrefab: {fileID: 1000010615010014, guid: 0ec2e92cb15d9432c96b961695fc3a76, type: 3}
   breakFXPrefab: {fileID: 1000013032388978, guid: 6f521999b115f44a5a40d38387f77e00, type: 3}
   doubleBreakFXPrefab: {fileID: 1000013940112220, guid: ff74114384f1040df9b7a964e11e747c, type: 3}
+  bombFXPrefab: {fileID: 1062716762611435068, guid: 7b953d1a4eea942cca0f44c8d119e9f5, type: 3}
 --- !u!4 &1982151549
 Transform:
   m_ObjectHideFlags: 0

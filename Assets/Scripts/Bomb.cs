@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public enum BombType
 {
     None,
-    Row,
     Column,
+    Row,
     Adjacent,
     Color
+
 }
-public class Bomb : GamePiece
+
+public class Bomb : GamePiece 
 {
     public BombType bombType;
+
 }
