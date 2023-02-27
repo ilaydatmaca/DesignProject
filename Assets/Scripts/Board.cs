@@ -47,6 +47,8 @@ public class Board : MonoBehaviour
     public int fillYOffset = 10;
     public float fillMoveTime = 0.5f;
 
+    private int m_scoreMultiplier = 0;
+    
     [System.Serializable]
     public class StartingObject
     {
@@ -651,6 +653,14 @@ public class Board : MonoBehaviour
             if (piece != null)
             {
                 ClearPieceAt(piece.xIndex, piece.yIndex);
+                int bonus = 0;
+
+                if (gamePieces.Count >= 4)
+                {
+                    bonus = 20;
+                }
+                
+                piece.ScorePoints(m_scoreMultiplier);
 
                 if (m_particleManager != null)
                 {
@@ -764,9 +774,12 @@ public class Board : MonoBehaviour
         m_playerInputEnabled = false;
 
         List<GamePiece> matches = gamePieces;
+        m_scoreMultiplier = 0;
 
         do
         {
+            m_scoreMultiplier++;
+            
             yield return StartCoroutine(ClearAndCollapseRoutine(matches));
 
             // add pause here 
@@ -849,6 +862,7 @@ public class Board : MonoBehaviour
             }
             else
             {
+                m_scoreMultiplier++;
                 yield return StartCoroutine(ClearAndCollapseRoutine(matches));
             }
         }

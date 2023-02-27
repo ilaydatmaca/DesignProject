@@ -38,6 +38,7 @@ public class GamePiece : MonoBehaviour {
 
 	public MatchValue matchValue;
 
+	public int scoreValue = 20;
 
 
 	// Use this for initialization
@@ -166,5 +167,13 @@ public class GamePiece : MonoBehaviour {
 			matchValue = pieceToMatch.matchValue;
 		}
 
+	}
+
+	public void ScorePoints(int multiplier = 1, int bonus = 0)
+	{
+		if (ScoreManager.Instance != null)
+		{
+			ScoreManager.Instance.AddScore(scoreValue * multiplier + bonus);
+		}
 	}
 }

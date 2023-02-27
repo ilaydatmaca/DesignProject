@@ -187,6 +187,7 @@ MonoBehaviour:
   yIndex: 0
   interpolation: 4
   matchValue: 8
+  scoreValue: 100
   bombType: 2
 --- !u!1001 &3056198586455033661
 PrefabInstance:
