@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +12,9 @@ public class GameManager : Singleton<GameManager>
     public int scoreGoal = 10000;
 
     public ScreenFader screenFader;
-    private Board m_board;
+    Board m_board;
+
+    public TextMeshProUGUI movesLeftText;
 
     bool isReadyToBegin = false;
     bool isGameOver = false;
@@ -20,7 +23,16 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         m_board = GameObject.FindObjectOfType<Board>().GetComponent<Board>();
+        UpdateMoves();
         StartCoroutine("ExecuteGameLoop");
+    }
+
+    public void UpdateMoves()
+    {
+        if (movesLeftText != null)
+        {
+            movesLeftText.text = movesLeft.ToString();
+        }
     }
 
     IEnumerator ExecuteGameLoop()
@@ -57,12 +69,21 @@ public class GameManager : Singleton<GameManager>
     {
         while (!isGameOver)
         {
+            if (movesLeft == 0)
+            {
+                isGameOver = true;
+                isWinner = false;
+            }
             yield return null;
         }    
     }
 
     IEnumerator EndGameRoutine()
     {
+        if (screenFader != null)
+        {
+            screenFader.FadeOn();
+        }
         if (isWinner)
         {
             Debug.Log("You Win");
