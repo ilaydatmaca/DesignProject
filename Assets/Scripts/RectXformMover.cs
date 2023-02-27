@@ -12,7 +12,7 @@ public class RectXformMover : MonoBehaviour
 
     public float timeToMove = 1f;
 
-    private RectTransform rectXform;
+    RectTransform rectXform;
     private bool isMoving = false;
 
     void Awake()

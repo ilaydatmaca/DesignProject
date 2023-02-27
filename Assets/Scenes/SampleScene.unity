@@ -421,7 +421,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score :'
+  m_text: 'Score Goal
+
+    5000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91302e1e6ead545859a799c3bc311238, type: 2}
   m_sharedMaterial: {fileID: 6002351981339138989, guid: 91302e1e6ead545859a799c3bc311238, type: 2}
@@ -817,7 +819,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422485519}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1201,9 +1203,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movesLeft: 2
-  scoreGoal: 10000
+  scoreGoal: 500
   screenFader: {fileID: 422485521}
   movesLeftText: {fileID: 27723794}
+  messageWindow: {fileID: 1683412296}
+  loseIcon: {fileID: 21300000, guid: 6f0eb8bddd7bd45eb80dd8c23ade85ba, type: 3}
+  winIcon: {fileID: 21300000, guid: 1688bfc54305649b882f5b64ad6729fa, type: 3}
+  goalIcon: {fileID: 21300000, guid: ebb1b415187f443eaa585692b2d94030, type: 3}
 --- !u!1 &1054576961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,7 +1301,7 @@ GameObject:
   - component: {fileID: 1136988143}
   - component: {fileID: 1136988142}
   m_Layer: 5
-  m_Name: StartButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1365,7 +1371,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1136988143}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037561603}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: BeginGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1683412297}
+        m_TargetAssemblyTypeName: RectXformMover, Assembly-CSharp
+        m_MethodName: MoveOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1037561603}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1136988143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,7 +1458,7 @@ GameObject:
   - component: {fileID: 1390052636}
   - component: {fileID: 1390052635}
   m_Layer: 5
-  m_Name: StartText
+  m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1462,7 +1504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START
+  m_text: start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91302e1e6ead545859a799c3bc311238, type: 2}
   m_sharedMaterial: {fileID: 6002351981339138989, guid: 91302e1e6ead545859a799c3bc311238, type: 2}

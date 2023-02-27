@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(RectXformMover))]
 public class MessageWindow : MonoBehaviour
 {
     public Image messageIcon;
@@ -28,3 +29,4 @@ public class MessageWindow : MonoBehaviour
         }
     }
 }
+

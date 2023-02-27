@@ -19,6 +19,13 @@ public class GameManager : Singleton<GameManager>
     bool isReadyToBegin = false;
     bool isGameOver = false;
     bool isWinner = false;
+    bool isReadyToReload = false;
+
+
+    public MessageWindow messageWindow;
+    public Sprite loseIcon;
+    public Sprite winIcon;
+    public Sprite goalIcon;
 
     void Start()
     {
@@ -43,13 +50,21 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    public void BeginGame()
+    {
+        isReadyToBegin = true;
+    }
+
     IEnumerator StartGameRoutine()
     {
+        if (messageWindow != null)
+        {
+            messageWindow.GetComponent<RectXformMover>().MoveOn();
+            messageWindow.ShowMessage(goalIcon, "score goal\n" + scoreGoal.ToString(), "start");
+        }
         while (!isReadyToBegin)
         {
             yield return null;
-            yield return new WaitForSeconds(2f);
-            isReadyToBegin = true;
         }
 
         if (screenFader != null)
@@ -80,21 +95,40 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator EndGameRoutine()
     {
+        isReadyToReload = false;
         if (screenFader != null)
         {
             screenFader.FadeOn();
         }
         if (isWinner)
         {
-            Debug.Log("You Win");
+            if (messageWindow != null)
+            {
+                messageWindow.GetComponent<RectXformMover>().MoveOn();
+                messageWindow.ShowMessage(winIcon, "You Win", "OK");
+            }
         }
         else
         {
-            Debug.Log("You Lose");
+            if (messageWindow != null)
+            {
+                messageWindow.GetComponent<RectXformMover>().MoveOn();
+                messageWindow.ShowMessage(loseIcon, "You Lose", "OK");
+            }
 
         }
-        yield return null;
+        while (!isReadyToReload)
+        {
+            yield return null;
+        }
 
+        SceneManager.LoadScene("Scenes/SampleScene");
+
+    }
+
+    public void ReloadScene()
+    {
+        isReadyToReload = true;
     }
 
    
