@@ -1202,7 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c377bf534a704679a3003efb57556d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesLeft: 2
+  movesLeft: 10
   scoreGoal: 500
   screenFader: {fileID: 422485521}
   movesLeftText: {fileID: 27723794}
