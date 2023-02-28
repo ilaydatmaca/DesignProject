@@ -40,6 +40,7 @@ public class GamePiece : MonoBehaviour {
 
 	public int scoreValue = 20;
 
+	public AudioClip clearSound;
 
 	// Use this for initialization
 	void Start () 
@@ -174,6 +175,12 @@ public class GamePiece : MonoBehaviour {
 		if (ScoreManager.Instance != null)
 		{
 			ScoreManager.Instance.AddScore(scoreValue * multiplier + bonus);
+		}
+
+		if (SoundManager.Instance != null)
+		{
+			SoundManager.Instance.PlayClipAtPoint(clearSound, Vector3.zero, SoundManager.Instance.fxVolume);
+
 		}
 	}
 }
