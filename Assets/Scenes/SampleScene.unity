@@ -1203,8 +1203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c377bf534a704679a3003efb57556d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesLeft: 3
-  scoreGoal: 10000
+  movesLeft: 50
+  scoreGoal: 50000
   screenFader: {fileID: 422485521}
   movesLeftText: {fileID: 27723794}
   messageWindow: {fileID: 1683412296}
@@ -1717,6 +1717,60 @@ MonoBehaviour:
   fxVolume: 1
   lowPitch: 0.95
   highPitch: 1.05
+--- !u!1 &1680363719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680363721}
+  - component: {fileID: 1680363720}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1680363720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680363719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b45fe87552cd4dc0a31c1fe6db7dc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 3056198587870010144, guid: a8e75d44e368b4bf8a7d535e1b83d479, type: 3}
+  rocketColumnPrefab: {fileID: 3056198587870010144, guid: cdab357f15ce74fb1a34a1b8b71c3f5d, type: 3}
+  rocketRowPrefab: {fileID: 3056198587870010144, guid: 714ee8b4e7c7f49ec9cd22e189609652, type: 3}
+  discoPrefab: {fileID: 1000013338762844, guid: 4a9ee0b5742c442aeb42653755006ff4, type: 3}
+  cellPrefabs:
+  - {fileID: 2419699633511248968, guid: 26d8d053bec234d8c8ca724b09ea0342, type: 3}
+  - {fileID: 8387671581441635528, guid: 60a32a61496b34cf8bd351bf85091fd9, type: 3}
+  - {fileID: 2861016000476985035, guid: 2fd2def334974430d8f9d3a3e8cf311e, type: 3}
+  - {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
+  - {fileID: 713420399113737490, guid: 63f817c785c8245a0be92a3276b8f82b, type: 3}
+--- !u!4 &1680363721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680363719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.191973, y: 3.7374623, z: -0.08419702}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1683412291
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,6 +2122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1952387142}
   - component: {fileID: 1952387141}
+  - component: {fileID: 1952387143}
+  - component: {fileID: 1952387144}
+  - component: {fileID: 1952387145}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -2090,45 +2147,8 @@ MonoBehaviour:
   width: 8
   height: 9
   borderSize: 1
-  tileNormalPrefab: {fileID: 187378, guid: f1d4d6601c1b8422baf0a64ee404f9e5, type: 3}
-  tileObstaclePrefab: {fileID: 1000010554755960, guid: 23dc251abb7054af984f40b9325d8d06, type: 3}
-  gamePiecePrefabs:
-  - {fileID: 713420399113737490, guid: 63f817c785c8245a0be92a3276b8f82b, type: 3}
-  - {fileID: 2419699633511248968, guid: 26d8d053bec234d8c8ca724b09ea0342, type: 3}
-  - {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
-  - {fileID: 2861016000476985035, guid: 2fd2def334974430d8f9d3a3e8cf311e, type: 3}
-  - {fileID: 2475221528682096355, guid: b4b6a6b241599447cb5b7ae8d21ec362, type: 3}
-  adjacentBombPrefab: {fileID: 3056198587870010144, guid: a8e75d44e368b4bf8a7d535e1b83d479, type: 3}
-  columnBombPrefab: {fileID: 3056198587870010144, guid: cdab357f15ce74fb1a34a1b8b71c3f5d, type: 3}
-  rowBombPrefab: {fileID: 3056198587870010144, guid: 714ee8b4e7c7f49ec9cd22e189609652, type: 3}
-  colorBombPrefab: {fileID: 1000013338762844, guid: 4a9ee0b5742c442aeb42653755006ff4, type: 3}
-  maxCollectibles: 3
-  collectibleCount: 0
-  chanceForCollectible: 0.25
-  collectiblePrefabs:
-  - {fileID: 1665201241071484, guid: 7a2dd4e1deceb4a38991d93bd7289729, type: 3}
-  - {fileID: 1583640311145312, guid: 5bd35735630694091b6c1079936da3f9, type: 3}
-  swapTime: 0.25
-  startingTiles: []
-  startingGamePieces:
-  - prefab: {fileID: 1583640311145312, guid: 5bd35735630694091b6c1079936da3f9, type: 3}
-    x: 4
-    y: 8
-    z: 0
-  - prefab: {fileID: 1949934371936278, guid: 590bffa9ea54844378825fc68d92c62d, type: 3}
-    x: 4
-    y: 5
-    z: 0
-  - prefab: {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
-    x: 4
-    y: 4
-    z: 0
-  - prefab: {fileID: 1598370618283271652, guid: 67b624bef58f54feca9cafc22f895b01, type: 3}
-    x: 5
-    y: 6
-    z: 0
-  fillYOffset: 10
-  fillMoveTime: 0.5
+  cellPrefab: {fileID: 187378, guid: f1d4d6601c1b8422baf0a64ee404f9e5, type: 3}
+  m_scoreMultiplier: 0
 --- !u!4 &1952387142
 Transform:
   m_ObjectHideFlags: 0
@@ -2144,6 +2164,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1952387143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952387140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6dd5ec956894f5eb5a66a65daa70d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1952387144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952387140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9143150f9c2844eb808552d1abed144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mClickedCell: {fileID: 0}
+  mTargetCell: {fileID: 0}
+  m_clickedTileBomb: {fileID: 0}
+  m_targetTileBomb: {fileID: 0}
+  m_playerInputEnabled: 1
+  swapTime: 0.5
+--- !u!114 &1952387145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952387140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97bf1dfa32a7b4abfa6dd116ca9dbac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982151547
 GameObject:
   m_ObjectHideFlags: 0
