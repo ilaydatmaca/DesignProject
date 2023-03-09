@@ -22,7 +22,7 @@ public class MatchFinder : MonoBehaviour
 
         if (board.IsInBorder(startX, startY))
         {
-            startPiece = board.allGamePieces[startX, startY];
+            startPiece = board.AllGamePieces[startX, startY];
         }
 
         if (startPiece != null)
@@ -47,7 +47,7 @@ public class MatchFinder : MonoBehaviour
                 break;
             }
             // find the adjacent GamePiece and check its MatchValue...
-            GamePiece nextPiece = board.allGamePieces[nextX, nextY];
+            GamePiece nextPiece = board.AllGamePieces[nextX, nextY];
 
             if (nextPiece == null)
             {

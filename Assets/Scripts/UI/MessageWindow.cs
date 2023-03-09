@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 // this is a UI component that can show a message, icon and button
-[RequireComponent(typeof(RectXformMover))]
+
 public class MessageWindow : MonoBehaviour 
 {
 	public Image messageImage;

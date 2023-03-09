@@ -11,48 +11,28 @@ public enum LevelCounter
 // class is abstract, use a subclass and re-define the abstract methods
 public abstract class LevelGoal : Singleton<LevelGoal>
 {
-    // the number of stars earned for this level
-    public int scoreStars = 0;
+    public int scoreStars;
+    public int[] scoreGoals;
+    
+    public int movesLeft;
 
-    // minimum scores used to earn stars
-    public int[] scoreGoals = { 1000, 2000, 3000 };
+    public int timeLeft;
 
-    // number of moves left in this level (replaces GameManager movesLeft)
-    public int movesLeft = 30;
+    public LevelCounter levelCounter;
 
-    public int timeLeft = 60;
-
-    public LevelCounter levelCounter = LevelCounter.Moves;
-
-    int m_maxTime;
+    int _maxTime;
 
     public virtual void Start()
     {
-        Init();
-
+        scoreStars = 0;
+        
         if (levelCounter == LevelCounter.Timer)
         {
-            m_maxTime = timeLeft;
+            _maxTime = timeLeft;
 
             if (UIManager.Instance != null && UIManager.Instance.timer != null)
             {
                 UIManager.Instance.timer.InitTimer(timeLeft);
-            }
-        }
-    }
-
-    public void Init()
-    {
-
-        // reset scoreStars
-        scoreStars = 0;
-        
-        // doublecheck that scoreGoals are setup in increasing order
-        for (int i = 1; i < scoreGoals.Length; i++)
-        {
-            if (scoreGoals[i] < scoreGoals[i - 1])
-            {
-                Debug.LogWarning("LEVELGOAL Setup score goals in increasing order!");
             }
         }
     }
@@ -106,7 +86,7 @@ public abstract class LevelGoal : Singleton<LevelGoal>
     public void AddTime(int timeValue)
     {
         timeLeft += timeValue;
-        timeLeft = Mathf.Clamp(timeLeft, 0, m_maxTime);
+        timeLeft = Mathf.Clamp(timeLeft, 0, _maxTime);
 
         if (UIManager.Instance != null && UIManager.Instance.timer != null)
         {

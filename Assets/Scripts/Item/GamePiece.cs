@@ -40,7 +40,7 @@ public class GamePiece : MonoBehaviour {
 	    transform.position = new Vector3(x, y, 0);
 	    if (_board.IsInBorder(x, y))
 	    {
-		    _board.allGamePieces[x, y] = this;
+		    _board.AllGamePieces[x, y] = this;
 	    }
 	    xIndex = x;
 	    yIndex = y;

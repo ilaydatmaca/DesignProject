@@ -80,7 +80,7 @@ public class BoardShuffler : MonoBehaviour
 
             // get a list of all the GamePieces
             List<GamePiece> allPieces = new List<GamePiece>();
-            foreach (GamePiece piece in board.allGamePieces)
+            foreach (GamePiece piece in board.AllGamePieces)
             {
                 allPieces.Add(piece);
             }
@@ -92,7 +92,7 @@ public class BoardShuffler : MonoBehaviour
             }
 
             // remove any normalPieces from m_allGamePieces and store them in a List
-            List<GamePiece> normalPieces = RemoveNormalPieces(board.allGamePieces);
+            List<GamePiece> normalPieces = RemoveNormalPieces(board.AllGamePieces);
 
             // shuffle the list of normal pieces
             board.boardShuffler.ShuffleList(normalPieces);
@@ -101,7 +101,7 @@ public class BoardShuffler : MonoBehaviour
             board.boardFiller.FillBoardFromList(normalPieces);
 
             // move the pieces to their correct onscreen positions
-            MovePieces(board.allGamePieces, board.swapTime);
+            MovePieces(board.AllGamePieces, board.swapTime);
 
             // in the event some matches form, clear and refill the Board
             List<GamePiece> matches = board.matchFinder.FindAllMatches();

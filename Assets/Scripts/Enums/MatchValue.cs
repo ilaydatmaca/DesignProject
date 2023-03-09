@@ -1,4 +1,3 @@
-// each GamePiece has a MatchValue to determine if it forms a match with its neighbors
 public enum MatchValue
 {
     Yellow,

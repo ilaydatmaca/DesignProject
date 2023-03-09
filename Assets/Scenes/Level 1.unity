@@ -5042,12 +5042,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenFader: {fileID: 646572288}
-  levelNameText: {fileID: 1452112355}
   movesLeftText: {fileID: 854957687}
   scoreMeter: {fileID: 2075557073}
   messageWindow: {fileID: 1686819350}
   movesCounter: {fileID: 373263026}
   timer: {fileID: 410729505}
+  levelGoal: {fileID: 0}
 --- !u!1 &68547251
 GameObject:
   m_ObjectHideFlags: 0
@@ -10304,8 +10304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidAlpha: 1
   clearAlpha: 0
-  delay: 0
-  timeToFade: 1
+  fadeTime: 1
 --- !u!1 &410729504
 GameObject:
   m_ObjectHideFlags: 0
@@ -15481,8 +15480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidAlpha: 1
   clearAlpha: 0
-  delay: 0
-  timeToFade: 1
+  fadeTime: 1
 --- !u!850595691 &574686990
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -16089,8 +16087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidAlpha: 1
   clearAlpha: 0
-  delay: 0
-  timeToFade: 1
+  fadeTime: 1
 --- !u!114 &646572289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25907,7 +25904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &769535789
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25923,7 +25920,7 @@ RectTransform:
   - {fileID: 627324420}
   - {fileID: 1042669617}
   m_Father: {fileID: 1727312869}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -31426,8 +31423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidAlpha: 1
   clearAlpha: 0
-  delay: 0
-  timeToFade: 1
+  fadeTime: 1
 --- !u!1 &1003490575
 GameObject:
   m_ObjectHideFlags: 0
@@ -31475,9 +31471,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreStars: 0
   scoreGoals: e8030000d0070000b80b0000
-  movesLeft: 2
+  movesLeft: 30
   timeLeft: 100
-  levelCounter: 0
+  levelCounter: 1
 --- !u!114 &1003490578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41937,86 +41933,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435722009}
   m_CullTransparentMesh: 0
---- !u!1 &1452112353
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1452112354}
-  - component: {fileID: 1452112356}
-  - component: {fileID: 1452112355}
-  m_Layer: 5
-  m_Name: LevelNameText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1452112354
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452112353}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1727312869}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -30, y: 30}
-  m_SizeDelta: {x: 800, y: 200}
-  m_Pivot: {x: 1, y: 0}
---- !u!114 &1452112355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452112353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: fa020e6fe4b584d36952fe3876a9e37e, type: 3}
-    m_FontSize: 100
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 100
-    m_Alignment: 8
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: LEVEL 999
---- !u!222 &1452112356
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452112353}
-  m_CullTransparentMesh: 0
 --- !u!1 &1461416852
 GameObject:
   m_ObjectHideFlags: 0
@@ -47214,8 +47130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   solidAlpha: 1
   clearAlpha: 0
-  delay: 0
-  timeToFade: 1
+  fadeTime: 1
 --- !u!1 &1614885391
 GameObject:
   m_ObjectHideFlags: 0
@@ -47261,7 +47176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1716117175}
-  countTime: 1
 --- !u!1 &1663219025
 GameObject:
   m_ObjectHideFlags: 0
@@ -52297,7 +52211,7 @@ RectTransform:
   - {fileID: 1357382802}
   - {fileID: 633479816}
   m_Father: {fileID: 1727312869}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -52397,7 +52311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 1500, z: 0}
   onscreenPosition: {x: 0, y: 0, z: 0}
-  endPosition: {x: 0, y: -1500, z: 0}
+  offScreenPosition: {x: 0, y: -1500, z: 0}
   timeToMove: 1
 --- !u!225 &1686819352
 CanvasGroup:
@@ -52454,15 +52368,15 @@ MonoBehaviour:
   height: 9
   borderSize: 2
   cellPrefab: {fileID: 187378, guid: 40e936c9a5bf249fd961db8ef23fbc7b, type: 3}
-  clickedTileBomb: {fileID: 0}
-  targetTileBomb: {fileID: 0}
-  swapTime: 0.25
+  clickedCellItem: {fileID: 0}
+  targetCellItem: {fileID: 0}
   clickedCell: {fileID: 0}
   targetCell: {fileID: 0}
   playerInputEnabled: 1
+  isRefilling: 0
+  swapTime: 0.25
   particleManager: {fileID: 0}
   scoreMultiplier: 0
-  isRefilling: 0
   boardDeadlock: {fileID: 0}
   boardShuffler: {fileID: 0}
   boardFiller: {fileID: 0}
@@ -57690,7 +57604,6 @@ RectTransform:
   m_Children:
   - {fileID: 1924203367}
   - {fileID: 646572287}
-  - {fileID: 1452112354}
   - {fileID: 1686819346}
   - {fileID: 769535789}
   m_Father: {fileID: 0}

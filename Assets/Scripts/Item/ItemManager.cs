@@ -15,8 +15,8 @@ public class ItemManager : MonoBehaviour
     {
         Vector2 swipeDirection = new Vector2(cellB.xIndex - cellA.xIndex, cellB.yIndex - cellA.yIndex);
 
-        board.clickedTileBomb = CreateItem(cellA.xIndex, cellA.yIndex, swipeDirection, tileAPieces);
-        board.targetTileBomb = CreateItem(cellB.xIndex, cellB.yIndex, swipeDirection, tileBPieces);
+        board.clickedCellItem = CreateItem(cellA.xIndex, cellA.yIndex, swipeDirection, tileAPieces);
+        board.targetCellItem = CreateItem(cellB.xIndex, cellB.yIndex, swipeDirection, tileBPieces);
         
     }
 
@@ -73,7 +73,7 @@ public class ItemManager : MonoBehaviour
 
         if (clickedPiece.IsDisco() && targetPiece.IsDisco())
         {
-            foreach (GamePiece piece in board.allGamePieces)
+            foreach (GamePiece piece in board.AllGamePieces)
             {
                 if (!colorMatches.Contains(piece))
                 {
@@ -111,11 +111,11 @@ public class ItemManager : MonoBehaviour
         {
             for (int j = 0; j < board.height; j++)
             {
-                if (board.allGamePieces[i, j] != null)
+                if (board.AllGamePieces[i, j] != null)
                 {
-                    if (board.allGamePieces[i, j].matchValue == mValue)
+                    if (board.AllGamePieces[i, j].matchValue == mValue)
                     {
-                        foundPieces.Add(board.allGamePieces[i, j]);
+                        foundPieces.Add(board.AllGamePieces[i, j]);
                     }
                 }
             }
@@ -137,23 +137,23 @@ public class ItemManager : MonoBehaviour
 
         if (board.IsInBorder(x, y))
         {
-            board.allGamePieces[x, y] = bomb.GetComponent<GamePiece>();
+            board.AllGamePieces[x, y] = bomb.GetComponent<GamePiece>();
         }
     }
 
     // initializes any bombs created on the clicked or target tile
     public void InitAllBombs()
     {
-        if (board.clickedTileBomb != null)
+        if (board.clickedCellItem != null)
         {
-            InitBomb(board.clickedTileBomb);
-            board.clickedTileBomb = null;
+            InitBomb(board.clickedCellItem);
+            board.clickedCellItem = null;
         }
 
-        if (board.targetTileBomb != null)
+        if (board.targetCellItem != null)
         {
-            InitBomb(board.targetTileBomb);
-            board.targetTileBomb = null;
+            InitBomb(board.targetCellItem);
+            board.targetCellItem = null;
         }
     }
 

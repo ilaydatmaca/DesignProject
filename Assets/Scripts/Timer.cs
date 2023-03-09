@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    // reference to countdown Text 
     public Text timeLeftText;
-
-    // reference to radially filled clock image
+    
     public Image clockImage;
 
     // the starting time in seconds
@@ -33,7 +31,7 @@ public class Timer : MonoBehaviour
     IEnumerator m_flashRoutine;
 
     // save the starting time and initialize the clock image, time left text, etc.
-    public void InitTimer(int maxTime = 60)
+    public void InitTimer(int maxTime)
     {
         m_maxTime = maxTime;
 

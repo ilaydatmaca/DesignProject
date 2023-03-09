@@ -84,7 +84,7 @@ public class ItemFactory : MonoBehaviour
         {
             GameObject randomPiece = Instantiate(GetRandomGamePiece(), Vector3.zero, Quaternion.identity, transform) as GameObject;
             randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
-            _board.allGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
+            _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
             randomPiece.GetComponent<GamePiece>().Fall();
         }
     }

@@ -11,33 +11,23 @@ public class Board : MonoBehaviour
 
     public GameObject cellPrefab;
 
-    // reference to a Bomb created on the clicked Tile (first Tile clicked by mouse or finger)
-    public GameObject clickedTileBomb;
-	
-    // reference to a Bomb created on the target Tile (Tile dragged into by mouse or finger)
-    public GameObject targetTileBomb;
-
-    // the time required to swap GamePieces between the Target and Clicked Tile
-    public float swapTime = 0.5f;
+    [HideInInspector] public GameObject clickedCellItem;
+    [HideInInspector] public GameObject targetCellItem;
     
-    Cell[,] allTiles;
-    public GamePiece[,] allGamePieces;
-
-    public Cell clickedCell;
-
-    public Cell targetCell;
-
-    // whether user input is currently allowed
+    [HideInInspector] public Cell clickedCell;
+    [HideInInspector] public Cell targetCell;
+    
+    Cell[,] _allTiles;
+    public GamePiece[,] AllGamePieces;
+    
     public bool playerInputEnabled = true;
+    public bool isRefilling;
+    public float swapTime = 0.5f;
 
     public ParticleManager particleManager;
+    
+    public int scoreMultiplier;
 
-
-
-    // the current score multiplier, depending on how many chain reactions we have caused
-    public int scoreMultiplier = 0;
-
-    public bool isRefilling = false;
 
     public BoardDeadlock boardDeadlock;
     public BoardShuffler boardShuffler;
@@ -68,8 +58,8 @@ public class Board : MonoBehaviour
 
     void Start()
     {
-        allTiles = new Cell[width, height];
-        allGamePieces = new GamePiece[width, height];
+        _allTiles = new Cell[width, height];
+        AllGamePieces = new GamePiece[width, height];
         particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
     }
     
@@ -81,22 +71,22 @@ public class Board : MonoBehaviour
         FillBoard();
     }
     
-    public void SetupCells()
+    void SetupCells()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                if (allTiles[x, y] == null)
+                if (_allTiles[x, y] == null)
                 {
-                    GameObject tile = Instantiate(cellPrefab, Vector3.zero, Quaternion.identity, transform) as GameObject;
-                    allTiles[x, y] = tile.GetComponent<Cell>();
-                    allTiles[x, y].Init(x, y, this);
+                    GameObject tile = Instantiate(cellPrefab, Vector3.zero, Quaternion.identity, transform);
+                    _allTiles[x, y] = tile.GetComponent<Cell>();
+                    _allTiles[x, y].Init(x, y, this);
                 }
             }
         }
     }
-    public void SetupCamera()
+    void SetupCamera()
     {
         Camera.main.transform.position = new Vector3((float)(width - 1) / 2f, (float)(height - 1) / 2f, -10f);
 
@@ -117,7 +107,7 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {           
-                if (allGamePieces[i, j] == null)
+                if (AllGamePieces[i, j] == null)
                 {
                     itemFactory.MakeRandomGamePiece(i, j);
                     int iteration = 0;
@@ -156,16 +146,16 @@ public class Board : MonoBehaviour
     {
         if (x > 1)
         {
-            MatchValue matchType = allGamePieces[x, y].matchValue;
-            if (allGamePieces[x - 1, y].matchValue.Equals(matchType) && allGamePieces[x - 2, y].matchValue.Equals(matchType))
+            MatchValue matchType = AllGamePieces[x, y].matchValue;
+            if (AllGamePieces[x - 1, y].matchValue.Equals(matchType) && AllGamePieces[x - 2, y].matchValue.Equals(matchType))
             {
                 return true;
             }
         }
         if (y > 1)
         {
-            MatchValue matchType = allGamePieces[x, y].matchValue;
-            if (allGamePieces[x, y - 1].matchValue.Equals(matchType) && allGamePieces[x, y - 2].matchValue.Equals(matchType))
+            MatchValue matchType = AllGamePieces[x, y].matchValue;
+            if (AllGamePieces[x, y - 1].matchValue.Equals(matchType) && AllGamePieces[x, y - 2].matchValue.Equals(matchType))
             {
                 return true;
             }
@@ -179,9 +169,9 @@ public class Board : MonoBehaviour
 
         for (int i = 0; i < width; i++)
         {
-            if (allGamePieces[i, row] != null)
+            if (AllGamePieces[i, row] != null)
             {
-                gamePieces.Add(allGamePieces[i, row]);
+                gamePieces.Add(AllGamePieces[i, row]);
             }
         }
         return gamePieces;
@@ -193,9 +183,9 @@ public class Board : MonoBehaviour
 
         for (int i = 0; i < height; i++)
         {
-            if (allGamePieces[column, i] != null)
+            if (AllGamePieces[column, i] != null)
             {
-                gamePieces.Add(allGamePieces[column, i]);
+                gamePieces.Add(AllGamePieces[column, i]);
             }
         }
         return gamePieces;
@@ -211,12 +201,11 @@ public class Board : MonoBehaviour
             {
                 if (IsInBorder(i, j))
                 {
-                    gamePieces.Add(allGamePieces[i, j]);
+                    gamePieces.Add(AllGamePieces[i, j]);
                 }
 
             }
         }
-
         return gamePieces;
     }
     
@@ -257,19 +246,9 @@ public class Board : MonoBehaviour
         }
         return allPiecesToClear;
     }
-
     
-    
-    // test if the Board is deadlocked
-    public void TestDeadlock()
-    {
-        boardDeadlock.IsDeadlocked(allGamePieces, 3);
-    }
-
-    // invoke the ShuffleBoardRoutine (called by a button for testing)
     public void ShuffleBoard()
     {
-        // only shuffle if the Board permits user input
         if (playerInputEnabled)
         {
             StartCoroutine(boardShuffler.ShuffleBoardRoutine(this));

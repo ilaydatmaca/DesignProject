@@ -50,8 +50,8 @@ public class SwapManager : MonoBehaviour
 
         if (_board.playerInputEnabled && !GameManager.Instance.IsGameOver)
         {
-            GamePiece clickedItem = _board.allGamePieces[cell1.xIndex, cell1.yIndex];
-            GamePiece targetItem = _board.allGamePieces[cell2.xIndex, cell2.yIndex];
+            GamePiece clickedItem = _board.AllGamePieces[cell1.xIndex, cell1.yIndex];
+            GamePiece targetItem = _board.AllGamePieces[cell2.xIndex, cell2.yIndex];
 
             if (targetItem != null && clickedItem != null)
             {

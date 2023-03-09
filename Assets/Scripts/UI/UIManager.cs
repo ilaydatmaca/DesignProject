@@ -1,33 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-
-    // reference to graphic that fades in and out
     public ScreenFader screenFader;
 
-    // UI.Text that stores the level name
-    public Text levelNameText;
-
-    // UI.Text that shows how many moves are left
     public Text movesLeftText;
 
-    // reference to three-star score meter
     public ScoreMeter scoreMeter;
 
-    // reference to the custom UI window
     public MessageWindow messageWindow;
 
     public GameObject movesCounter;
 
     public Timer timer;
 
-
+    public LevelGoal levelGoal;
     public override void Awake()
     {
+        levelGoal = FindObjectOfType<GameManager>().GetComponent<LevelGoal>();
+
         base.Awake();
 
         if (messageWindow != null)
@@ -39,6 +32,11 @@ public class UIManager : Singleton<UIManager>
         {
             screenFader.gameObject.SetActive(true);
         }
+    }
+
+    private void Start()
+    {
+        UpdateMovesText();
     }
 
     public void EnableTimer(bool state)
@@ -56,5 +54,14 @@ public class UIManager : Singleton<UIManager>
             movesCounter.SetActive(state);
         }
     }
+
+    public void UpdateMovesText()
+    {
+        if (movesLeftText != null)
+        {
+            movesLeftText.text = levelGoal.movesLeft.ToString();
+        }
+    }
+
 
 }

@@ -5163,8 +5163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d1b423c06d4423792c6cd64b331ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectionGoalLayout: {fileID: 1609532222}
-  collectionGoalBaseWidth: 125
   screenFader: {fileID: 646572288}
   levelNameText: {fileID: 1452112355}
   movesLeftText: {fileID: 854957687}
@@ -11876,7 +11874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &627324420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23654,8 +23652,6 @@ MonoBehaviour:
   movesLeft: 2
   timeLeft: 10
   levelCounter: 0
-  collectionGoals:
-  - {fileID: 18434058}
 --- !u!114 &1003490578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35701,7 +35697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1716117175}
-  countTime: 1
 --- !u!1 &1631090750
 GameObject:
   m_ObjectHideFlags: 0

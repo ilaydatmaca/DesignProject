@@ -2,30 +2,30 @@
 
 public class Singleton<T> : MonoBehaviour where T: MonoBehaviour 
 {
-	static T m_instance;
+	static T _instance;
 	public static T Instance
 	{
 		get 
 		{
-			if (m_instance == null) 
+			if (_instance == null) 
 			{
-				m_instance = GameObject.FindObjectOfType<T> ();
+				_instance = FindObjectOfType<T> ();
 
-				if (m_instance == null) 
+				if (_instance == null) 
 				{
 					GameObject singleton = new GameObject (typeof(T).Name);
-					m_instance = singleton.AddComponent<T> ();
+					_instance = singleton.AddComponent<T> ();
 				}
 			}
-			return m_instance;
+			return _instance;
 		}
 	}
 
 	public virtual void Awake()
 	{
-		if (m_instance == null) 
+		if (_instance == null) 
 		{
-			m_instance = this as T;
+			_instance = this as T;
 		} 
 		else 
 		{

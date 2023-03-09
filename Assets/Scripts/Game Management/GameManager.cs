@@ -1,20 +1,14 @@
 ﻿using UnityEngine;
-
-//using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Collections.Generic;
 
-// the GameManager is the master controller for the GamePlay
-
-[RequireComponent(typeof(LevelGoal))]
 public class GameManager : Singleton<GameManager>
 {
-    Board _board;
+    private Board _board;
     
-    bool _isPlayerReady = false;
-
-    bool _isGameOver = false;
+    private bool _isPlayerReady;
+    private bool _isGameOver;
+    
     public bool IsGameOver { get { return _isGameOver; } set { _isGameOver = value; } }
 
     bool _isWinner;
@@ -24,19 +18,13 @@ public class GameManager : Singleton<GameManager>
     
     LevelGoal _levelGoal;
 
-    LevelGoalCollected _levelGoalCollected;
-
-    // public reference to LevelGoalTimed component
-    public LevelGoal LevelGoal { get { return _levelGoal; } }
-
 
     public override void Awake()
     {
         base.Awake();
 
         _levelGoal = GetComponent<LevelGoal>();
-        _levelGoalCollected = GetComponent<LevelGoalCollected>();
-        _board = Object.FindObjectOfType<Board>().GetComponent<Board>();
+        _board = FindObjectOfType<Board>().GetComponent<Board>();
 
     }
     
@@ -44,18 +32,10 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null)
         {
-            // position ScoreStar horizontally
+
             if (UIManager.Instance.scoreMeter != null)
             {
                 UIManager.Instance.scoreMeter.SetupStars(_levelGoal);
-            }
-
-            // use the Scene name as the Level name
-            if (UIManager.Instance.levelNameText != null)
-            {
-                // get a reference to the current Scene
-                Scene scene = SceneManager.GetActiveScene();
-                UIManager.Instance.levelNameText.text = scene.name;
             }
 
             bool useTimer = (_levelGoal.levelCounter == LevelCounter.Timer);
@@ -64,55 +44,38 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.EnableMovesCounter(!useTimer);
         }
 
-        // update the moves left UI
-        _levelGoal.movesLeft++;
-        UpdateMoves();
-
-        // start the main game loop
-        StartCoroutine("ExecuteGameLoop");
+        StartCoroutine(ExecuteGameLoop());
     }
 
     // update the Text component that shows our moves left
     public void UpdateMoves()
     {
-        // if the LevelGoal is not timed (e.g. LevelGoalScored)...
         if (_levelGoal.levelCounter == LevelCounter.Moves)
         {
-            // decrement a move
             _levelGoal.movesLeft--;
 
-            // update the UI
-            if (UIManager.Instance != null && UIManager.Instance.movesLeftText != null)
-            {
-                UIManager.Instance.movesLeftText.text = _levelGoal.movesLeft.ToString();
-            }
+            UIManager.Instance.UpdateMovesText();
         }
     }
 
-    // this is the main coroutine for the Game, that determines are basic beginning/middle/end
-
-    // each stage of the game must complete before we advance to the next stage
-    // add as many stages here as necessary
 
     IEnumerator ExecuteGameLoop()
     {
-        yield return StartCoroutine("StartGameRoutine");
-        yield return StartCoroutine("PlayGameRoutine");
+        yield return StartCoroutine(StartGameRoutine());
+        yield return StartCoroutine(PlayGameRoutine());
 
         // wait for board to refill
-        yield return StartCoroutine("WaitForBoardRoutine", 0.5f);
+        yield return StartCoroutine(WaitForBoardRoutine(0.5f));
 
-        yield return StartCoroutine("EndGameRoutine");
+        yield return StartCoroutine(EndGameRoutine());
     }
 
-    // switches ready to begin status to true
     public void BeginGame()
     {
         _isPlayerReady = true;
 
     }
 
-    // coroutine for the level introduction
     IEnumerator StartGameRoutine()
     {
         if (UIManager.Instance != null)
@@ -120,9 +83,8 @@ public class GameManager : Singleton<GameManager>
             // show the message window with the level goal
             if (UIManager.Instance.messageWindow != null)
             {
-                UIManager.Instance.messageWindow.GetComponent<RectXformMover>().MoveOn();
-                int maxGoal = _levelGoal.scoreGoals.Length - 1;
-                UIManager.Instance.messageWindow.ShowScoreMessage(_levelGoal.scoreGoals[maxGoal]);
+                UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
+                UIManager.Instance.messageWindow.ShowScoreMessage(_levelGoal.scoreGoals[_levelGoal.scoreGoals.Length - 1]);
 
                 if (_levelGoal.levelCounter == LevelCounter.Timer)
                 {
@@ -157,7 +119,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    // coroutine for game play
+    
     IEnumerator PlayGameRoutine()
     {
         // if level is timed, start the timer
@@ -165,6 +127,7 @@ public class GameManager : Singleton<GameManager>
         {
             _levelGoal.StartCountdown();
         }
+        
         // while the end game condition is not true, we keep playing
         // just keep waiting one frame and checking for game conditions
         while (!_isGameOver)
@@ -247,7 +210,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.GetComponent<RectXformMover>().MoveOn();
+            UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowWinMessage();
             UIManager.Instance.messageWindow.ShowCollectionGoal(false);
 
@@ -273,7 +236,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.GetComponent<RectXformMover>().MoveOn();
+            UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowLoseMessage();
             UIManager.Instance.messageWindow.ShowCollectionGoal(false);
 

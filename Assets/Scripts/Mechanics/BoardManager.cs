@@ -53,7 +53,7 @@ public class BoardManager : MonoBehaviour
     private IEnumerator DeadlockCheck()
     {
         // deadlock check
-        if (board.boardDeadlock.IsDeadlocked(board.allGamePieces, 3))
+        if (board.boardDeadlock.IsDeadlocked(board.AllGamePieces, 3))
         {
             yield return new WaitForSeconds(board.delay * 5f);
 
@@ -128,7 +128,7 @@ public class BoardManager : MonoBehaviour
     {
         if (board.IsInBorder(x, y))
         {
-            GamePiece pieceToClear = board.allGamePieces[x, y];
+            GamePiece pieceToClear = board.AllGamePieces[x, y];
             List<GamePiece> listOfOne = new List<GamePiece>();
             listOfOne.Add(pieceToClear);
             BoardChecking(listOfOne);

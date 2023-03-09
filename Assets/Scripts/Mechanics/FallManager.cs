@@ -23,16 +23,16 @@ public class FallManager : MonoBehaviour
         {
             for (int y = 0; y < _board.height; y++)
             {
-                if (_board.allGamePieces[x, y] == null)
+                if (_board.AllGamePieces[x, y] == null)
                 {
                     nullCount++;
                 }
                 else if (nullCount > 0)
                 {
-                    _board.allGamePieces[x, y].Move(x, y - nullCount, collapseTime * (nullCount));
-                    _board.allGamePieces[x, y - nullCount] = _board.allGamePieces[x, y];
-                    movingPieces.Add(_board.allGamePieces[x, y - nullCount]);
-                    _board.allGamePieces[x, y] = null;
+                    _board.AllGamePieces[x, y].Move(x, y - nullCount, collapseTime * (nullCount));
+                    _board.AllGamePieces[x, y - nullCount] = _board.AllGamePieces[x, y];
+                    movingPieces.Add(_board.AllGamePieces[x, y - nullCount]);
+                    _board.AllGamePieces[x, y] = null;
 
 
                 }

@@ -28,10 +28,10 @@ public class BoardFiller : MonoBehaviour
             for (int j = 0; j < board.height; j++)
             {
                 // only fill in a GamePiece if 
-                if (board.allGamePieces[i, j] == null)
+                if (board.AllGamePieces[i, j] == null)
                 {
                     // grab a new GamePiece from the Queue
-                    board.allGamePieces[i, j] = unusedPieces.Dequeue();
+                    board.AllGamePieces[i, j] = unusedPieces.Dequeue();
 
                     // reset iteration count
                     iterations = 0;
@@ -40,10 +40,10 @@ public class BoardFiller : MonoBehaviour
                     while (board.HasMatchOnFill(i, j))
                     {
                         // put the GamePiece back into the Queue at the end of the line
-                        unusedPieces.Enqueue(board.allGamePieces[i, j]);
+                        unusedPieces.Enqueue(board.AllGamePieces[i, j]);
 
                         // grab a new GamePiece from the Queue
-                        board.allGamePieces[i, j] = unusedPieces.Dequeue();
+                        board.AllGamePieces[i, j] = unusedPieces.Dequeue();
 
                         // increment iterations each time we try to place a piece
                         iterations++;
@@ -68,7 +68,7 @@ public class BoardFiller : MonoBehaviour
 
         if (board.IsInBorder(x, y))
         {
-            GamePiece pieceToReplace = board.allGamePieces[x, y];
+            GamePiece pieceToReplace = board.AllGamePieces[x, y];
 
             if (pieceToReplace != null)
             {
