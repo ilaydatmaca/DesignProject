@@ -1,5 +1,4 @@
 
-
 public enum ItemType
 {
     None,

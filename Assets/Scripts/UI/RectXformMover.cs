@@ -1,76 +1,107 @@
-using System;
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+// this component allows a UI component to move from a start position to onscreen position to an end position
 
 [RequireComponent(typeof(RectTransform))]
-public class RectXformMover : MonoBehaviour
+public class RectXformMover : MonoBehaviour 
 {
-    public Vector3 startPosition;
-    public Vector3 onScreenPosition;
-    public Vector3 endPosition;
+    // starting position (typically offscreen)
+	public Vector3 startPosition;
 
-    public float timeToMove = 1f;
+    // our onscreen position
+	public Vector3 onscreenPosition;
 
-    RectTransform rectXform;
-    private bool isMoving = false;
+    // our end position (typically offscreen again)
+	public Vector3 endPosition;
 
-    void Awake()
-    {
-        rectXform = GetComponent<RectTransform>();
-    }
+    // time needed to move
+	public float timeToMove = 1f;
 
-    void Move(Vector3 startPos, Vector3 endPos, float timeToMove)
-    {
-        if (!isMoving)
-        {
-            StartCoroutine(MoveRoutine(startPos, endPos, timeToMove));
-        }
-    }
+    // reference to the RectTransform 
+	RectTransform m_rectXform;
 
-    IEnumerator MoveRoutine(Vector3 startPos, Vector3 endPos, float timeToMove)
-    {
-        if (rectXform != null)
-        {
-            rectXform.anchoredPosition = startPos;
-        }
+    // are we currently moving?
+	bool m_isMoving = false;
 
-        bool reachedDestination = false;
-        float elapsedTime = 0f;
-        isMoving = true;
 
-        while (!reachedDestination)
-        {
-            if (Vector3.Distance(rectXform.anchoredPosition, endPos) < 0.01f)
-            {
-                reachedDestination = true;
-                break;
-            }
+	void Awake() 
+	{
+        // cache a reference to our RectTransform
+		m_rectXform = GetComponent<RectTransform>();
+	}
 
-            elapsedTime += Time.deltaTime;
+    // move the RectTransform
+	void Move(Vector3 startPos, Vector3 endPos, float timeToMove)
+	{
+		if (!m_isMoving) 
+		{
+			StartCoroutine (MoveRoutine (startPos, endPos, timeToMove));
+		}
+	}
 
-            float t = Mathf.Clamp(elapsedTime / timeToMove, 0f, 1f);
-            t = t * t * t * (t * (t * 6 - 15) + 10);
+    // coroutine for movement; this is generic, just pass in a start position, end position and time to move
+	IEnumerator MoveRoutine(Vector3 startPos, Vector3 endPos, float timeToMove)
+	{
+        // set our current position to our start position
+		if (m_rectXform != null) 
+		{
+			m_rectXform.anchoredPosition = startPos;
+		}
 
-            if (rectXform != null)
-            {
-                rectXform.anchoredPosition = Vector3.Lerp(startPos, endPos, t);
-            }
+        // we have not reached our destination
+		bool reachedDestination = false;
 
-            yield return null;
-        }
+        // reset the amount of time that has passed
+		float elapsedTime = 0f;
 
-        isMoving = false;
+        // we are moving
+		m_isMoving = true;
 
-    }
+        // while we have not reached the destination...
+		while (!reachedDestination) 
+		{
+            // ... check to see if we are close to the target position
+			if (Vector3.Distance (m_rectXform.anchoredPosition, endPos) < 0.01f)
+			{
+				reachedDestination = true;
+				break;
 
-    public void MoveOn()
-    {
-        Move(startPosition, onScreenPosition, timeToMove);
-    }
-    
-    public void MoveOff()
-    {
-        Move(onScreenPosition, endPosition, timeToMove);
-    }
+			}
+            // increment our elapsed time by the time for this frame
+			elapsedTime += Time.deltaTime;
+
+            // calculate the interpolation parameter
+			float t = Mathf.Clamp (elapsedTime / timeToMove, 0f, 1f);
+			t = t * t * t * (t * (t * 6 - 15) + 10);
+
+            // linearly interpolate from the start to the end position
+			if (m_rectXform != null)
+			{
+				m_rectXform.anchoredPosition = Vector3.Lerp (startPos, endPos, t);
+              
+			}
+
+            // wait one frame
+			yield return null;
+
+		}
+        // we are no longer moving
+		m_isMoving = false;
+	
+	}
+
+    // move from a starting position offscreen to a position onscreen
+	public void MoveOn()
+	{
+		Move (startPosition, onscreenPosition, timeToMove);
+	}
+
+    // move from the position onscreen to an end position offscreen
+	public void MoveOff()
+	{
+		Move (onscreenPosition, endPosition, timeToMove);
+	}
+
+
 }
