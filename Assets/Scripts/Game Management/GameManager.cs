@@ -58,16 +58,6 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.levelNameText.text = scene.name;
             }
 
-            if (_levelGoalCollected != null)
-            {
-                UIManager.Instance.EnableCollectionGoalLayout(true);
-                UIManager.Instance.SetupCollectionGoalLayout(_levelGoalCollected.collectionGoals);
-            }
-            else
-            {
-                UIManager.Instance.EnableCollectionGoalLayout(false);
-            }
-
             bool useTimer = (_levelGoal.levelCounter == LevelCounter.Timer);
 
             UIManager.Instance.EnableTimer(useTimer);
@@ -141,22 +131,6 @@ public class GameManager : Singleton<GameManager>
                 else
                 {
                     UIManager.Instance.messageWindow.ShowMovesGoal(_levelGoal.movesLeft);
-                }
-
-                if (_levelGoalCollected != null)
-                {
-                    UIManager.Instance.messageWindow.ShowCollectionGoal(true);
-
-                    GameObject goalLayout = UIManager.Instance.messageWindow.collectionGoalLayout;
-
-                    if (goalLayout != null)
-                    {
-                        UIManager.Instance.SetupCollectionGoalLayout(_levelGoalCollected.collectionGoals, goalLayout, 80);
-                    }
-                }
-                else
-                {
-                    UIManager.Instance.messageWindow.ShowCollectionGoal(false);
                 }
             }
         }
@@ -368,16 +342,6 @@ public class GameManager : Singleton<GameManager>
             _levelGoal.AddTime(timeValue);
         }
     }
-
-    public void UpdateCollectionGoals(GamePiece pieceToCheck)
-    {
-        if (_levelGoalCollected != null)
-        {
-            _levelGoalCollected.UpdateGoals(pieceToCheck);
-        }
-    }
-
-
 
 
 }

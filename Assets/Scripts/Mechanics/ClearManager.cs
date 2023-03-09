@@ -49,8 +49,6 @@ public class ClearManager : MonoBehaviour
                     {
                         GameManager.Instance.AddTime(timeBonus.bonusValue);
                     }
-
-                    GameManager.Instance.UpdateCollectionGoals(piece);
                 }
 
                 // play particle effects for pieces...
