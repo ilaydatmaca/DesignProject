@@ -42,13 +42,6 @@ public class ClearManager : MonoBehaviour
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.ScorePoints(piece, board.scoreMultiplier, bonus);
-
-                    TimeBonus timeBonus = piece.GetComponent<TimeBonus>();
-
-                    if (timeBonus != null)
-                    {
-                        GameManager.Instance.AddTime(timeBonus.bonusValue);
-                    }
                 }
 
                 // play particle effects for pieces...

@@ -6,14 +6,12 @@ using System.Collections;
 public class ScoreManager : Singleton<ScoreManager> 
 {
     // our current score
-	int m_currentScore = 0;
-
-    // read-only Property to refer to our current score publicly
-    public int CurrentScore
+	int _currentScore = 0;
+	public int CurrentScore
     {
         get
         {
-            return m_currentScore;
+            return _currentScore;
         }
     }
 
@@ -26,13 +24,10 @@ public class ScoreManager : Singleton<ScoreManager>
     // UI.Text that shows the score
 	public Text scoreText;
 
-
-	public float countTime = 1f;
-
 	// Use this for initialization
 	void Start () 
 	{
-		UpdateScoreText (m_currentScore);
+		UpdateScoreText (_currentScore);
 	}
 
     // update the UI score Text
@@ -47,7 +42,7 @@ public class ScoreManager : Singleton<ScoreManager>
     // add a value to the current score
 	public void AddScore(int value)
 	{
-		m_currentScore += value;
+		_currentScore += value;
 		StartCoroutine (CountScoreRoutine ());
 	}
 
@@ -57,7 +52,7 @@ public class ScoreManager : Singleton<ScoreManager>
 		int iterations = 0;
 
         // if we are less than the current score (and we haven't taken too long to get there)...
-		while (m_counterValue < m_currentScore && iterations < 100000) 
+		while (m_counterValue < _currentScore && iterations < 100000) 
 		{
 			m_counterValue += m_increment;
 			UpdateScoreText (m_counterValue);
@@ -66,8 +61,8 @@ public class ScoreManager : Singleton<ScoreManager>
 		}
 
         //... set the counter equal to the currentScore and update the score Text
-		m_counterValue = m_currentScore;
-		UpdateScoreText (m_currentScore);
+		m_counterValue = _currentScore;
+		UpdateScoreText (_currentScore);
 
 	}
 
