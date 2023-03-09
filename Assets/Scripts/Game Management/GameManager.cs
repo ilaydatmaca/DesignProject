@@ -29,20 +29,12 @@ public class GameManager : Singleton<GameManager>
     }
     
     void Start()
-    {
-        if (UIManager.Instance != null)
-        {
+    { 
+        UIManager.Instance.scoreMeter.SetupStars(_levelGoal);
+        bool useTimer = (_levelGoal.levelCounter == LevelCounter.Timer);
 
-            if (UIManager.Instance.scoreMeter != null)
-            {
-                UIManager.Instance.scoreMeter.SetupStars(_levelGoal);
-            }
-
-            bool useTimer = (_levelGoal.levelCounter == LevelCounter.Timer);
-
-            UIManager.Instance.EnableTimer(useTimer);
-            UIManager.Instance.EnableMovesCounter(!useTimer);
-        }
+        UIManager.Instance.EnableTimer(useTimer);
+        UIManager.Instance.EnableMovesCounter(!useTimer);
 
         StartCoroutine(ExecuteGameLoop());
     }
@@ -173,28 +165,22 @@ public class GameManager : Singleton<GameManager>
         // set ready to reload to false to give the player time to read the screen
         _isReadyToReload = false;
 
-
-        // if player beat the level goals, show the win screen and play the win sound
         if (_isWinner)
         {
             ShowWinScreen();
         } 
-        // otherwise, show the lose screen and play the lose sound
 		else
         {   
             ShowLoseScreen();
         }
 
-        // wait one second
         yield return new WaitForSeconds(1f);
 
-        // fade the screen 
         if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
         {
             UIManager.Instance.screenFader.FadeOn();
         }  
 
-        // wait until read to reload
         while (!_isReadyToReload)
         {
             yield return null;
@@ -212,7 +198,6 @@ public class GameManager : Singleton<GameManager>
         {
             UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowWinMessage();
-            UIManager.Instance.messageWindow.ShowCollectionGoal(false);
 
             if (ScoreManager.Instance != null)
             {
@@ -238,7 +223,6 @@ public class GameManager : Singleton<GameManager>
         {
             UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowLoseMessage();
-            UIManager.Instance.messageWindow.ShowCollectionGoal(false);
 
             string caption = "";
             if (_levelGoal.levelCounter == LevelCounter.Timer)

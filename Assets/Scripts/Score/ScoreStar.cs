@@ -1,22 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// plays UI effects when player reaches scoring goal
 public class ScoreStar : MonoBehaviour
 {
-    // reference to the icon 
+    // when complete the stage
     public Image star;
-
-    // reference to activation particle effect
     public ParticlePlayer starFX;
-
-    // delay between particles and turning icon on
+    public AudioClip starSound;
     public float delay = 0.5f;
 
-    // activation sound clip
-    public AudioClip starSound;
 
     // have we been activated already?
     public bool activated = false;
@@ -44,17 +37,13 @@ public class ScoreStar : MonoBehaviour
         {
             return;
         }
-
-        // invoke ActivateRoutine coroutine
         StartCoroutine(ActivateRoutine());
     }
 
     IEnumerator ActivateRoutine()
     {
-        // we are activated
         activated = true;
 
-        // play the ParticlePlayer
         if (starFX != null)
         {
             starFX.Play();
@@ -67,8 +56,6 @@ public class ScoreStar : MonoBehaviour
         }
 
         yield return new WaitForSeconds(delay);
-
-        // turn on the icon
         SetActive(true);
     }
 

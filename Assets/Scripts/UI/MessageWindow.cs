@@ -18,7 +18,6 @@ public class MessageWindow : MonoBehaviour
     // sprite for the level goal
     public Sprite goalIcon;
 
-    public Sprite collectIcon;
     public Sprite timerIcon;
     public Sprite movesIcon;
 
@@ -27,8 +26,6 @@ public class MessageWindow : MonoBehaviour
 
     public Image goalImage;
     public Text goalText;
-
-    public GameObject collectionGoalLayout;
 
 	public void ShowMessage(Sprite sprite = null, string message = "", string buttonMsg = "start")
 	{
@@ -112,19 +109,6 @@ public class MessageWindow : MonoBehaviour
     {
         string caption = moves.ToString() + " moves";
         ShowGoal(caption, movesIcon);
-    }
-
-    public void ShowCollectionGoal(bool state = true)
-    {
-        if (collectionGoalLayout != null)
-        {
-            collectionGoalLayout.SetActive(state);
-        }
-
-        if (state)
-        {
-            ShowGoal("", collectIcon);
-        }
     }
 
 

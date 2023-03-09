@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Image))]
 public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 	// the UI.Image component
@@ -55,7 +54,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     {
         m_image = GetComponent<Image>();
         m_rectXform = GetComponent<RectTransform>();
-        m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
+        m_board = FindObjectOfType<Board>().GetComponent<Board>();
     }
 
     void Start()
@@ -71,11 +70,11 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         if (state)
         {
             DisableOtherBoosters();
-            Booster.ActiveBooster = gameObject;
+            ActiveBooster = gameObject;
         }
-        else if (gameObject == Booster.ActiveBooster)
+        else if (gameObject == ActiveBooster)
         {
-            Booster.ActiveBooster = null;
+            ActiveBooster = null;
         }
 
         m_image.color = (state) ? Color.white : Color.gray;

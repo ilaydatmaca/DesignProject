@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
 public class ScoreMeter : MonoBehaviour
 {
     public Slider slider;
@@ -27,19 +24,15 @@ public class ScoreMeter : MonoBehaviour
         // get the slider's RectTransform width
         float sliderWidth = slider.GetComponent<RectTransform>().rect.width;
 
-        // avoid divide by zero error
         if (_maxScore > 0)
         {
-            // loop through our scoring goals
             for (int i = 0; i < levelGoal.scoreGoals.Length; i++)
             {
                 // if the corresponding ScoreStar exists...
                 if (scoreStars[i] != null)
                 {
-                    // set the x value based on the ratio of the scoring goal over the maximum score
                     float newX = (sliderWidth * levelGoal.scoreGoals[i] / _maxScore) - (sliderWidth * 0.5f);
-
-                    // move the ScoreStar's RectTransform
+                    
                     RectTransform starRectXform = scoreStars[i].GetComponent<RectTransform>();
 
                     if (starRectXform != null)
@@ -59,7 +52,7 @@ public class ScoreMeter : MonoBehaviour
         if (_levelGoal != null)
         {
             // adjust the slider fill area (cast as floats, otherwise will become zero)
-            slider.value = (float) score / (float) _maxScore;
+            slider.value = (float) score / _maxScore;
         }
 
         // activate each star based on current star count

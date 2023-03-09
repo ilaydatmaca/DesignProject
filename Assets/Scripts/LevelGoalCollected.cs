@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
 public class LevelGoalCollected : LevelGoal
 {
 
     public override bool IsGameOver()
     {
-        if (levelCounter == LevelCounter.Timer)
+        int maxScore = scoreGoals[scoreGoals.Length - 1];
+
+        if (ScoreManager.Instance.CurrentScore >= maxScore || timeLeft <= 0 || movesLeft <= 0)
         {
-            return (timeLeft <= 0);
+            return true;
         }
-        else
-        {
-            return (movesLeft <= 0);
-        }
+
+        return false;
     }
 
     public override bool IsWinner()
