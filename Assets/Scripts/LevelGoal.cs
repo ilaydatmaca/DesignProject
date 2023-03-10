@@ -1,13 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum LevelCounter
-{
-    Timer,
-    Moves
-}
 
-// class is abstract, use a subclass and re-define the abstract methods
 public abstract class LevelGoal : Singleton<LevelGoal>
 {
     public int scoreStars;
@@ -17,22 +11,16 @@ public abstract class LevelGoal : Singleton<LevelGoal>
 
     public int timeLeft;
 
-    public LevelCounter levelCounter;
-
     int _maxTime;
 
     public virtual void Start()
     {
         scoreStars = 0;
-        
-        if (levelCounter == LevelCounter.Timer)
-        {
-            _maxTime = timeLeft;
+        _maxTime = timeLeft;
 
-            if (UIManager.Instance != null && UIManager.Instance.timer != null)
-            {
-                UIManager.Instance.timer.InitTimer(timeLeft);
-            }
+        if (UIManager.Instance != null && UIManager.Instance.timer != null)
+        {
+            UIManager.Instance.timer.InitTimer(timeLeft);
         }
     }
 

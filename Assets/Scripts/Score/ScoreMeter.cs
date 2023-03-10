@@ -3,42 +3,41 @@ using UnityEngine.UI;
 
 public class ScoreMeter : MonoBehaviour
 {
-    public Slider slider;
+    private Slider _slider;
+    private int _maxScore;
+    private LevelGoal _levelGoal;
 
-    public ScoreStar[] scoreStars = new ScoreStar[3];
+    private ScoreStar[] _scoreStars;
     
-    LevelGoal _levelGoal;
-    int _maxScore;
 
     void Awake()
     {
-        slider = GetComponent<Slider>();
+        _slider = GetComponent<Slider>();
     }
-
-    // position the ScoreStars automatically
-    public void SetupStars(LevelGoal levelGoal)
+    
+    public void Init(LevelGoal levelGoal)
     {
         _levelGoal = levelGoal;
+        SetupStars();
+    }
+    
+    void SetupStars()
+    {
         _maxScore = _levelGoal.scoreGoals[_levelGoal.scoreGoals.Length - 1];
 
-        // get the slider's RectTransform width
-        float sliderWidth = slider.GetComponent<RectTransform>().rect.width;
+        float sliderWidth = _slider.GetComponent<RectTransform>().rect.width;
 
         if (_maxScore > 0)
         {
-            for (int i = 0; i < levelGoal.scoreGoals.Length; i++)
+            for (int i = 0; i < _levelGoal.scoreGoals.Length; i++)
             {
-                // if the corresponding ScoreStar exists...
-                if (scoreStars[i] != null)
+                if (_scoreStars[i] != null)
                 {
-                    float newX = (sliderWidth * levelGoal.scoreGoals[i] / _maxScore) - (sliderWidth * 0.5f);
+                    float starXPos = (sliderWidth * _levelGoal.scoreGoals[i] / _maxScore) - (sliderWidth * 0.5f);
                     
-                    RectTransform starRectXform = scoreStars[i].GetComponent<RectTransform>();
-
-                    if (starRectXform != null)
-                    {
-                        starRectXform.anchoredPosition = new Vector2(newX, starRectXform.anchoredPosition.y);
-                    }
+                    RectTransform startRect = _scoreStars[i].GetComponent<RectTransform>();
+                    
+                    startRect.anchoredPosition = new Vector2(starXPos, startRect.anchoredPosition.y);
                 }
             }
 
@@ -52,15 +51,15 @@ public class ScoreMeter : MonoBehaviour
         if (_levelGoal != null)
         {
             // adjust the slider fill area (cast as floats, otherwise will become zero)
-            slider.value = (float) score / _maxScore;
+            _slider.value = (float) score / _maxScore;
         }
 
         // activate each star based on current star count
         for (int i = 0; i < starCount; i++)
         {
-            if (scoreStars[i] != null)
+            if (_scoreStars[i] != null)
             {
-                scoreStars[i].Activate();
+                _scoreStars[i].Activate();
             }
         }
     }

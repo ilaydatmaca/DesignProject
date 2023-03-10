@@ -4,18 +4,15 @@ using System.Collections;
 
 public class GameManager : Singleton<GameManager>
 {
-    private Board _board;
+    Board _board;
     
-    private bool _isPlayerReady;
-    private bool _isGameOver;
-    
-    public bool IsGameOver { get { return _isGameOver; } set { _isGameOver = value; } }
-
+    bool _isPlayerReady;
+    bool _isGameOver;
     bool _isWinner;
+    bool _isReadyToReload;
 
-    // are we ready to load/reload a new level?
-    bool _isReadyToReload = false;
-    
+    public bool IsGameOver { get => _isGameOver; }
+
     LevelGoal _levelGoal;
 
 
@@ -30,11 +27,10 @@ public class GameManager : Singleton<GameManager>
     
     void Start()
     { 
-        UIManager.Instance.scoreMeter.SetupStars(_levelGoal);
-        bool useTimer = (_levelGoal.levelCounter == LevelCounter.Timer);
+        UIManager.Instance.scoreMeter.Init(_levelGoal);
 
-        UIManager.Instance.EnableTimer(useTimer);
-        UIManager.Instance.EnableMovesCounter(!useTimer);
+        UIManager.Instance.EnableTimer(true);
+        UIManager.Instance.EnableMovesCounter(true);
 
         StartCoroutine(ExecuteGameLoop());
     }
@@ -42,12 +38,9 @@ public class GameManager : Singleton<GameManager>
     // update the Text component that shows our moves left
     public void UpdateMoves()
     {
-        if (_levelGoal.levelCounter == LevelCounter.Moves)
-        {
-            _levelGoal.movesLeft--;
+        _levelGoal.movesLeft--;
 
-            UIManager.Instance.UpdateMovesText();
-        }
+        UIManager.Instance.UpdateMovesText();
     }
 
 
@@ -65,6 +58,7 @@ public class GameManager : Singleton<GameManager>
     public void BeginGame()
     {
         _isPlayerReady = true;
+        _isReadyToReload = true;
 
     }
 
@@ -78,14 +72,8 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
                 UIManager.Instance.messageWindow.ShowScoreMessage(_levelGoal.scoreGoals[_levelGoal.scoreGoals.Length - 1]);
 
-                if (_levelGoal.levelCounter == LevelCounter.Timer)
-                {
                     UIManager.Instance.messageWindow.ShowTimedGoal(_levelGoal.timeLeft);
-                }
-                else
-                {
                     UIManager.Instance.messageWindow.ShowMovesGoal(_levelGoal.movesLeft);
-                }
             }
         }
 
@@ -115,10 +103,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator PlayGameRoutine()
     {
         // if level is timed, start the timer
-        if (_levelGoal.levelCounter == LevelCounter.Timer)
-        {
-            _levelGoal.StartCountdown();
-        }
+        _levelGoal.StartCountdown();
         
         // while the end game condition is not true, we keep playing
         // just keep waiting one frame and checking for game conditions
@@ -136,7 +121,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator WaitForBoardRoutine(float delay = 0f)
     {
-        if (_levelGoal.levelCounter == LevelCounter.Timer && UIManager.Instance != null
+        if (UIManager.Instance != null
             && UIManager.Instance.timer != null)
         {
             UIManager.Instance.timer.FadeOff();
@@ -225,14 +210,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.messageWindow.ShowLoseMessage();
 
             string caption = "";
-            if (_levelGoal.levelCounter == LevelCounter.Timer)
-            {
-                caption = "Out of time!";
-            }
-            else
-            {
-                caption = "Out of moves!";
-            }
+            caption = "Out of time!";
 
             UIManager.Instance.messageWindow.ShowGoalCaption(caption, 0, 70);
 
@@ -246,12 +224,6 @@ public class GameManager : Singleton<GameManager>
         {
             SoundManager.Instance.PlayLoseSound();
         }
-    }
-
-    // use this to acknowledge that the player is ready to reload
-    public void ReloadScene()
-    {
-        _isReadyToReload = true;
     }
 
     // score points and play a sound
@@ -284,10 +256,7 @@ public class GameManager : Singleton<GameManager>
 
     public void AddTime(int timeValue)
     {
-        if (_levelGoal.levelCounter == LevelCounter.Timer)
-        {
-            _levelGoal.AddTime(timeValue);
-        }
+        _levelGoal.AddTime(timeValue);
     }
 
 
