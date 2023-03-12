@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenFader: {fileID: 646572288}
-  scoreMeter: {fileID: 2075557073}
   messageWindow: {fileID: 1686819350}
 --- !u!1 &75403467
 GameObject:
@@ -5424,7 +5423,7 @@ MonoBehaviour:
   timer: {fileID: 410729505}
   timeLeftText: {fileID: 574154051}
   currentTime: 0
-  maxTime: 30
+  maxTime: 10
 --- !u!1 &469936786
 GameObject:
   m_ObjectHideFlags: 0
@@ -17317,8 +17316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c00916d497240a29af251779759543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1716117175}
   maxScore: 500
+  scoreText: {fileID: 1716117175}
+  scoreMeter: {fileID: 2075557073}
 --- !u!1 &1670947445
 GameObject:
   m_ObjectHideFlags: 0

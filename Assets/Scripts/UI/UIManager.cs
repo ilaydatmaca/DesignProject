@@ -4,9 +4,6 @@ public class UIManager : Singleton<UIManager>
 {
     public ScreenFader screenFader;
 
-
-    public ScoreMeter scoreMeter;
-
     public MessageWindow messageWindow;
 
 

@@ -13,7 +13,6 @@ public class TimeManager : Singleton<TimeManager>
 
     private void Start()
     {
-        
         currentTime = maxTime;
         EnableTimerArea();
         timer.InitTimer();

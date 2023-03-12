@@ -2,15 +2,17 @@
 
 public class ScoreManager : Singleton<ScoreManager> 
 {
-	int _currentScore;
+	private int _currentScore;
 	public int CurrentScore { get => _currentScore; }
-
-	public Text scoreText;
 	public int maxScore = 500;
 
-	void Start () 
+	public Text scoreText;
+
+	public ScoreMeter scoreMeter;
+
+	void Start() 
 	{
-		UpdateScoreText ();
+		UpdateScoreText();
 	}
 
 	void UpdateScoreText()
@@ -24,7 +26,8 @@ public class ScoreManager : Singleton<ScoreManager>
 	public void AddScore(int value)
 	{
 		_currentScore += value;
-		UpdateScoreText ();
+		scoreMeter.UpdateScoreMeter(_currentScore);
+		UpdateScoreText();
 	}
 
 }
