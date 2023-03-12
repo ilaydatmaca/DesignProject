@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public abstract class LevelGoal : Singleton<LevelGoal>
+public class LevelGoal : Singleton<LevelGoal>
 {
     public int scoreStars;
     public int[] scoreGoals;
@@ -43,10 +43,6 @@ public abstract class LevelGoal : Singleton<LevelGoal>
     {
         scoreStars = UpdateScore(score);
     }
-        
-    // abstract methods to be re-defined in subclass
-    public abstract bool IsWinner();
-    public abstract bool IsGameOver();
 
 
     // public method to start the timer
@@ -80,5 +76,28 @@ public abstract class LevelGoal : Singleton<LevelGoal>
             UIManager.Instance.timer.UpdateTimer(timeLeft);
         }
     }
+    
+            
+    public bool IsGameOver()
+    {
+        int maxScore = scoreGoals[scoreGoals.Length - 1];
+
+        if (ScoreManager.Instance.CurrentScore >= maxScore || timeLeft <= 0 || movesLeft <= 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsWinner()
+    {
+        if (ScoreManager.Instance != null)
+        {
+            return (ScoreManager.Instance.CurrentScore >= scoreGoals[0]);
+        }
+        return false;
+    }
+
 
 }

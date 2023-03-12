@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public bool IsGameOver { get => _isGameOver; }
 
     LevelGoal _levelGoal;
+    public MovesManager _movesManager;
 
 
     public override void Awake()
@@ -30,7 +31,6 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.scoreMeter.Init(_levelGoal);
 
         UIManager.Instance.EnableTimer(true);
-        UIManager.Instance.EnableMovesCounter(true);
 
         StartCoroutine(ExecuteGameLoop());
     }
@@ -38,9 +38,7 @@ public class GameManager : Singleton<GameManager>
     // update the Text component that shows our moves left
     public void UpdateMoves()
     {
-        _levelGoal.movesLeft--;
-
-        UIManager.Instance.UpdateMovesText();
+        _movesManager.DecreaseMoveLeft();
     }
 
 

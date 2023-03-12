@@ -7,7 +7,7 @@ public class ScoreMeter : MonoBehaviour
     private int _maxScore;
     private LevelGoal _levelGoal;
 
-    private ScoreStar[] _scoreStars;
+    public ScoreStar[] _scoreStars;
     
 
     void Awake()
