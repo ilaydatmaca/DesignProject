@@ -9,7 +9,6 @@ public class MovesManager : Singleton<MovesManager>
     
     public int movesLeft;
 
-
     private void Start()
     {
         EnableMovesCounterArea();

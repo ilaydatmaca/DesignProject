@@ -168,17 +168,6 @@ public class GameManager : Singleton<GameManager>
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
             UIManager.Instance.messageWindow.ShowWinMessage();
-
-            /*if (ScoreManager.Instance != null)
-            {
-                string scoreStr = "you scored\n" + ScoreManager.Instance.CurrentScore + " points!";
-                UIManager.Instance.messageWindow.ShowGoalCaption(scoreStr,0,70);
-            }
-
-            if (UIManager.Instance.messageWindow.goalCompleteIcon != null)
-            {
-                UIManager.Instance.messageWindow.ShowGoalImage(UIManager.Instance.messageWindow.goalCompleteIcon);
-            }*/
         }
 
         if (SoundManager.Instance != null)
@@ -192,17 +181,6 @@ public class GameManager : Singleton<GameManager>
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
             UIManager.Instance.messageWindow.ShowLoseMessage();
-
-            /*string caption = "";
-            caption = "Out of time!";
-
-            UIManager.Instance.messageWindow.ShowGoalCaption(caption, 0, 70);
-
-            if (UIManager.Instance.messageWindow.goalFailedIcon != null)
-            {
-                UIManager.Instance.messageWindow.ShowGoalImage(UIManager.Instance.messageWindow.goalFailedIcon);
-            }*/
-
         }
         if (SoundManager.Instance != null)
         {
@@ -210,7 +188,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    // score points and play a sound
+
     public void ScorePoints(GamePiece piece, int multiplier = 1, int bonus = 0)
     {
         if (piece != null)
