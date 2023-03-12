@@ -14,7 +14,6 @@ public class GameManager : Singleton<GameManager>
     public bool IsGameOver { get => _isGameOver; }
 
     LevelGoal _levelGoal;
-    public MovesManager _movesManager;
 
 
     public override void Awake()
@@ -26,19 +25,26 @@ public class GameManager : Singleton<GameManager>
 
     }
     
+    public void BeginGame()
+    {
+        _isPlayerReady = true;
+        _isReadyToReload = true;
+
+    }
     void Start()
     { 
         UIManager.Instance.scoreMeter.Init(_levelGoal);
-
-        UIManager.Instance.EnableTimer(true);
-
         StartCoroutine(ExecuteGameLoop());
     }
 
-    // update the Text component that shows our moves left
     public void UpdateMoves()
     {
-        _movesManager.DecreaseMoveLeft();
+        MovesManager.Instance.DecreaseMoveLeft();
+    }
+
+    public void AddTime(int timeValue)
+    {
+        TimeManager.Instance.AddTime(timeValue);
     }
 
 
@@ -52,13 +58,7 @@ public class GameManager : Singleton<GameManager>
 
         yield return StartCoroutine(EndGameRoutine());
     }
-
-    public void BeginGame()
-    {
-        _isPlayerReady = true;
-        _isReadyToReload = true;
-
-    }
+    
 
     IEnumerator StartGameRoutine()
     {
@@ -70,8 +70,8 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
                 UIManager.Instance.messageWindow.ShowScoreMessage(_levelGoal.scoreGoals[_levelGoal.scoreGoals.Length - 1]);
 
-                    UIManager.Instance.messageWindow.ShowTimedGoal(_levelGoal.timeLeft);
-                    UIManager.Instance.messageWindow.ShowMovesGoal(_levelGoal.movesLeft);
+                    UIManager.Instance.messageWindow.ShowTimedGoal(TimeManager.Instance.currentTime);
+                    UIManager.Instance.messageWindow.ShowMovesGoal(MovesManager.Instance.movesLeft);
             }
         }
 
@@ -100,16 +100,14 @@ public class GameManager : Singleton<GameManager>
     
     IEnumerator PlayGameRoutine()
     {
-        // if level is timed, start the timer
-        _levelGoal.StartCountdown();
+        
+       TimeManager.Instance.StartCountdown();
         
         // while the end game condition is not true, we keep playing
         // just keep waiting one frame and checking for game conditions
         while (!_isGameOver)
         {
-
             _isGameOver = _levelGoal.IsGameOver();
-
             _isWinner = _levelGoal.IsWinner();
 
             // wait one frame
@@ -119,11 +117,10 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator WaitForBoardRoutine(float delay = 0f)
     {
-        if (UIManager.Instance != null
-            && UIManager.Instance.timer != null)
+        if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
         {
-            UIManager.Instance.timer.FadeOff();
-            UIManager.Instance.timer.paused = true;
+            TimeManager.Instance.timer.FadeOff();
+            TimeManager.Instance.timer.paused = true;
         }
 
         if (_board != null)
@@ -250,11 +247,6 @@ public class GameManager : Singleton<GameManager>
                 SoundManager.Instance.PlayClipAtPoint(piece.clearSound, Vector3.zero, SoundManager.Instance.fxVolume);
             }
         }
-    }
-
-    public void AddTime(int timeValue)
-    {
-        _levelGoal.AddTime(timeValue);
     }
 
 

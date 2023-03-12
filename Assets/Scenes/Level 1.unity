@@ -5042,12 +5042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenFader: {fileID: 646572288}
-  movesLeftText: {fileID: 854957687}
   scoreMeter: {fileID: 2075557073}
   messageWindow: {fileID: 1686819350}
-  movesCounter: {fileID: 373263026}
-  timer: {fileID: 410729505}
-  levelGoal: {fileID: 0}
 --- !u!1 &68547251
 GameObject:
   m_ObjectHideFlags: 0
@@ -10335,13 +10331,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40357ea0df9ac4fb89e3ddd47b1fe9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeftText: {fileID: 574154051}
   clockImage: {fileID: 995527235}
-  paused: 0
   flashTimeLimit: 10
-  flashBeep: {fileID: 8300000, guid: 3235eb35ca4de45b9901ea9ccbff8d77, type: 3}
   flashInterval: 1
+  flashBeep: {fileID: 8300000, guid: 3235eb35ca4de45b9901ea9ccbff8d77, type: 3}
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  paused: 0
 --- !u!224 &410729506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15929,18 +15924,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1003490578}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ReloadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1686819351}
         m_TargetAssemblyTypeName: 
         m_MethodName: MoveOff
@@ -31395,7 +31378,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 0
-  m_FillOrigin: 2
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &995527236
@@ -31487,7 +31470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fbca393c37145548d3e63725c71ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movesManager: {fileID: 1003490580}
 --- !u!114 &1003490580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31501,7 +31483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movesCounterArea: {fileID: 373263026}
-  _movesLeftText: {fileID: 854957687}
+  movesLeftText: {fileID: 854957687}
+  movesLeft: 30
 --- !u!114 &1003490581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31516,8 +31499,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreStars: 0
   scoreGoals: c80000009001000058020000
-  movesLeft: 30
-  timeLeft: 30
 --- !u!1 &1005665932
 GameObject:
   m_ObjectHideFlags: 0
@@ -41864,14 +41845,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2403763, g: 0.32538772, b: 0.5735294, a: 0.653}
+  m_Color: {r: 0.22128133, g: 0.1457814, b: 0.26415092, a: 0.653}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 636b3f637ab1c49af9d73740133042b7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

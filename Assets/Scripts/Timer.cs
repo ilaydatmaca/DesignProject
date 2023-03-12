@@ -1,40 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public Text timeLeftText;
-    
     public Image clockImage;
 
-    // the starting time in seconds
-    int m_maxTime = 60;
-
-    // do we stop the timer?
-    public bool paused = false;
-
-    // time window when we start flashing the clock face
-    public int flashTimeLimit = 10;
-
-    // sound to play for each second during the flash routine
+    public int flashTimeLimit = 10; // kırmızı uyarının başlama zamanı
+    public float flashInterval = 1f; //flash uyarasını her 1 saniyede bir
+    
     public AudioClip flashBeep;
+    
+    public Color flashColor = Color.red; // the color of flash warning
+    
+    public bool paused;
+    
+    private TimeManager _timeManager;
 
-    // how long it takes to flash to a different color and change back
-    public float flashInterval = 1f;
-
-    // color for flash effect
-    public Color flashColor = Color.red;
-
-    // reference to Flash coroutine
-    IEnumerator m_flashRoutine;
-
-    // save the starting time and initialize the clock image, time left text, etc.
-    public void InitTimer(int maxTime)
+    private void Awake()
     {
-        m_maxTime = maxTime;
+        _timeManager = GetComponent<TimeManager>();
+    }
 
+    public void InitTimer()
+    {
         // make sure the image is using Radial360 fillMethod with origin at top
         if (clockImage != null)
         {
@@ -43,31 +32,18 @@ public class Timer : MonoBehaviour
             clockImage.fillOrigin = (int) Image.Origin360.Top;
         }
 
-        if (timeLeftText != null)
-        {
-            timeLeftText.text = maxTime.ToString();
-        }
     }
 
-    // update the clock image and time left text
-    public void UpdateTimer(int currentTime)
+    public void UpdateTimer()
     {
-        if (paused)
+        if (clockImage != null && !paused)
         {
-            return;
-        }
 
-        if (clockImage != null)
-        {
-            // update the clock fill
-            clockImage.fillAmount = (float) currentTime / (float) m_maxTime;
+            clockImage.fillAmount = (float) _timeManager.currentTime / (float) _timeManager.maxTime;
 
-            // flash and play extra beep if within the danger zone
-            if (currentTime <= flashTimeLimit)
+            if (_timeManager.currentTime <= flashTimeLimit)
             {
-                // start the flash effect
-                m_flashRoutine = FlashRoutine(clockImage, flashColor, flashInterval);
-                StartCoroutine(m_flashRoutine);
+                StartCoroutine(FlashRoutine());
 
                 if (SoundManager.Instance != null && flashBeep != null)
                 {
@@ -76,35 +52,28 @@ public class Timer : MonoBehaviour
             }
         }
 
-        // update countdown text
-        if (timeLeftText != null)
-        {
-            timeLeftText.text = currentTime.ToString();
-        }
+        _timeManager.UpdateTimeLeftText();
+
     }
   
-    // change an image to a flash color for a fraction of a interval and change the color back
-    IEnumerator FlashRoutine(Image image, Color targetColor, float interval)
+    IEnumerator FlashRoutine()
     {
-        if (image != null)
+        if (clockImage != null)
         {
-            Color originalColor = image.color;
-            image.CrossFadeColor(targetColor, interval * 0.3f, true, true);
-            yield return new WaitForSeconds(interval * 0.5f);
+            Color originalColor = clockImage.color;
+            clockImage.CrossFadeColor(flashColor, flashInterval * 0.3f, true, true);
+            yield return new WaitForSeconds(flashInterval * 0.5f);
 
-            image.CrossFadeColor(originalColor, interval * 0.3f, true, true);
-            yield return new WaitForSeconds(interval * 0.5f);
+            clockImage.CrossFadeColor(originalColor, flashInterval * 0.3f, true, true);
+            yield return new WaitForSeconds(flashInterval * 0.5f);
         }
     }
+    
 
-    // fade off any ScreenFaders components
+    // Zaman dolduğunda flashi durdur ve win ya da lose screen göster
     public void FadeOff()
     {
-        // stop any flash effect currently running
-        if (m_flashRoutine != null)
-        {
-            StopCoroutine(m_flashRoutine);
-        }
+        StopCoroutine(FlashRoutine());
 
         ScreenFader[] screenFaders = GetComponentsInChildren<ScreenFader>();
         foreach (ScreenFader fader in screenFaders)

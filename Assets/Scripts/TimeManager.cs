@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : Singleton<TimeManager>
 {
     public Timer timer;
 
@@ -10,11 +10,14 @@ public class TimeManager : MonoBehaviour
 
     public int currentTime;
     public int maxTime;
+
     private void Start()
     {
+        
         currentTime = maxTime;
         EnableTimerArea();
-        timer.InitTimer(currentTime);
+        timer.InitTimer();
+        UpdateTimeLeftText();
     }
     
     void EnableTimerArea()
@@ -26,27 +29,27 @@ public class TimeManager : MonoBehaviour
     }
     
     
-    /*void UpdateTimeLeftText()
+    public void UpdateTimeLeftText()
     {
         if (timeLeftText != null)
         {
-            timeLeftText.text = timeLeftText.movesLeft.ToString();
+            timeLeftText.text = currentTime.ToString();
         }
-    }*/
+    }
     
     public void StartCountdown()
     {
         StartCoroutine(CountdownRoutine());
     }
 
-    // decrement the timeLeft each second
+
     IEnumerator CountdownRoutine()
     {
         while (currentTime > 0)
         {
             yield return new WaitForSeconds(1f);
             currentTime--;
-            timer.UpdateTimer(currentTime);
+            timer.UpdateTimer();
         }
     }
 
@@ -55,7 +58,7 @@ public class TimeManager : MonoBehaviour
         currentTime += timeValue;
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
 
-        timer.UpdateTimer(currentTime);
+        timer.UpdateTimer();
     }
 
 }

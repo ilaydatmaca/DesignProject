@@ -10,8 +10,6 @@ public class UIManager : Singleton<UIManager>
     public MessageWindow messageWindow;
 
 
-    public Timer timer;
-
     public override void Awake()
     {
 
@@ -25,14 +23,6 @@ public class UIManager : Singleton<UIManager>
         if (screenFader != null)
         {
             screenFader.gameObject.SetActive(true);
-        }
-    }
-
-    public void EnableTimer(bool state)
-    {
-        if (timer != null)
-        {
-            timer.gameObject.SetActive(state);
         }
     }
 

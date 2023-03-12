@@ -2,18 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MovesManager : MonoBehaviour
+public class MovesManager : Singleton<MovesManager>
 {
-    private LevelGoal _levelGoal;
-    
     public GameObject movesCounterArea;
-    public Text _movesLeftText;
+    public Text movesLeftText;
+    
+    public int movesLeft;
 
-    private void Awake()
-    {
-        _levelGoal = FindObjectOfType<GameManager>().GetComponent<LevelGoal>();
-
-    }
 
     private void Start()
     {
@@ -32,7 +27,7 @@ public class MovesManager : MonoBehaviour
     
     public void DecreaseMoveLeft()
     {
-        _levelGoal.movesLeft--;
+        movesLeft--;
 
         UpdateMovesText();
     }
@@ -40,9 +35,9 @@ public class MovesManager : MonoBehaviour
 
     void UpdateMovesText()
     {
-        if (_movesLeftText != null)
+        if (movesLeftText != null)
         {
-            _movesLeftText.text = _levelGoal.movesLeft.ToString();
+            movesLeftText.text = movesLeft.ToString();
         }
     }
 }
