@@ -17,14 +17,15 @@ public class MessageWindow : MonoBehaviour
     // sprite for the level goal
     public Sprite goalIcon;
 
-    public Sprite timerIcon;
-    public Sprite movesIcon;
+    //public Sprite timerIcon;
+    //public Sprite movesIcon;
 
-    public Sprite goalCompleteIcon;
+    /*public Sprite goalCompleteIcon;
     public Sprite goalFailedIcon;
 
     public Image goalImage;
-    public Text goalText;
+    public Text goalText;*/
+    
 
     void ShowMessage(Sprite sprite = null, string message = "", string buttonMsg = "start")
 	{
@@ -44,7 +45,26 @@ public class MessageWindow : MonoBehaviour
         }
 	}
     
-    void ShowGoal(string caption = "", Sprite icon = null)
+    public void ShowLoseMessage()
+    {
+        GetComponent<MovingScreen>().MoveOn();
+        ShowMessage(loseIcon, "level\nfailed", "ok");
+    }
+    
+    public void ShowWinMessage()
+    {
+        GetComponent<MovingScreen>().MoveOn();
+        ShowMessage(winIcon, "level\ncomplete", "ok");
+    }
+    
+    public void ShowScoreMessage(int scoreGoal)
+    {
+        string message = "score goal \n" + scoreGoal;
+        ShowMessage(goalIcon, message, "start");
+    }
+
+    
+    /*void ShowGoal(string caption = "", Sprite icon = null)
     {
         if (caption != "")
         {
@@ -55,10 +75,10 @@ public class MessageWindow : MonoBehaviour
         {
             ShowGoalImage(icon);
         }
-    }
+    }*/
     
     
-    public void ShowGoalCaption(string caption = "", int offsetX = 0, int offsetY = 0)
+    /*public void ShowGoalCaption(string caption = "", int offsetX = 0, int offsetY = 0)
     {
         if (goalText != null)
         {
@@ -66,9 +86,9 @@ public class MessageWindow : MonoBehaviour
             RectTransform rectXform = goalText.GetComponent<RectTransform>();
             rectXform.anchoredPosition += new Vector2(offsetX, offsetY);
         }
-    }
+    }*/
 
-    public void ShowGoalImage(Sprite icon = null)
+    /*public void ShowGoalImage(Sprite icon = null)
     {
         if (goalImage != null)
         {
@@ -80,37 +100,21 @@ public class MessageWindow : MonoBehaviour
         {
             goalImage.gameObject.SetActive(false);
         }
-    }
-    public void ShowTimedGoal(int time)
+    }*/
+    /*public void ShowTimedGoal(int time)
     {
         string caption = time + " seconds";
         ShowGoal(caption, timerIcon);
-    }
+    }*/
 
-    public void ShowMovesGoal(int moves)
+    /*public void ShowMovesGoal(int moves)
     {
         string caption = moves + " moves";
         ShowGoal(caption, movesIcon);
-    }
-    
-
-    public void ShowScoreMessage(int scoreGoal)
-    {
-        string message = "score goal \n" + scoreGoal.ToString();
-        ShowMessage(goalIcon, message, "start");
-    }
-
-    public void ShowWinMessage()
-    {
-        ShowMessage(winIcon, "level\ncomplete", "ok");
-    }
-
-    public void ShowLoseMessage()
-    {
-        ShowMessage(loseIcon, "level\nfailed", "ok");
-    }
+    }*/
     
     
+
 
 
 }

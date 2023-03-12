@@ -90,8 +90,8 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
                 UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
 
-                UIManager.Instance.messageWindow.ShowTimedGoal(TimeManager.Instance.currentTime);
-                UIManager.Instance.messageWindow.ShowMovesGoal(MovesManager.Instance.movesLeft);
+                //UIManager.Instance.messageWindow.ShowTimedGoal(TimeManager.Instance.currentTime);
+                //UIManager.Instance.messageWindow.ShowMovesGoal(MovesManager.Instance.movesLeft);
             }
         }
     }
@@ -167,10 +167,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowWinMessage();
 
-            if (ScoreManager.Instance != null)
+            /*if (ScoreManager.Instance != null)
             {
                 string scoreStr = "you scored\n" + ScoreManager.Instance.CurrentScore + " points!";
                 UIManager.Instance.messageWindow.ShowGoalCaption(scoreStr,0,70);
@@ -179,7 +178,7 @@ public class GameManager : Singleton<GameManager>
             if (UIManager.Instance.messageWindow.goalCompleteIcon != null)
             {
                 UIManager.Instance.messageWindow.ShowGoalImage(UIManager.Instance.messageWindow.goalCompleteIcon);
-            }
+            }*/
         }
 
         if (SoundManager.Instance != null)
@@ -192,10 +191,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
             UIManager.Instance.messageWindow.ShowLoseMessage();
 
-            string caption = "";
+            /*string caption = "";
             caption = "Out of time!";
 
             UIManager.Instance.messageWindow.ShowGoalCaption(caption, 0, 70);
@@ -203,7 +201,7 @@ public class GameManager : Singleton<GameManager>
             if (UIManager.Instance.messageWindow.goalFailedIcon != null)
             {
                 UIManager.Instance.messageWindow.ShowGoalImage(UIManager.Instance.messageWindow.goalFailedIcon);
-            }
+            }*/
 
         }
         if (SoundManager.Instance != null)
