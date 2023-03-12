@@ -6,6 +6,7 @@ public class ScoreManager : Singleton<ScoreManager>
 	public int CurrentScore { get => _currentScore; }
 
 	public Text scoreText;
+	public int maxScore = 500;
 
 	void Start () 
 	{

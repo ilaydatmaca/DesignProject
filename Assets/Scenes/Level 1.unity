@@ -10019,8 +10019,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: 0}
+  m_SizeDelta: {x: -5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &258472890
 GameObject:
@@ -10441,7 +10441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &477120289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10477,11 +10477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b372ee2e44c6b4c608795d56a9632f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star: {fileID: 882305549}
-  starFX: {fileID: 639797404}
-  starSound: {fileID: 8300000, guid: 3235eb35ca4de45b9901ea9ccbff8d77, type: 3}
-  delay: 0.5
-  activated: 0
 --- !u!114 &477120291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25807,7 +25802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &763249653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25881,11 +25876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b372ee2e44c6b4c608795d56a9632f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star: {fileID: 1971751689}
-  starFX: {fileID: 1942007980}
-  starSound: {fileID: 8300000, guid: 3235eb35ca4de45b9901ea9ccbff8d77, type: 3}
-  delay: 0.5
-  activated: 0
 --- !u!1 &769535788
 GameObject:
   m_ObjectHideFlags: 0
@@ -31497,8 +31487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfe1f77f59a6407bababec7257c7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreStars: 0
-  scoreGoals: c80000009001000058020000
 --- !u!1 &1005665932
 GameObject:
   m_ObjectHideFlags: 0
@@ -47189,6 +47177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1716117175}
+  maxScore: 500
 --- !u!1 &1663219025
 GameObject:
   m_ObjectHideFlags: 0
@@ -62959,7 +62948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936863968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -62995,11 +62984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b372ee2e44c6b4c608795d56a9632f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star: {fileID: 1435722011}
-  starFX: {fileID: 1888470428}
-  starSound: {fileID: 8300000, guid: 3235eb35ca4de45b9901ea9ccbff8d77, type: 3}
-  delay: 0.5
-  activated: 0
 --- !u!114 &1936863970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68462,10 +68446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3fb1809f7c3458ba85c2b446443e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreStars:
-  - {fileID: 763249656}
-  - {fileID: 1936863969}
-  - {fileID: 477120290}
 --- !u!1 &2104866642
 GameObject:
   m_ObjectHideFlags: 0

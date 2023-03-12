@@ -33,7 +33,6 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     { 
-        UIManager.Instance.scoreMeter.Init(_levelGoal);
         StartCoroutine(ExecuteGameLoop());
     }
 
@@ -68,7 +67,7 @@ public class GameManager : Singleton<GameManager>
             if (UIManager.Instance.messageWindow != null)
             {
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
-                UIManager.Instance.messageWindow.ShowScoreMessage(_levelGoal.scoreGoals[_levelGoal.scoreGoals.Length - 1]);
+                UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
 
                     UIManager.Instance.messageWindow.ShowTimedGoal(TimeManager.Instance.currentTime);
                     UIManager.Instance.messageWindow.ShowMovesGoal(MovesManager.Instance.movesLeft);
@@ -231,13 +230,9 @@ public class GameManager : Singleton<GameManager>
                 // score points
                 ScoreManager.Instance.AddScore(piece.scoreValue * multiplier + bonus);
 
-                // update the scoreStars in the Level Goal component
-                _levelGoal.UpdateScoreStars(ScoreManager.Instance.CurrentScore);
-
                 if (UIManager.Instance != null && UIManager.Instance.scoreMeter != null)
                 {
-                    UIManager.Instance.scoreMeter.UpdateScoreMeter(ScoreManager.Instance.CurrentScore, 
-                        _levelGoal.scoreStars);
+                    UIManager.Instance.scoreMeter.UpdateScoreMeter(ScoreManager.Instance.CurrentScore);
                 }
             }
 
