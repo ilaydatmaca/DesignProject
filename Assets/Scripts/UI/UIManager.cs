@@ -5,8 +5,7 @@ public class UIManager : Singleton<UIManager>
     public ScreenFader screenFader;
 
     public MessageWindow messageWindow;
-
-
+    
     public override void Awake()
     {
 
