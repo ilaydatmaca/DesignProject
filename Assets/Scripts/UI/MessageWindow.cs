@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-// this is a UI component that can show a message, icon and button
 
 public class MessageWindow : MonoBehaviour 
 {
@@ -27,7 +26,7 @@ public class MessageWindow : MonoBehaviour
     public Image goalImage;
     public Text goalText;
 
-	public void ShowMessage(Sprite sprite = null, string message = "", string buttonMsg = "start")
+    void ShowMessage(Sprite sprite = null, string message = "", string buttonMsg = "start")
 	{
 		if (messageImage != null) 
 		{
