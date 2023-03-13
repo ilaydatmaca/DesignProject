@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -33,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     { 
+        Console.WriteLine("asd");
         StartCoroutine(ExecuteGameLoop());
     }
 
