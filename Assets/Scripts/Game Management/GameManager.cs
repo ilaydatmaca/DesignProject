@@ -34,7 +34,6 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     { 
-        Console.WriteLine("asd");
         StartCoroutine(ExecuteGameLoop());
     }
 
