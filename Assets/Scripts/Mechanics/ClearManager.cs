@@ -4,10 +4,12 @@ using UnityEngine;
 public class ClearManager : MonoBehaviour
 {
     private Board board;
+    private ParticleManager _particleManager;
 
     private void Awake()
     {
         board = GetComponent<Board>();
+        _particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
     }
     
 
@@ -23,7 +25,7 @@ public class ClearManager : MonoBehaviour
 
     }
 
-    // clear a list of GamePieces (plus a potential sublist of GamePieces destroyed by bombs)
+    // clear a list of GamePieces (plus a potential sublist of GamePieces destroyed by items)
     public void DestroyAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces)
     {
         foreach (GamePiece piece in gamePieces)
@@ -32,7 +34,6 @@ public class ClearManager : MonoBehaviour
             {
                 DestroyAt(piece.xIndex, piece.yIndex);
 
-                // add a score bonus if we clear four or more pieces
                 int bonus = 0;
                 if (gamePieces.Count >= 4)
                 {
@@ -45,17 +46,17 @@ public class ClearManager : MonoBehaviour
                 }
 
                 // play particle effects for pieces...
-                if (board.particleManager != null)
+                if (_particleManager != null)
                 {
                     // ... cleared by bombs
                     if (bombedPieces.Contains(piece))
                     {
-                        board.particleManager.BombFXAt(piece.xIndex, piece.yIndex);
+                        _particleManager.BombFXAt(piece.xIndex, piece.yIndex);
                     }
                     // ... cleared normally
                     else
                     {
-                        board.particleManager.ClearPieceFXAt(piece.xIndex, piece.yIndex);
+                        _particleManager.ClearPieceFXAt(piece.xIndex, piece.yIndex);
                     }
                 }
             }

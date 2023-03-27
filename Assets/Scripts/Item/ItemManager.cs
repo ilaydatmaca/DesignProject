@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private Board board;
+    private Board _board;
+    private ItemFactory _itemFactory;
 
     private void Awake()
     {
-        board = GetComponent<Board>();
+        _board = GetComponent<Board>();
+        _itemFactory = GetComponent<ItemFactory>();
     }
 
-    public void CheckItems(Cell cellA, Cell cellB, GamePiece clickedPiece, GamePiece targetPiece, List<GamePiece> tileAPieces, List<GamePiece> tileBPieces)
+    public void CheckItems(Cell cellA, Cell cellB, List<GamePiece> tileAPieces, List<GamePiece> tileBPieces)
     {
         Vector2 swipeDirection = new Vector2(cellB.xIndex - cellA.xIndex, cellB.yIndex - cellA.yIndex);
 
-        board.clickedCellItem = CreateItem(cellA.xIndex, cellA.yIndex, swipeDirection, tileAPieces);
-        board.targetCellItem = CreateItem(cellB.xIndex, cellB.yIndex, swipeDirection, tileBPieces);
+        _board.clickedCellItem = CreateItem(cellA.xIndex, cellA.yIndex, swipeDirection, tileAPieces);
+        _board.targetCellItem = CreateItem(cellB.xIndex, cellB.yIndex, swipeDirection, tileBPieces);
         
     }
 
@@ -35,33 +37,33 @@ public class ItemManager : MonoBehaviour
     GameObject CreateItem(int x, int y, Vector2 swapDirection, List<GamePiece> gamePieces)
     {
         GameObject item = null;
-        MatchValue matchValue = MatchValue.None;
 
         if (gamePieces != null)
         {
-            matchValue = FindMatchValue(gamePieces);
+            MatchValue matchValue = FindMatchValue(gamePieces);
+            
+            if (gamePieces.Count == 4 && matchValue != MatchValue.None)
+            {
+                if (Mathf.Abs(swapDirection.x) > Math.Abs(swapDirection.y))
+                {
+                    item = _itemFactory.MakeItem(ItemType.RocketRow, x, y, matchValue);
+                }
+                else
+                {
+                    item = _itemFactory.MakeItem(ItemType.RocketColumn, x, y, matchValue);
+                }
+            }
+            else if (gamePieces.Count == 5 && matchValue != MatchValue.None)
+            {
+                item = _itemFactory.MakeItem(ItemType.Bomb,x, y,  matchValue);
+            }
+        
+            else if (gamePieces.Count >= 6)
+            {
+                item = _itemFactory.MakeItem(ItemType.Disco, x, y);
+            }
         }
 
-        if (gamePieces.Count == 4 && matchValue != MatchValue.None)
-        {
-            if(Mathf.Abs(swapDirection.x) > Math.Abs(swapDirection.y))
-            {
-                item = board.itemFactory.MakeItem(ItemType.RocketRow, x, y, matchValue);
-            }
-            else
-            {
-                item = board.itemFactory.MakeItem(ItemType.RocketColumn, x, y, matchValue);
-            }
-        }
-        else if (gamePieces.Count == 5 && matchValue != MatchValue.None)
-        {
-            item = board.itemFactory.MakeItem(ItemType.Bomb,x, y,  matchValue);
-        }
-        
-        else if (gamePieces.Count >= 6)
-        {
-            item = board.itemFactory.MakeItem(ItemType.Disco, x, y);
-        }
         return item;
     }
 
@@ -72,7 +74,7 @@ public class ItemManager : MonoBehaviour
 
         if (clickedPiece.IsDisco() && targetPiece.IsDisco())
         {
-            foreach (GamePiece piece in board.AllGamePieces)
+            foreach (GamePiece piece in _board.AllGamePieces)
             {
                 if (!colorMatches.Contains(piece))
                 {
@@ -101,20 +103,20 @@ public class ItemManager : MonoBehaviour
     // find all GamePieces on the Board with a certain MatchValue
     public List<GamePiece> FindAllMatchValue(MatchValue mValue)
     {
-        if (board == null)
+        if (_board == null)
             return null;
 
         List<GamePiece> foundPieces = new List<GamePiece>();
 
-        for (int i = 0; i < board.width; i++)
+        for (int i = 0; i < _board.width; i++)
         {
-            for (int j = 0; j < board.height; j++)
+            for (int j = 0; j < _board.height; j++)
             {
-                if (board.AllGamePieces[i, j] != null)
+                if (_board.AllGamePieces[i, j] != null)
                 {
-                    if (board.AllGamePieces[i, j].matchValue == mValue)
+                    if (_board.AllGamePieces[i, j].matchValue == mValue)
                     {
-                        foundPieces.Add(board.AllGamePieces[i, j]);
+                        foundPieces.Add(_board.AllGamePieces[i, j]);
                     }
                 }
             }
@@ -122,37 +124,32 @@ public class ItemManager : MonoBehaviour
         return foundPieces;
     }
     
-    
-    
-    
-    
 
     // puts the bomb into the game Board and treats it as a normal GamePiece
-    public void InitBomb(GameObject bomb)
+    public void InitItem(GameObject item)
     {
-        int x = (int)bomb.transform.position.x;
-        int y = (int)bomb.transform.position.y;
-
-
-        if (board.IsInBorder(x, y))
+        int x = item.GetComponent<GamePiece>().xIndex;
+        int y = item.GetComponent<GamePiece>().yIndex;
+        
+        if (_board.IsInBorder(x, y))
         {
-            board.AllGamePieces[x, y] = bomb.GetComponent<GamePiece>();
+            _board.AllGamePieces[x, y] = item.GetComponent<GamePiece>();
         }
     }
 
     // initializes any bombs created on the clicked or target tile
-    public void InitAllBombs()
+    public void InitAllItems()
     {
-        if (board.clickedCellItem != null)
+        if (_board.clickedCellItem != null)
         {
-            InitBomb(board.clickedCellItem);
-            board.clickedCellItem = null;
+            InitItem(_board.clickedCellItem);
+            _board.clickedCellItem = null;
         }
 
-        if (board.targetCellItem != null)
+        if (_board.targetCellItem != null)
         {
-            InitBomb(board.targetCellItem);
-            board.targetCellItem = null;
+            InitItem(_board.targetCellItem);
+            _board.targetCellItem = null;
         }
     }
 

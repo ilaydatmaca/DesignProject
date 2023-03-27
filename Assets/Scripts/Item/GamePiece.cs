@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class GamePiece : MonoBehaviour {
@@ -8,16 +7,13 @@ public class GamePiece : MonoBehaviour {
 	public int yIndex;
 	
 	private bool _isMoving;
-	
 	private readonly int _fallOffset = 10;
 	private readonly float _moveTime = 0.5f;
+
 	public MatchValue matchValue;
 
-    // how much this GamePiece is worth when it is cleared
 	public int scoreValue = 20;
-
-    // the sound the GamePiece makes when it clears
-    public AudioClip clearSound;
+	public AudioClip clearSound;
 
     private Board _board;
 
@@ -99,7 +95,7 @@ public class GamePiece : MonoBehaviour {
 
 	public bool IsDisco()
 	{
-		Item ıtem = this.GetComponent<Item>();
+		Item ıtem = GetComponent<Item>();
 
 		if (ıtem != null)
 		{

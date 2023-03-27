@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
 public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    
     public static GameObject ActiveBooster; // the one active Booster GameObject
 
     private Vector3 _startPosition; // reset position
@@ -14,12 +12,14 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     
     public bool isEnabled;    // is the Booster enabled? (has the button been clicked once?)
     public bool isDraggable = true;
-    
 
     public UnityEvent boostEvent;
     public int bonusTime = 15;
 
     private Board _board;
+    private BoardManager _boardManager;
+    private ItemFactory _itemFactory;
+    
     private Image _image;
     private RectTransform _rectform;
 
@@ -29,6 +29,9 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         _image = GetComponent<Image>();
         _rectform = GetComponent<RectTransform>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
+        _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
+        _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
+
     }
 
     void Start()
@@ -123,9 +126,9 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void RemoveOneGamePiece()
     {
-        if (_board != null && _targetCell != null)
+        if (_boardManager != null && _targetCell != null)
         {
-            _board.boardManager.ClearAndRefillBoard(_targetCell.xIndex, _targetCell.yIndex);
+            _boardManager.ClearAndRefillBoard(_targetCell.xIndex, _targetCell.yIndex);
         }
     }
 
@@ -141,7 +144,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     {
         if (_board != null && _targetCell != null)
         {
-            _board.boardFiller.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
+            _itemFactory.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
         }
     }
 }

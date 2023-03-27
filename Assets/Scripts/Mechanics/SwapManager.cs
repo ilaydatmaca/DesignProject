@@ -8,10 +8,16 @@ public class SwapManager : MonoBehaviour
 {
 
     private Board _board;
-
+    private BoardManager _boardManager;
+    private MatchFinder _matchFinder;
+    private ItemManager _itemManager;
+    
     private void Awake()
     {
         _board = GetComponent<Board>();
+        _boardManager = GetComponent<BoardManager>();
+        _matchFinder = GetComponent<MatchFinder>();
+        _itemManager = GetComponent<ItemManager>();
     }
 
     public void ClickCell(Cell cell)
@@ -62,9 +68,9 @@ public class SwapManager : MonoBehaviour
                 yield return new WaitForSeconds(_board.swapTime);
 
                 // find all matches for each GamePiece after the swap
-                List<GamePiece> cellAMatches = _board.matchFinder.FindMatchesAt(cell1.xIndex, cell1.yIndex);
-                List<GamePiece> cellBMatches = _board.matchFinder.FindMatchesAt(cell2.xIndex, cell2.yIndex);
-                List<GamePiece> colorMatches = _board.ıtemManager.ProcessDisco(clickedItem, targetItem);
+                List<GamePiece> cellAMatches = _matchFinder.FindMatchesAt(cell1.xIndex, cell1.yIndex);
+                List<GamePiece> cellBMatches = _matchFinder.FindMatchesAt(cell2.xIndex, cell2.yIndex);
+                List<GamePiece> colorMatches = _itemManager.ProcessDisco(clickedItem, targetItem);
                 
 
                 // if we don't make any matches, then swap the pieces back
@@ -79,11 +85,11 @@ public class SwapManager : MonoBehaviour
                     yield return new WaitForSeconds(_board.swapTime);
 
                     // drop items on either tile if necessary
-                    _board.ıtemManager.CheckItems(cell1, cell2, clickedItem, targetItem, cellAMatches, cellBMatches);
+                    _itemManager.CheckItems(cell1, cell2, cellAMatches, cellBMatches);
 
                     List<GamePiece> piecesToClear = cellAMatches.Union(cellBMatches).ToList().Union(colorMatches).ToList();
                     
-                    yield return StartCoroutine(_board.boardManager.BoardRoutine(piecesToClear));
+                    yield return StartCoroutine(_boardManager.BoardRoutine(piecesToClear));
 
 
                     // otherwise, we decrement our moves left

@@ -1,5 +1,7 @@
 ﻿
-public class LevelGoal : Singleton<LevelGoal>
+using UnityEngine;
+
+public class LevelGoal : MonoBehaviour
 {
             
     public bool IsGameOver()

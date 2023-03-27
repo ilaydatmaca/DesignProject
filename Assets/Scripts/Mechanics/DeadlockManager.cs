@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-public class BoardDeadlock : MonoBehaviour
+public class DeadlockManager : MonoBehaviour
 {
     private Board _board;
     private Directions _directions;

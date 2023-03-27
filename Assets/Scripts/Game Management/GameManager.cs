@@ -90,9 +90,6 @@ public class GameManager : Singleton<GameManager>
             {
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
                 UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
-
-                //UIManager.Instance.messageWindow.ShowTimedGoal(TimeManager.Instance.currentTime);
-                //UIManager.Instance.messageWindow.ShowMovesGoal(MovesManager.Instance.movesLeft);
             }
         }
     }

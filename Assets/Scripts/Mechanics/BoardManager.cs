@@ -6,11 +6,23 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    private Board board;
+    private Board _board;
+    private MatchFinder _matchFinder;
+    private ItemManager _itemManager;
+    private ShuffleManager _shuffleManager;
+    private FallManager _fallManager;
+    private DeadlockManager _deadlockManager;
+    private ClearManager _clearManager;
 
     private void Awake()
     {
-        board = GetComponent<Board>();
+        _board = GetComponent<Board>();
+        _matchFinder = GetComponent<MatchFinder>();
+        _itemManager = GetComponent<ItemManager>();
+        _shuffleManager = GetComponent<ShuffleManager>();
+        _fallManager = GetComponent<FallManager>();
+        _deadlockManager = GetComponent<DeadlockManager>();
+        _clearManager = GetComponent<ClearManager>();
     }
     void BoardChecking(List<GamePiece> gamePieces)
     {
@@ -20,17 +32,17 @@ public class BoardManager : MonoBehaviour
     public IEnumerator BoardRoutine(List<GamePiece> gamePieces)
     {
 
-        board.playerInputEnabled = false;
-        board.isRefilling = true;
+        _board.playerInputEnabled = false;
+        _board.isRefilling = true;
 
         List<GamePiece> matches = gamePieces;
 
         // store a score multiplier for chain reactions
-        board.scoreMultiplier = 0;
+        _board.scoreMultiplier = 0;
 
         while(matches.Count != 0)
         {
-            board.scoreMultiplier++;
+            _board.scoreMultiplier++;
             
             yield return StartCoroutine(ClearAndFallRoutine(matches));
 
@@ -38,51 +50,51 @@ public class BoardManager : MonoBehaviour
             
             yield return StartCoroutine(RefillRoutine());
             
-            matches = board.matchFinder.FindAllMatches();
-            yield return new WaitForSeconds(board.delay);
+            matches = _matchFinder.FindAllMatches();
+            yield return new WaitForSeconds(_board.delay);
 
         }
 
         StartCoroutine(DeadlockCheck());
 
 
-        board.playerInputEnabled = true;
-        board.isRefilling = false;
+        _board.playerInputEnabled = true;
+        _board.isRefilling = false;
     }
 
 
     IEnumerator ClearAndFallRoutine(List<GamePiece> gamePieces)
     {
 
-        yield return new WaitForSeconds(board.delay);
+        yield return new WaitForSeconds(_board.delay);
 
         bool isFinished = false;
 
         while (!isFinished)
         {
 
-            List<GamePiece> bombedPieces = board.GetAffectedPiecesByItems(gamePieces);
+            List<GamePiece> bombedPieces = _board.GetAffectedPiecesByItems(gamePieces);
             gamePieces = gamePieces.Union(bombedPieces).ToList();
 
-            bombedPieces = board.GetAffectedPiecesByItems(gamePieces);
+            bombedPieces = _board.GetAffectedPiecesByItems(gamePieces);
             gamePieces = gamePieces.Union(bombedPieces).ToList();
 
-            board.clearManager.DestroyAt(gamePieces, bombedPieces);
+            _clearManager.DestroyAt(gamePieces, bombedPieces);
 
-            board.ıtemManager.InitAllBombs();
+            _itemManager.InitAllItems();
 
             
-            yield return new WaitForSeconds(board.delay);
+            yield return new WaitForSeconds(_board.delay);
 
-            List<GamePiece> movingPieces =board.fallManager.FallPieces();
-            while (!board.fallManager.AreAllPiecesIsSet(movingPieces))
+            List<GamePiece> movingPieces = _fallManager.FallPieces();
+            while (!_fallManager.AreAllPiecesIsSet(movingPieces))
             {
                 yield return null;
             }
 
-            yield return new WaitForSeconds(board.delay);
+            yield return new WaitForSeconds(_board.delay);
             
-            List<GamePiece> allMatchesInBoard = board.matchFinder.FindAllMatches();
+            List<GamePiece> allMatchesInBoard = _matchFinder.FindAllMatches();
 
             if (allMatchesInBoard.Count == 0)
             {
@@ -91,7 +103,7 @@ public class BoardManager : MonoBehaviour
             
             else
             {
-                board.scoreMultiplier++;
+                _board.scoreMultiplier++;
 
                 if (SoundManager.Instance != null)
                 {
@@ -108,26 +120,25 @@ public class BoardManager : MonoBehaviour
     private IEnumerator DeadlockCheck()
     {
         // deadlock check
-        if (board.boardDeadlock.IsDeadlocked())
+        if (_deadlockManager.IsDeadlocked())
         {
-            yield return new WaitForSeconds(board.delay * 5f);
+            yield return new WaitForSeconds(_board.delay * 5f);
 
-            yield return StartCoroutine(board.boardShuffler.ShuffleBoardRoutine());
+            yield return StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
 
-            yield return new WaitForSeconds(board.delay * 5f);
+            yield return new WaitForSeconds(_board.delay * 5f);
 
             yield return StartCoroutine(RefillRoutine());
         }
     }
     
     
-    
     // clear and refill one position of the Board (used by Booster)
     public void ClearAndRefillBoard(int x, int y)
     {
-        if (board.IsInBorder(x, y))
+        if (_board.IsInBorder(x, y))
         {
-            GamePiece pieceToClear = board.AllGamePieces[x, y];
+            GamePiece pieceToClear = _board.AllGamePieces[x, y];
             List<GamePiece> listOfOne = new List<GamePiece>();
             listOfOne.Add(pieceToClear);
             BoardChecking(listOfOne);
@@ -138,7 +149,7 @@ public class BoardManager : MonoBehaviour
     // coroutine to refill the Board
     IEnumerator RefillRoutine()
     {
-        board.FillBoard();
+        _board.FillBoard();
 
         yield return null;
     }

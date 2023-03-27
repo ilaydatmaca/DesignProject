@@ -4,14 +4,19 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class BoardShuffler : MonoBehaviour
+public class ShuffleManager : MonoBehaviour
 {
-
     private Board _board;
+    private BoardManager _boardManager;
+    private MatchFinder _matchFinder;
+    private FallManager _fallManager;
 
     private void Awake()
     {
         _board = GetComponent<Board>();
+        _boardManager = GetComponent<BoardManager>();
+        _matchFinder = GetComponent<MatchFinder>();
+        _fallManager = GetComponent<FallManager>();
     }
     
     public IEnumerator ShuffleBoardRoutine()
@@ -22,7 +27,7 @@ public class BoardShuffler : MonoBehaviour
             allPieces.Add(piece);
         }
 
-        while (!_board.fallManager.AreAllPiecesIsSet(allPieces))
+        while (!_fallManager.AreAllPiecesIsSet(allPieces))
         {
             yield return null;
         }
@@ -36,8 +41,8 @@ public class BoardShuffler : MonoBehaviour
         MovePieces();
 
         // in the event some matches form, clear and refill the Board
-        List<GamePiece> matches = _board.matchFinder.FindAllMatches();
-        StartCoroutine(_board.boardManager.BoardRoutine(matches));
+        List<GamePiece> matches = _matchFinder.FindAllMatches();
+        StartCoroutine(_boardManager.BoardRoutine(matches));
 
 
     }

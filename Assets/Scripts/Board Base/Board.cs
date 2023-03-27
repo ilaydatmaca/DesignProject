@@ -22,45 +22,27 @@ public class Board : MonoBehaviour
     
     public bool playerInputEnabled = true;
     public bool isRefilling;
-    public float swapTime = 0.5f;
-
-    public ParticleManager particleManager;
     
+    public float swapTime = 0.5f;
     public int scoreMultiplier;
-
-
-    public BoardDeadlock boardDeadlock;
-    public BoardShuffler boardShuffler;
-    public BoardFiller boardFiller;
-    public MatchFinder matchFinder;
-    public FallManager fallManager;
-    public ItemManager ıtemManager;
-    public ItemFactory itemFactory;
     public float delay = 0.2f;
-    public SwapManager swapManager;
-    public ClearManager clearManager;
-    public BoardManager boardManager;
 
+
+    private ItemFactory _itemFactory;
+    private ShuffleManager _shuffleManager;
+    private ClearManager _clearManager;
+    
     private void Awake()
     {
-
-        boardDeadlock = GetComponent<BoardDeadlock>();
-        boardShuffler = GetComponent<BoardShuffler>();
-        boardFiller = GetComponent<BoardFiller>();
-        matchFinder = GetComponent<MatchFinder>();
-        fallManager = GetComponent<FallManager>();
-        ıtemManager = GetComponent<ItemManager>();
-        itemFactory = GetComponent<ItemFactory>();
-        swapManager = GetComponent<SwapManager>();
-        clearManager = GetComponent<ClearManager>();
-        boardManager = GetComponent<BoardManager>();
+        _shuffleManager = GetComponent<ShuffleManager>();
+        _itemFactory = GetComponent<ItemFactory>();
+        _clearManager = GetComponent<ClearManager>();
     }
 
     void Start()
     {
         _allTiles = new Cell[width, height];
         AllGamePieces = new GamePiece[width, height];
-        particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
     }
     
     public void SetupBoard()
@@ -81,7 +63,7 @@ public class Board : MonoBehaviour
                 {
                     GameObject tile = Instantiate(cellPrefab, Vector3.zero, Quaternion.identity, transform);
                     _allTiles[x, y] = tile.GetComponent<Cell>();
-                    _allTiles[x, y].Init(x, y, this);
+                    _allTiles[x, y].Init(x, y);
                 }
             }
         }
@@ -109,13 +91,13 @@ public class Board : MonoBehaviour
             {           
                 if (AllGamePieces[i, j] == null)
                 {
-                    itemFactory.MakeRandomGamePiece(i, j);
+                    _itemFactory.MakeRandomGamePiece(i, j);
                     int iteration = 0;
 
                     while (HasMatchOnFill(i, j) && iteration < maxIterations)
                     {
-                        clearManager.DestroyAt(i, j);
-                        itemFactory.MakeRandomGamePiece(i, j);
+                        _clearManager.DestroyAt(i, j);
+                        _itemFactory.MakeRandomGamePiece(i, j);
 
                         iteration++;
                     }
@@ -252,7 +234,7 @@ public class Board : MonoBehaviour
     {
         if (playerInputEnabled)
         {
-            StartCoroutine(boardShuffler.ShuffleBoardRoutine());
+            StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
         }
     }
 

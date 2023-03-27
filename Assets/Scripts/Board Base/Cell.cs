@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class Cell : MonoBehaviour {
@@ -6,13 +7,17 @@ public class Cell : MonoBehaviour {
 	[HideInInspector] public int xIndex;
 	[HideInInspector] public int yIndex;
 
-	Board _board;
+	private SwapManager _swapManager;
 
-	public void Init(int x, int y, Board board)
+	private void Awake()
+	{
+		_swapManager = FindObjectOfType<Board>().GetComponent<SwapManager>();
+	}
+
+	public void Init(int x, int y)
 	{
 		xIndex = x;
 		yIndex = y;
-		_board = board;
 		
 		transform.position = new Vector3(x, y, 0);
 		UpdateLabel();
@@ -27,24 +32,24 @@ public class Cell : MonoBehaviour {
 	}
 	void OnMouseDown()
 	{
-		if (_board !=null)
+		if (_swapManager !=null)
 		{
-			_board.swapManager.ClickCell(this);
+			_swapManager.ClickCell(this);
 		}
 
 	}
 	void OnMouseEnter()
 	{
-		if (_board !=null)
+		if (_swapManager !=null)
 		{
-			_board.swapManager.DragCell(this);
+			_swapManager.DragCell(this);
 		}
 	}
 	void OnMouseUp()
 	{
-		if (_board !=null)
+		if (_swapManager !=null)
 		{
-			_board.swapManager.ReleaseCell();
+			_swapManager.ReleaseCell();
 		}
 	}
 
