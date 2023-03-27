@@ -1,134 +1,132 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-// use these methods from the Board class to shuffle your GamePieces
+
 public class BoardShuffler : MonoBehaviour
 {
 
-    // removes non-bomb and collectible pieces from your GamePiece array and returns them as a List
-    public List<GamePiece> RemoveNormalPieces(GamePiece[,] allPieces)
+    private Board _board;
+
+    private void Awake()
     {
-        // list of pieces to return
-        List<GamePiece> normalPieces = new List<GamePiece>();
+        _board = GetComponent<Board>();
+    }
+    
+    public IEnumerator ShuffleBoardRoutine()
+    {
+        List<GamePiece> allPieces = new List<GamePiece>();
+        foreach (GamePiece piece in _board.AllGamePieces)
+        {
+            allPieces.Add(piece);
+        }
 
-        // get width and height from array
-        int width = allPieces.GetLength(0);
-        int height = allPieces.GetLength(1);
+        while (!_board.fallManager.AreAllPiecesIsSet(allPieces))
+        {
+            yield return null;
+        }
 
-        // foreach position in the array...
+        List<GamePiece> nonItems = GetNonItems();
+
+        ShuffleWithFisherYates(nonItems);
+
+        FillBoardFromList(nonItems);
+
+        MovePieces();
+
+        // in the event some matches form, clear and refill the Board
+        List<GamePiece> matches = _board.matchFinder.FindAllMatches();
+        StartCoroutine(_board.boardManager.BoardRoutine(matches));
+
+
+    }
+
+
+    List<GamePiece> GetNonItems()
+    {
+
+        List<GamePiece> nonItems = new List<GamePiece>();
+
+        int width = _board.AllGamePieces.GetLength(0);
+        int height = _board.AllGamePieces.GetLength(1);
+
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                // ... if it's not a null object (i.e. a hole caused by Obstacle)
-                if (allPieces[i, j] != null)
+                if (_board.AllGamePieces[i, j] != null)
                 {
-                    // check for bomb and collectible components
-                    Item ıtem = allPieces[i, j].GetComponent<Item>();
-
-                    // add to normalPieces list if gamePiece is not Bomb or Collectible
-                    if (ıtem == null)
+                    Item item = _board.AllGamePieces[i, j].GetComponent<Item>();
+                    
+                    if (item == null)
                     {
-                        normalPieces.Add(allPieces[i, j]);
-
-                        // and clear position from original array
-                        allPieces[i, j] = null;
+                        nonItems.Add(_board.AllGamePieces[i, j]);
+                        _board.AllGamePieces[i, j] = null;
                     }
                 }
             }
         }
-
-        // returns list of non-bomb and non-collectible pieces
-        return normalPieces;
+        return nonItems;
     }
 
-    // shuffles a list of GamePieces in place using Fisher-Yates shuffle
-    public void ShuffleList(List<GamePiece> piecesToShuffle)
+    void ShuffleWithFisherYates(List<GamePiece> piecesToShuffle)
     {
-        // number of GamePieces to shuffle
         int maxCount = piecesToShuffle.Count;
 
-        // count up to maxCount minus 1 (last item has no other GamePieces to swap with)
         for (int i = 0; i < maxCount - 1; i++)
         {
-            // generate a random number from current item to end of the list (note: maxCount is exclusive for integers)
             int r = Random.Range(i, maxCount);
 
-            // if we have selected the current GamePiece, skip to next count
             if (r == i)
             {
                 continue;
             }
-
-            // swap the current items with the randomly selected item
-            GamePiece temp = piecesToShuffle[r];
-
-            piecesToShuffle[r] = piecesToShuffle[i];
-
-            piecesToShuffle[i] = temp;
-
+            (piecesToShuffle[r], piecesToShuffle[i]) = (piecesToShuffle[i], piecesToShuffle[r]);
         }
     }
-
-    // shuffle non-bomb and non-collectible GamePieces
-    public IEnumerator ShuffleBoardRoutine(Board board)
+    
+    void FillBoardFromList(List<GamePiece> gamePieces)
     {
-        if (board != null)
+        Queue<GamePiece> unusedPieces = new Queue<GamePiece>(gamePieces);
+
+        int maxIterations = 100;
+
+        for (int i = 0; i < _board.width; i++)
         {
-
-
-            // get a list of all the GamePieces
-            List<GamePiece> allPieces = new List<GamePiece>();
-            foreach (GamePiece piece in board.AllGamePieces)
+            for (int j = 0; j < _board.height; j++)
             {
-                allPieces.Add(piece);
+                if (_board.AllGamePieces[i, j] == null)
+                {
+                    _board.AllGamePieces[i, j] = unusedPieces.Dequeue();
+                    
+                    int iterationNum = 0;
+
+                    while (_board.HasMatchOnFill(i, j) && iterationNum < maxIterations)
+                    {
+                        unusedPieces.Enqueue(_board.AllGamePieces[i, j]);
+                        
+                        _board.AllGamePieces[i, j] = unusedPieces.Dequeue();
+                        iterationNum++;
+                    }
+                }
             }
-
-            // wait for any GamePieces that have not settled into place
-            while (!board.fallManager.AreAllPiecesIsSet(allPieces))
-            {
-                yield return null;
-            }
-
-            // remove any normalPieces from m_allGamePieces and store them in a List
-            List<GamePiece> normalPieces = RemoveNormalPieces(board.AllGamePieces);
-
-            // shuffle the list of normal pieces
-            board.boardShuffler.ShuffleList(normalPieces);
-
-            // use the shuffled list to fill the Board
-            board.boardFiller.FillBoardFromList(normalPieces);
-
-            // move the pieces to their correct onscreen positions
-            MovePieces(board.AllGamePieces, board.swapTime);
-
-            // in the event some matches form, clear and refill the Board
-            List<GamePiece> matches = board.matchFinder.FindAllMatches();
-            StartCoroutine(board.boardManager.BoardRoutine(matches));
         }
-
-
     }
 
 
-
-    // moves GamePieces into onscreen positions after being shuffled in the array
-    public void MovePieces(GamePiece[,] allPieces, float swapTime = 0.5f)
+    void MovePieces()
     {
+        int width = _board.AllGamePieces.GetLength(0);
+        int height = _board.AllGamePieces.GetLength(1);
 
-        // get width and height from array
-        int width = allPieces.GetLength(0);
-        int height = allPieces.GetLength(1);
-
-        // run Move method for each GamePiece to move to correct (x,y) position onscreen
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                if (allPieces[i, j] != null)
+                if (_board.AllGamePieces[i, j] != null)
                 {
-                    allPieces[i, j].Move(i, j, swapTime);
+                    _board.AllGamePieces[i, j].Move(i, j, _board.swapTime);
                 }
             }
         }

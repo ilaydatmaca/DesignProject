@@ -140,7 +140,8 @@ public class Board : MonoBehaviour
         {
             return true;
         }
-        return false;    }
+        return false;    
+    }
     
     public bool HasMatchOnFill(int x, int y)
     {
@@ -251,7 +252,7 @@ public class Board : MonoBehaviour
     {
         if (playerInputEnabled)
         {
-            StartCoroutine(boardShuffler.ShuffleBoardRoutine(this));
+            StartCoroutine(boardShuffler.ShuffleBoardRoutine());
         }
     }
 

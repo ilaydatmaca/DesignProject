@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -51,7 +50,7 @@ public class FallManager : MonoBehaviour
         {
             if (piece != null)
             {
-                return piece.isSet();
+                return piece.IsSetup();
             }
         }
 

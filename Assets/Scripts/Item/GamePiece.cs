@@ -46,7 +46,7 @@ public class GamePiece : MonoBehaviour {
 	    yIndex = y;
     }
 
-    public bool isSet()
+    public bool IsSetup()
     {
 	    Vector2 destination = new Vector2(xIndex, yIndex);
 	    return Vector2.Distance(transform.position, destination) < 0.01f;
@@ -75,7 +75,6 @@ public class GamePiece : MonoBehaviour {
 		{
 			if (Vector3.Distance(transform.position, destination) < 0.01f)
 			{
-				Console.WriteLine(elapsedTime);
 				isReached = true;
 				Set((int) destination.x, (int) destination.y);
 			}

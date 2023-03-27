@@ -58,8 +58,7 @@ public class ItemManager : MonoBehaviour
             item = board.itemFactory.MakeItem(ItemType.Bomb,x, y,  matchValue);
         }
         
-        
-        if (gamePieces.Count >= 6)
+        else if (gamePieces.Count >= 6)
         {
             item = board.itemFactory.MakeItem(ItemType.Disco, x, y);
         }

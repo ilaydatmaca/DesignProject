@@ -1,139 +1,105 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
 public class BoardDeadlock : MonoBehaviour
 {
-    // given an (x,y) coordinate return a List of GamePieces (either a row or column) 
-    List<GamePiece> GetRowOrColumnList(GamePiece[,] allPieces, int x, int y, int listLength = 3, bool checkRow = true)
-    {
-        // get the Board dimensions
-        int width = allPieces.GetLength(0);
-        int height = allPieces.GetLength(1);
+    private Board _board;
+    private Directions _directions;
 
-        // empty list to store GamePieces
+    private int _matchLength = 3;
+    private void Awake()
+    {
+        _board = GetComponent<Board>();
+        _directions = GetComponent<Directions>();
+
+    }
+    
+    List<GamePiece> GetRowOrColumnList(int x, int y, bool checkRow = true)
+    {
         List<GamePiece> piecesList = new List<GamePiece>();
 
-        // loop through listLength number of pieces
-        for (int i = 0; i < listLength; i++)
+        for (int i = 0; i < _matchLength; i++)
         {
-            // for getting a row...
             if (checkRow)
             {
-                // the coordinate is within the Board dimensions, add to our running list
-                if (x + i < width && y < height && allPieces[x + i, y] != null)
+                if (_board.AllGamePieces[x + i, y] != null && _board.IsInBorder(x + i, y))
                 {
-                    piecesList.Add(allPieces[x + i, y]);
+                    piecesList.Add(_board.AllGamePieces[x + i, y]);
                 }
             }
-            // for getting a column...
             else
             {
-                // the coordinate is within the Board dimensions, add to our running list
-                if (x < width && y + i < height && allPieces[x, y + i] != null)
+                if (_board.AllGamePieces[x, y + i] != null && _board.IsInBorder(x, y + i))
                 {
-                    piecesList.Add(allPieces[x, y + i]);
+                    piecesList.Add(_board.AllGamePieces[x, y + i]);
                 }
             }
         }
         return piecesList;
     }
 
-    // given a list of GamePieces, return a sub-list of matching GamePieces
-    List<GamePiece> GetMinimumMatches(List<GamePiece> gamePieces, int minForMatch = 2)
+    List<GamePiece> GetMinimumMatches(List<GamePiece> gamePieces)
     {
-        // empty running list of GamePieces
         List<GamePiece> matches = new List<GamePiece>();
-
-        // use the Linq.GroupBy method to break the list into smaller groups
+        
         var groups = gamePieces.GroupBy(n => n.matchValue);
 
-        // check each group for minimum length and valid MatchValue
         foreach (var grp in groups)
         {
-            // convert the group to our list of matches if it meets the requirements
-            if (grp.Count() >= minForMatch && grp.Key != MatchValue.None)
+            if (grp.Count() >= _matchLength - 1  && grp.Key != MatchValue.None)
             {
                 matches = grp.ToList();
             }
         }
-        // return the list of matching GamePieces (can be an empty list if we don't have valid matches)
         return matches;
     }
 
-    // given a coordinate (x,y), locate the four adjacent GamePieces in the array
-    List<GamePiece> GetNeighbors(GamePiece[,] allPieces, int x, int y)
+    List<GamePiece> GetNeighbors(int x, int y)
     {
-        // get the Board dimensions
-        int width = allPieces.GetLength(0);
-        int height = allPieces.GetLength(1);
+        HashSet<GamePiece> neighbors = new HashSet<GamePiece>();
 
-        // empty List of GamePieces to return
-        List<GamePiece> neighbors = new List<GamePiece>();
+        List<Vector2> searchDirections = _directions.GetVectorsFromList(
+            new List<Direction>(){ Direction.Up, Direction.Down, Direction.Left, Direction.Right });
 
-        // four compass directions represented as Vector2's
-        Vector2[] searchDirections = new Vector2[4]
-        {
-            new Vector2(-1f, 0f),
-            new Vector2(1f, 0f),
-            new Vector2(0f, 1f),
-            new Vector2(0f, -1f)
-        };
-
-        // foreach compass direction, check if the neighboring space has a valid GamePiece
         foreach (Vector2 dir in searchDirections)
         {
-            // verify the neighboring position is within the Board
-            if (x + (int)dir.x >= 0 && x + (int)dir.x < width && y + (int)dir.y >= 0 && y + (int)dir.y < height)
+            if (_board.IsInBorder(x + (int)dir.x, y + (int)dir.y))
             {
-                // add each valid neighboring GamePiece to our running list
-                if (allPieces[x + (int)dir.x, y + (int)dir.y] != null)
+                if (_board.AllGamePieces[x + (int)dir.x, y + (int)dir.y] != null)
                 {
-                    if (!neighbors.Contains(allPieces[x + (int)dir.x, y + (int)dir.y]))
-                    {
-                        neighbors.Add(allPieces[x + (int)dir.x, y + (int)dir.y]);
-                    }
+                    neighbors.Add(_board.AllGamePieces[x + (int)dir.x, y + (int)dir.y]);
                 }
             }
         }
-        // return the list of GamePieces (can be empty List if we don't have valid neighbors)
-        return neighbors;
+        return neighbors.ToList();
     }
 
-    // do we have a possible move at postion (x,y) in the Board?
-    bool HasMoveAt(GamePiece[,] allPieces, int x, int y, int listLength = 3, bool checkRow = true)
+
+    bool HasMoveAt(int x, int y, bool checkRow = true)
     {
-        List<GamePiece> pieces = GetRowOrColumnList(allPieces, x, y, listLength, checkRow);
+        List<GamePiece> pieces = GetRowOrColumnList(x, y, checkRow);
 
-        // find what GamePieces in the list already match (usually we are looking for two out of three)
-        List<GamePiece> matches = GetMinimumMatches(pieces, listLength - 1);
+        List<GamePiece> matches = GetMinimumMatches(pieces);
 
-        // if we have matching GamePieces, find the single unmatched piece
         GamePiece unmatchedPiece = null;
         if (pieces != null && matches != null)
         {
-            if (pieces.Count == listLength && matches.Count == listLength - 1)
+            if (pieces.Count == _matchLength && matches.Count == _matchLength - 1)
             {
                 unmatchedPiece = pieces.Except(matches).FirstOrDefault();
             }
 
-            // if we have an unmatched GamePiece, check its neighboring GamePieces
             if (unmatchedPiece != null)
             {
-                List<GamePiece> neighbors = GetNeighbors(allPieces, unmatchedPiece.xIndex, unmatchedPiece.yIndex);
+                List<GamePiece> neighbors = GetNeighbors(unmatchedPiece.xIndex, unmatchedPiece.yIndex);
                 neighbors = neighbors.Except(matches).ToList();
                 neighbors = neighbors.FindAll(n => n.matchValue == matches[0].matchValue);
                 matches = matches.Union(neighbors).ToList();
             }
 
-            // if the neighbor of the unmatched Piece matches our original list of matches, return true; we can make a move here
-            if (matches.Count >= listLength)
+            if (matches.Count >= _matchLength)
             {
-//                string rowColStr = (checkRow) ? " row " : " column ";
-//                Debug.Log("======= AVAILABLE MOVE ================================");
-//                Debug.Log("Move " + matches[0].matchValue + " piece to " + unmatchedPiece.xIndex + "," + 
-//                    unmatchedPiece.yIndex + " to form matching " + rowColStr);
                 return true;
             }
         }
@@ -142,26 +108,24 @@ public class BoardDeadlock : MonoBehaviour
         return false;
     }
 
-    // does the Board have any more moves available?
-    public bool IsDeadlocked(GamePiece[,] allPieces, int listLength = 3)
-    {
-        int width = allPieces.GetLength(0);
-        int height = allPieces.GetLength(1);
 
-        bool isDeadlocked = true;
+    public bool IsDeadlocked()
+    {
+        int width = _board.AllGamePieces.GetLength(0);
+        int height = _board.AllGamePieces.GetLength(1);
 
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                // if the row or column of GamePieces has an available move, return false; board is not deadlocked
-                if (HasMoveAt(allPieces, i, j, listLength, true) || HasMoveAt(allPieces, i, j, listLength, false))
+                if (HasMoveAt(i, j, true) || 
+                    HasMoveAt(i, j, false))
                 {
-                    isDeadlocked = false;
+                    return false;
 
                 }
             }
         }
-        return isDeadlocked;
+        return true;
     }
 }

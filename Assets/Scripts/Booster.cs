@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -7,54 +6,29 @@ using UnityEngine.Events;
 
 public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-	// the UI.Image component
-    Image m_image;
+    
+    public static GameObject ActiveBooster; // the one active Booster GameObject
 
-    // the RectTransform component
-    RectTransform m_rectXform;
-
-    // reset position
-    Vector3 m_startPosition;
-
-    // Board component
-    Board m_board;
-
-    // the Tile to apply the booster effect
-    Cell _mCellTarget;
-
-    // the one active Booster GameObject
-    public static GameObject ActiveBooster;
-
-    // UI.Text component for instructions
-    public Text instructionsText;
-
-    // text instructions 
-    public string instructions = "drag over game piece to remove";
-
-    // is the Booster enabled? (has the button been clicked once?)
-    public bool isEnabled = false;
-
-    // is this Booster intended to draggable (currently the only implemented behavior)
+    private Vector3 _startPosition; // reset position
+    private Cell _targetCell;
+    
+    public bool isEnabled;    // is the Booster enabled? (has the button been clicked once?)
     public bool isDraggable = true;
+    
 
-    // has the Booster been locked (for use with another manager script)
-    public bool isLocked = false;
-
-    // useful for UI elements that may be colliding with drag event / add a CanvasGroup and add to List
-    public List<CanvasGroup> canvasGroups;
-
-    // actions to invoke when the drag is complete
     public UnityEvent boostEvent;
+    public int bonusTime = 15;
 
-    // time bonus
-    public int boostTime = 15;
+    private Board _board;
+    private Image _image;
+    private RectTransform _rectform;
 
-    // initialize components
+
     void Awake()
     {
-        m_image = GetComponent<Image>();
-        m_rectXform = GetComponent<RectTransform>();
-        m_board = FindObjectOfType<Board>().GetComponent<Board>();
+        _image = GetComponent<Image>();
+        _rectform = GetComponent<RectTransform>();
+        _board = FindObjectOfType<Board>().GetComponent<Board>();
     }
 
     void Start()
@@ -62,8 +36,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         EnableBooster(false);
     }
 
-    // toggle the Booster on/off
-    public void EnableBooster(bool state)
+    void EnableBooster(bool state)
     {
         isEnabled = state;
 
@@ -77,23 +50,12 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             ActiveBooster = null;
         }
 
-        m_image.color = (state) ? Color.white : Color.gray;
-
-        if (instructionsText != null)
-        {
-            instructionsText.gameObject.SetActive(Booster.ActiveBooster != null);
-
-            if (gameObject == Booster.ActiveBooster)
-            {
-                instructionsText.text = instructions;
-            }
-        }
+        _image.color = (state) ? Color.white : Color.gray;
     }
 
-    // disable all other boosters
     void DisableOtherBoosters()
     {
-        Booster[] allBoosters = Object.FindObjectsOfType<Booster>();
+        Booster[] allBoosters = FindObjectsOfType<Booster>();
 
         foreach (Booster b in allBoosters)
         {
@@ -104,59 +66,47 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         }
     }
 
-    // toggle Booster state
     public void ToggleBooster()
     {
         EnableBooster(!isEnabled);
     }
 
-    // frame where we begin dragging
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable && !isLocked)
+        if (isEnabled && isDraggable)
         {
-            m_startPosition = gameObject.transform.position;
-            EnableCanvasGroups(false);
+            _startPosition = gameObject.transform.position;
         }
     }
 
-    // still dragging
     public void OnDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable && !isLocked && Camera.main != null)
+        if (isEnabled && isDraggable)
         {
             Vector3 onscreenPosition;
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(m_rectXform, eventData.position, 
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectform, eventData.position, 
                                                                     Camera.main, out onscreenPosition);
             gameObject.transform.position = onscreenPosition;
 
             RaycastHit2D hit2D = Physics2D.Raycast(onscreenPosition, Vector3.forward, Mathf.Infinity);
 
-            if (hit2D.collider != null )
-            {
-                _mCellTarget = hit2D.collider.GetComponent<Cell>();
-            }
-            else
-            {
-                _mCellTarget = null;
-            }
+            _targetCell = (hit2D.collider != null) ? hit2D.collider.GetComponent<Cell>() : null;
         }
     }
 
     // frame where we end drag
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable && !isLocked)
+        if (isEnabled && isDraggable)
         {
-            gameObject.transform.position = m_startPosition;
-            EnableCanvasGroups(true);
+            gameObject.transform.position = _startPosition;
 
-            if (m_board != null && m_board.isRefilling)
+            if (_board != null && _board.isRefilling)
             {
                 return;
             }
 
-            if (_mCellTarget != null)
+            if (_targetCell != null)
             {
                 if (boostEvent != null)
                 {
@@ -165,51 +115,33 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
                 EnableBooster(false);
 
-                _mCellTarget = null;
-                Booster.ActiveBooster = null;
+                _targetCell = null;
+                ActiveBooster = null;
             }
         }
     }
 
-    // enable/disable blocksRaycasts for CanvasGroup components
-    void EnableCanvasGroups(bool state)
-    {
-        if (canvasGroups != null && canvasGroups.Count > 0)
-        {
-            foreach (CanvasGroup cGroup in canvasGroups)
-            {
-                if (cGroup != null)
-                {
-                    cGroup.blocksRaycasts = state;
-                }
-            }
-        }
-    }
-
-    // action to remove one GamePiece
     public void RemoveOneGamePiece()
     {
-        if (m_board != null && _mCellTarget != null)
+        if (_board != null && _targetCell != null)
         {
-            m_board.boardManager.ClearAndRefillBoard(_mCellTarget.xIndex, _mCellTarget.yIndex);
+            _board.boardManager.ClearAndRefillBoard(_targetCell.xIndex, _targetCell.yIndex);
         }
     }
 
-    // action to add bonus time
     public void AddTime()
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddTime(boostTime);
+            GameManager.Instance.AddTime(bonusTime);
         }
     }
 
-    // action to replace GamePiece with Color Bomb
     public void DropColorBomb()
     {
-        if (m_board != null && _mCellTarget != null)
+        if (_board != null && _targetCell != null)
         {
-            m_board.boardFiller.MakeColorBombBooster(_mCellTarget.xIndex, _mCellTarget.yIndex);
+            _board.boardFiller.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
         }
     }
 }

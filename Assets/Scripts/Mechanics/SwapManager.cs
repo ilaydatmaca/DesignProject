@@ -40,7 +40,7 @@ public class SwapManager : MonoBehaviour
         _board.targetCell = null;
     }
 
-    public void SwapCells(Cell clickedCell, Cell targetCell)
+    void SwapCells(Cell clickedCell, Cell targetCell)
     {
         StartCoroutine(SwapCellsRoutine(clickedCell, targetCell));
     }

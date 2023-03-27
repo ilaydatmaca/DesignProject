@@ -14,7 +14,7 @@ public class MatchFinder : MonoBehaviour
 
 
     // general method to find matches, defaulting to a minimum of three-in-a-row, passing in an (x,y) position and direction
-    public List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection, int minLength = 3)
+    List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection, int minLength = 3)
     {
         HashSet<GamePiece> matches = new HashSet<GamePiece>();
 

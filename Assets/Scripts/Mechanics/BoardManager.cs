@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour
     {
         board = GetComponent<Board>();
     }
-    public void BoardChecking(List<GamePiece> gamePieces)
+    void BoardChecking(List<GamePiece> gamePieces)
     {
         StartCoroutine(BoardRoutine(gamePieces));
     }
@@ -48,22 +48,6 @@ public class BoardManager : MonoBehaviour
 
         board.playerInputEnabled = true;
         board.isRefilling = false;
-    }
-
-    private IEnumerator DeadlockCheck()
-    {
-        // deadlock check
-        if (board.boardDeadlock.IsDeadlocked(board.AllGamePieces, 3))
-        {
-            yield return new WaitForSeconds(board.delay * 5f);
-
-            // shuffle the Board's normal pieces instead of Clearing out the whole Board
-            yield return StartCoroutine(board.boardShuffler.ShuffleBoardRoutine(board));
-
-            yield return new WaitForSeconds(board.delay * 5f);
-
-            yield return StartCoroutine(RefillRoutine());
-        }
     }
 
 
@@ -121,6 +105,21 @@ public class BoardManager : MonoBehaviour
     
     
 
+    private IEnumerator DeadlockCheck()
+    {
+        // deadlock check
+        if (board.boardDeadlock.IsDeadlocked())
+        {
+            yield return new WaitForSeconds(board.delay * 5f);
+
+            yield return StartCoroutine(board.boardShuffler.ShuffleBoardRoutine());
+
+            yield return new WaitForSeconds(board.delay * 5f);
+
+            yield return StartCoroutine(RefillRoutine());
+        }
+    }
+    
     
     
     // clear and refill one position of the Board (used by Booster)
@@ -137,7 +136,7 @@ public class BoardManager : MonoBehaviour
     
     
     // coroutine to refill the Board
-    public IEnumerator RefillRoutine()
+    IEnumerator RefillRoutine()
     {
         board.FillBoard();
 
