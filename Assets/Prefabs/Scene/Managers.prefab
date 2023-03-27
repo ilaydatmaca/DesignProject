@@ -103,9 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c00916d497240a29af251779759543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScore: 500
   scoreText: {fileID: 0}
-  scoreMeter: {fileID: 0}
 --- !u!1 &6966813969668759490
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,8 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearFXPrefab: {fileID: 1000010615010014, guid: 97273a9a2bbe94ed0aa22cfda47432fa, type: 3}
-  breakFXPrefab: {fileID: 1000013032388978, guid: dca6c51fc5c6549548508efd58bdfdb9, type: 3}
-  doubleBreakFXPrefab: {fileID: 1000013940112220, guid: f35d57202eae54e0d92bd1d2feed734e, type: 3}
   bombFXPrefab: {fileID: 1000013172160682, guid: 1940f5a8b14d242afa10ee49495ba85a, type: 3}
 --- !u!1 &6966813969966715019
 GameObject:

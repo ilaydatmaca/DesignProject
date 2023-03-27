@@ -89,7 +89,7 @@ public class GameManager : Singleton<GameManager>
             if (UIManager.Instance.messageWindow != null)
             {
                 UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
-                UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
+                //UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
             }
         }
     }

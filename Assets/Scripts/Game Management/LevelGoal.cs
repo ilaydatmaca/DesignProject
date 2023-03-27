@@ -6,7 +6,7 @@ public class LevelGoal : MonoBehaviour
             
     public bool IsGameOver()
     {
-        if (ScoreManager.Instance.CurrentScore >= ScoreManager.Instance.maxScore || TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
+        if (TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
         {
             return true;
         }
@@ -18,7 +18,7 @@ public class LevelGoal : MonoBehaviour
     {
         if (ScoreManager.Instance != null)
         {
-            return (ScoreManager.Instance.CurrentScore >= ScoreManager.Instance.maxScore);
+            return true;
         }
         return false;
     }
