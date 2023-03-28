@@ -98,7 +98,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator PlayGameRoutine()
     {
         
-        TimeManager.Instance.StartCountdown();
+        TimeManager.Instance.StartCountDown();
         
         while (!_isGameOver)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +8,7 @@ public class TimeManager : Singleton<TimeManager>
 
     public Text timeLeftText;
 
-    public int currentTime;
+    public float currentTime;
     public int maxTime;
 
     private void Start()
@@ -27,28 +27,15 @@ public class TimeManager : Singleton<TimeManager>
         }
     }
     
-    
+    public void StartCountDown()
+    {
+        timer.paused = false;
+    }
     public void UpdateTimeLeftText()
     {
         if (timeLeftText != null)
         {
-            timeLeftText.text = currentTime.ToString();
-        }
-    }
-    
-    public void StartCountdown()
-    {
-        StartCoroutine(CountdownRoutine());
-    }
-
-
-    IEnumerator CountdownRoutine()
-    {
-        while (currentTime > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            currentTime--;
-            timer.UpdateTimer();
+            timeLeftText.text = ((int)currentTime).ToString();
         }
     }
 
@@ -57,7 +44,7 @@ public class TimeManager : Singleton<TimeManager>
         currentTime += timeValue;
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
 
-        timer.UpdateTimer();
+        //timer.UpdateTimer();
     }
 
 }
