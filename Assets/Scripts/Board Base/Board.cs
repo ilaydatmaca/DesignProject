@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public int width = 8;
-    public int height = 9;
+    public int width;
+    public int height;
 
-    public int borderSize = 1;
+    public int borderSize;
 
     public GameObject cellPrefab;
 
@@ -70,7 +70,7 @@ public class Board : MonoBehaviour
     }
     void SetupCamera()
     {
-        Camera.main.transform.position = new Vector3((float)(width - 1) / 2f, (float)(height - 1) / 2f, -10f);
+        Camera.main.transform.position = new Vector3((float)(width - 1) / 2f, ((float)(height - 1) / 2f) +2.5f, -10f);
 
         float aspectRatio = (float)Screen.width / (float)Screen.height;
 

@@ -23,16 +23,23 @@ public class DeadlockManager : MonoBehaviour
         {
             if (checkRow)
             {
-                if (_board.AllGamePieces[x + i, y] != null && _board.IsInBorder(x + i, y))
+                if (_board.IsInBorder(x + i, y))
                 {
-                    piecesList.Add(_board.AllGamePieces[x + i, y]);
+                    if (_board.AllGamePieces[x + i, y] != null)
+                    {
+                        piecesList.Add(_board.AllGamePieces[x + i, y]);
+
+                    }
                 }
             }
             else
             {
-                if (_board.AllGamePieces[x, y + i] != null && _board.IsInBorder(x, y + i))
+                if (_board.IsInBorder(x, y + i))
                 {
-                    piecesList.Add(_board.AllGamePieces[x, y + i]);
+                    if (_board.AllGamePieces[x, y + i] != null)
+                    {
+                        piecesList.Add(_board.AllGamePieces[x, y + i]);
+                    }
                 }
             }
         }
