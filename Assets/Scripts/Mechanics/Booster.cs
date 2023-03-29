@@ -53,7 +53,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             ActiveBooster = null;
         }
 
-        _image.color = (state) ? Color.white : Color.gray;
+        //_image.color = (state) ? Color.white : Color.gray;
     }
 
     void DisableOtherBoosters()
