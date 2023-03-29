@@ -24,7 +24,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     private ShuffleManager _shuffleManager;
     private SoundManager _soundManager;
     
-    private Image _image;
     private RectTransform _rectform;
     public TMP_Text amountText;
 
@@ -32,7 +31,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     void Awake()
     {
-        _image = GetComponent<Image>();
         _rectform = GetComponent<RectTransform>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
@@ -61,7 +59,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             ActiveBooster = null;
         }
 
-        //_image.color = (state) ? Color.white : Color.gray;
     }
 
     void DisableOtherBoosters()
