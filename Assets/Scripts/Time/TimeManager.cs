@@ -1,12 +1,9 @@
 
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TimeManager : Singleton<TimeManager>
 {
     public Timer timer;
-
-    public Text timeLeftText;
 
     public float currentTime;
     public int maxTime;
@@ -16,7 +13,6 @@ public class TimeManager : Singleton<TimeManager>
         currentTime = maxTime;
         EnableTimerArea();
         timer.InitTimer();
-        UpdateTimeLeftText();
     }
     
     void EnableTimerArea()
@@ -31,20 +27,11 @@ public class TimeManager : Singleton<TimeManager>
     {
         timer.paused = false;
     }
-    public void UpdateTimeLeftText()
-    {
-        if (timeLeftText != null)
-        {
-            timeLeftText.text = ((int)currentTime).ToString();
-        }
-    }
 
     public void AddTime(int timeValue)
     {
         currentTime += timeValue;
         currentTime = Mathf.Clamp(currentTime, 0, maxTime);
-
-        //timer.UpdateTimer();
     }
 
 }
