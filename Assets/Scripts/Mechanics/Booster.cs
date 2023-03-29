@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
@@ -19,10 +21,14 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     private Board _board;
     private BoardManager _boardManager;
     private ItemFactory _itemFactory;
+    private ShuffleManager _shuffleManager;
+    private SoundManager _soundManager;
     
     private Image _image;
     private RectTransform _rectform;
+    public TMP_Text amountText;
 
+    public int boosterCount = 1;
 
     void Awake()
     {
@@ -31,6 +37,8 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         _board = FindObjectOfType<Board>().GetComponent<Board>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
         _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
+        _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
+        _soundManager = FindObjectOfType<SoundManager>();
 
     }
 
@@ -126,25 +134,45 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void RemoveOneGamePiece()
     {
-        if (_boardManager != null && _targetCell != null)
+        if (_boardManager != null && _targetCell != null && boosterCount > 0)
         {
             _boardManager.ClearAndRefillBoard(_targetCell.xIndex, _targetCell.yIndex);
+            UpdateText();
         }
     }
 
     public void AddTime()
     {
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null && boosterCount > 0)
         {
             GameManager.Instance.AddTime(bonusTime);
+            UpdateText();
         }
     }
 
     public void DropColorBomb()
     {
-        if (_board != null && _targetCell != null)
+        if (_itemFactory != null && _targetCell != null && boosterCount > 0)
         {
             _itemFactory.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
+            UpdateText();
         }
+    }
+    
+        
+    public void ShuffleBoard()
+    {
+        if (_shuffleManager != null && boosterCount > 0)
+        {
+            StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
+            UpdateText();
+        }
+    }
+
+    private void UpdateText()
+    {
+        boosterCount--;
+        _soundManager.PlayBonusSound();
+        amountText.text = boosterCount.ToString();
     }
 }

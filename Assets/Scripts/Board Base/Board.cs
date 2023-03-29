@@ -229,13 +229,5 @@ public class Board : MonoBehaviour
         }
         return allPiecesToClear;
     }
-    
-    public void ShuffleBoard()
-    {
-        if (playerInputEnabled)
-        {
-            StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
-        }
-    }
 
 }

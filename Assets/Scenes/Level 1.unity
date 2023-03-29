@@ -986,8 +986,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1688913551}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 733282763}
+        m_TargetAssemblyTypeName: Booster, Assembly-CSharp
         m_MethodName: ShuffleBoard
         m_Mode: 1
         m_Arguments:
@@ -1047,6 +1047,7 @@ GameObject:
   - component: {fileID: 733282759}
   - component: {fileID: 733282762}
   - component: {fileID: 733282761}
+  - component: {fileID: 733282763}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -1112,6 +1113,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733282758}
   m_CullTransparentMesh: 0
+--- !u!114 &733282763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733282758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 0
+  isDraggable: 0
+  boostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  bonusTime: 15
+  amountText: {fileID: 1353722755}
+  boosterCount: 1
 --- !u!1 &781491851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,35 +2399,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 0
-  isDraggable: 1
+  isDraggable: 0
   boostEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1461416856}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: AddTime
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1983026991}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayBonusSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   bonusTime: 15
+  amountText: {fileID: 1371404210}
+  boosterCount: 1
 --- !u!1 &1465215048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,19 +2778,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1983026991}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayBonusSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   bonusTime: 15
+  amountText: {fileID: 449773228}
+  boosterCount: 1
 --- !u!1 &1688913550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,8 +3702,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1461416856}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ToggleBooster
+        m_TargetAssemblyTypeName: Booster, Assembly-CSharp
+        m_MethodName: AddTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4146,19 +4135,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1983026991}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: PlayBonusSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   bonusTime: 15
+  amountText: {fileID: 781491853}
+  boosterCount: 1
 --- !u!1 &2056637099
 GameObject:
   m_ObjectHideFlags: 0
