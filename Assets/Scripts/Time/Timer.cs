@@ -38,8 +38,6 @@ public class Timer : MonoBehaviour
             
         }
 
-        _timeManager.UpdateTimeLeftText();
-
     }
     
 

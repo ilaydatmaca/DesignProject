@@ -19,6 +19,7 @@ public class ItemFactory : MonoBehaviour
     {
         _board = GetComponent<Board>();
         _itemManager = GetComponent<ItemManager>();
+        _clearManager = FindObjectOfType<Board>().GetComponent<ClearManager>();
     }
 
     GameObject GetRandomGamePiece()
