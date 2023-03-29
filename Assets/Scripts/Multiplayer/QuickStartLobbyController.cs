@@ -22,7 +22,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         quickStartButton.SetActive(false);
         quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
-        Debug.Log("Quick Start");
+        Debug.Log("Delay Start");
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
