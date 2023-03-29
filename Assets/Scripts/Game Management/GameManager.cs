@@ -62,17 +62,19 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator StartGameRoutine()
     {
-        StartUI();
+        //StartUI();
+        
+        BeginGame();
 
         while (!_isPlayerReady)
         {
             yield return null;
         }
 
-        if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
+        /*if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
         {
             UIManager.Instance.screenFader.FadeOff();
-        }
+        }*/
 
         yield return new WaitForSeconds(0.5f);
 
@@ -113,7 +115,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
         {
-            TimeManager.Instance.timer.FadeOff();
+            //TimeManager.Instance.timer.FadeOff();
             TimeManager.Instance.timer.paused = true;
         }
 
@@ -147,10 +149,10 @@ public class GameManager : Singleton<GameManager>
 
         yield return new WaitForSeconds(1f);
 
-        if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
+        /*if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
         {
             UIManager.Instance.screenFader.FadeOn();
-        }  
+        }  */
 
         while (!_isReadyToReload)
         {

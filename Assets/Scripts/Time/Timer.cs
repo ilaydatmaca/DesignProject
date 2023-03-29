@@ -42,12 +42,12 @@ public class Timer : MonoBehaviour
     
 
     // Zaman dolduğunda flashi durdur ve win ya da lose screen göster
-    public void FadeOff()
+    /*public void FadeOff()
     {
         ScreenFader[] screenFaders = GetComponentsInChildren<ScreenFader>();
         foreach (ScreenFader fader in screenFaders)
         {
             fader.FadeOff();
         }
-    }
+    }*/
 }

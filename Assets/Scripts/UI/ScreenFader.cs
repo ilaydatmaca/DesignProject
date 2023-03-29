@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ScreenFader : MonoBehaviour 
 {
 
-	public float solidAlpha = 1f;
+	/*public float solidAlpha = 1f;
 	public float clearAlpha = 0f;
 	public float fadeTime = 1f;
 
@@ -27,5 +27,5 @@ public class ScreenFader : MonoBehaviour
 	public void FadeOff()
 	{
 		maskableGraphic.CrossFadeAlpha(clearAlpha, fadeTime, true);
-	}
+	}*/
 }
