@@ -5,19 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: caa256a831def467480b13d12429c347
   - enabled: 1
     path: Assets/Scenes/DelayStartWaitingRoom.unity
     guid: ab8ffcc41d140429f8d10f8d020632d9
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
-    guid: 43430830364484e4bab7109ffb325d62
-  - enabled: 0
     path: Assets/Scenes/Level 1.unity
     guid: bbe6b48be0992453fa6807010eb06419
-  - enabled: 1
-    path: Assets/Scenes/deneme.unity
-    guid: 7965c1c4342864fae87aa18d042d69ef
   m_configObjects: {}

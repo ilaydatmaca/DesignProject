@@ -7,8 +7,31 @@ using Photon.Realtime;
 
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private GameObject quickStartButton;
+    [SerializeField] private GameObject quickCancelButton;
     [SerializeField] private int roomSize;
-    public void CreateRoom()
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+        quickStartButton.SetActive(true);
+    }
+
+    public void QuickStart()
+    {
+        quickStartButton.SetActive(false);
+        quickCancelButton.SetActive(true);
+        PhotonNetwork.JoinRandomRoom();
+        Debug.Log("Delay Start");
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed to join a room");
+        CreateRoom();
+    }
+    
+    void CreateRoom()
     {
         Debug.Log("Creating room now");
         int randomRoomNumber = Random.Range(0, 10000);
@@ -18,17 +41,16 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 
     }
 
-    public void JoinRoom()
+    public override void OnCreateRoomFailed(short returnCode, string message)
     {
+        Debug.Log("Failed to create room, try again");
         CreateRoom();
-        PhotonNetwork.JoinRandomRoom();
-
     }
 
-    public override void OnJoinedRoom()
+    public void QuickCancel()
     {
-        PhotonNetwork.LoadLevel("deneme");
-
+        quickCancelButton.SetActive(false);
+        quickStartButton.SetActive(true);
+        PhotonNetwork.LeaveRoom();
     }
-    
 }
