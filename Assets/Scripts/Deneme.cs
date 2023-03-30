@@ -10,6 +10,8 @@ public class Deneme : MonoBehaviour
     public PhotonView photonView;
     private void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
+            
         /*var views = FindObjectsOfType<PhotonView>();
         foreach (var view in views)
         {
@@ -19,6 +21,8 @@ public class Deneme : MonoBehaviour
             }
         }*/
         photonView = GetComponent<PhotonView>();
+        if (!photonView.AmOwner)
+            return;
         Ins();
     }
     
@@ -28,9 +32,8 @@ public class Deneme : MonoBehaviour
         {
             int randomIdx = Random.Range(0, cubePrefabs.Length);
             Debug.Log(randomIdx);
-            Instantiate(cubePrefabs[randomIdx], Vector3.zero, Quaternion.identity);
 
-            photonView.RPC("RPC_piece", RpcTarget.Others, randomIdx);
+            photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);
         }
         /*else
         {
@@ -40,6 +43,9 @@ public class Deneme : MonoBehaviour
         /*int randomIdx = Random.Range(0, cubePrefabs.Length);
         Debug.Log(randomIdx);
         photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);*/
+        
+
+
     }
 
     [PunRPC]
