@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*public class DelayStartWaitingRoomController : MonoBehaviourPunCallbacks
+public class DelayStartWaitingRoomController : MonoBehaviourPunCallbacks
 {
     private PhotonView myPhotonView;
 
@@ -141,4 +141,4 @@ using UnityEngine.SceneManagement;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(menuSceneIndex);
     }
-}*/
+}

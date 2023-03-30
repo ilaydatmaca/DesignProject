@@ -5,7 +5,7 @@ using Photon.Pun.Demo.Cockpit.Forms;
 using UnityEngine;
 using Photon.Realtime;
 
-/*public class QuickStartLobbyController : MonoBehaviourPunCallbacks
+public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject quickStartButton;
     [SerializeField] private GameObject quickCancelButton;
@@ -53,4 +53,4 @@ using Photon.Realtime;
         quickStartButton.SetActive(true);
         PhotonNetwork.LeaveRoom();
     }
-}*/
+}
