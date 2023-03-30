@@ -5,8 +5,10 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class QuickStartRoomController : MonoBehaviourPunCallbacks
+
+/*public class QuickStartRoomController : MonoBehaviourPunCallbacks
 {
+
     [SerializeField] private int multiplayerSceneIndex;
 
     public override void OnEnable()
@@ -31,7 +33,8 @@ public class QuickStartRoomController : MonoBehaviourPunCallbacks
         {
             Debug.Log("Starting Game");
             PhotonNetwork.LoadLevel(multiplayerSceneIndex);
-        }*/
+        }#1#
         SceneManager.LoadScene(multiplayerSceneIndex);
     }
-}
+
+}*/
