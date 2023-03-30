@@ -31,6 +31,7 @@ public class DelayStartWaitingRoomController : MonoBehaviourPunCallbacks
     [SerializeField] private float maxWaitTime;
     [SerializeField] private float maxFullGameWaitTime;
 
+
     private void Start()
     {
         myPhotonView = GetComponent<PhotonView>();
