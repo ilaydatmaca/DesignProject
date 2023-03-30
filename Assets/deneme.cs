@@ -24,13 +24,13 @@ public class Deneme : MonoBehaviour
     
     void Ins()
     {
-        if (photonView.ViewID == 1001)
+        if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log(photonView.ViewID);
             int randomIdx = Random.Range(0, cubePrefabs.Length);
             Debug.Log(randomIdx);
+            Instantiate(cubePrefabs[randomIdx], Vector3.zero, Quaternion.identity);
 
-            photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);
+            photonView.RPC("RPC_piece", RpcTarget.Others, randomIdx);
         }
         /*else
         {
