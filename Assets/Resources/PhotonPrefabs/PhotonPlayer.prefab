@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391304722996368179}
   - component: {fileID: 1391304722996368178}
-  - component: {fileID: 2130052045662208885}
+  - component: {fileID: 440654296159811321}
   m_Layer: 0
   m_Name: PhotonPlayer
   m_TagString: Untagged
@@ -56,26 +56,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2130052045662208885
+--- !u!114 &440654296159811321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391304722996368181}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc4ca434ca4ed46eda3617fefb17d54c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fc46e92ec1504429af218f9bf70d74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefabs:
-  - {fileID: 1836425604369276, guid: 7471f6d24260942c499dd3fbbeccadc6, type: 3}
-  - {fileID: 1282329895864240, guid: 16eff60049fa742e09c4e037182057a2, type: 3}
-  - {fileID: 1372902284518312, guid: ddd7ecb364d034ad295c2ea9c8df1999, type: 3}
-  - {fileID: 1161606897531048, guid: 805c5ac8742f1457bb6137a92eef3032, type: 3}
-  - {fileID: 1664362004353522, guid: ded3823fda2b64d07a29783e0ce9acc9, type: 3}
-  - {fileID: 1616169278628932, guid: d8220af17d71d4a7b91d94fdb37f90e0, type: 3}
-  - {fileID: 1764584299026588, guid: d25f2e53e91ce49bd99d368bec39987a, type: 3}
   photonView: {fileID: 0}
 --- !u!1 &1511514602655748283
 GameObject:
@@ -95,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5316421432232175017
 Transform:
   m_ObjectHideFlags: 0

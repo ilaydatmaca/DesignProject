@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,7 @@ public class ItemFactory : MonoBehaviour
     private Board _board;
     private ItemManager _itemManager;
     private ClearManager _clearManager;
+    public PhotonView photonView;
 
     private void Awake()
     {
@@ -22,14 +24,10 @@ public class ItemFactory : MonoBehaviour
         _clearManager = FindObjectOfType<Board>().GetComponent<ClearManager>();
     }
 
-    GameObject GetRandomGamePiece()
+    int GetRandomGamePiece()
     {
         int randomIdx = Random.Range(0, cellPrefabs.Length);
-        if (cellPrefabs[randomIdx] == null)
-        {
-            Debug.LogWarning("ERROR:  BOARD.GetRandomObject at index " + randomIdx + "does not contain a valid GameObject!");
-        }
-        return cellPrefabs[randomIdx];
+        return randomIdx;
     }
 
     GameObject GetItem(ItemType itemType, MatchValue matchValue)
@@ -84,11 +82,18 @@ public class ItemFactory : MonoBehaviour
     {
         if (_board.IsInBorder(x, y))
         {
-            GameObject randomPiece = Instantiate(GetRandomGamePiece(), Vector3.zero, Quaternion.identity, transform);
-            randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
-            _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
-            randomPiece.GetComponent<GamePiece>().Fall();
+            int index = GetRandomGamePiece();
+            photonView.RPC("RPC_InitGameObject", RpcTarget.AllViaServer, index, x, y);
         }
+    }
+
+    
+    public void InitGameObject(int index, int x, int y)
+    {
+        GameObject randomPiece = Instantiate(cellPrefabs[index], Vector3.zero, Quaternion.identity, transform);
+        randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
+        _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
+        randomPiece.GetComponent<GamePiece>().Fall();
     }
     
     public GameObject MakeItem(ItemType ıtemType, int x, int y, MatchValue matchValue = MatchValue.Wild)

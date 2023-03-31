@@ -6,11 +6,12 @@ public class LevelGoal : MonoBehaviour
             
     public bool IsGameOver()
     {
-        if (TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
+        /*if (TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
         {
             return true;
         }
 
+        return false;*/
         return false;
     }
 

@@ -4,10 +4,10 @@ using UnityEngine;
 public class Deneme : MonoBehaviour
 {
     public GameObject[] cubePrefabs;
-    public PhotonView photonView;
+    //public PhotonView photonView;
     private void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        /*PhotonNetwork.AutomaticallySyncScene = true;
             
         var views = FindObjectsOfType<PhotonView>();
         foreach (var view in views)
@@ -20,27 +20,27 @@ public class Deneme : MonoBehaviour
         
         if (!photonView.IsMine)
             return;
-        Ins();
+        Ins();*/
     }
     
     void Ins()
     {
-        if (PhotonNetwork.IsMasterClient)
+        /*if (PhotonNetwork.IsMasterClient)
         {
             int randomIdx = Random.Range(0, cubePrefabs.Length);
             Debug.Log(randomIdx);
 
             photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);
-        }
+        }*/
         
 
 
     }
 
-    [PunRPC]
+    /*[PunRPC]
     private void RPC_piece(int random)
     {
         Instantiate(cubePrefabs[random], Vector3.zero, Quaternion.identity);
 
-    }
+    }*/
 }

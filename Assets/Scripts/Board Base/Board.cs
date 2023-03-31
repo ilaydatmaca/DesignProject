@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -14,10 +15,10 @@ public class Board : MonoBehaviour
     [HideInInspector] public GameObject clickedCellItem;
     [HideInInspector] public GameObject targetCellItem;
     
-    [HideInInspector] public Cell clickedCell;
-    [HideInInspector] public Cell targetCell;
+    public Cell clickedCell;
+    public Cell targetCell;
     
-    Cell[,] _allTiles;
+    public Cell[,] _allTiles;
     public GamePiece[,] AllGamePieces;
     
     public bool playerInputEnabled = true;
@@ -30,6 +31,8 @@ public class Board : MonoBehaviour
 
     private ItemFactory _itemFactory;
     private ClearManager _clearManager;
+
+    public PhotonView photonView;
     
     private void Awake()
     {
@@ -51,7 +54,7 @@ public class Board : MonoBehaviour
         FillBoard();
     }
     
-    void SetupCells()
+    void SetupCells() //done
     {
         for (int x = 0; x < width; x++)
         {
@@ -66,7 +69,8 @@ public class Board : MonoBehaviour
             }
         }
     }
-    void SetupCamera()
+    
+    void SetupCamera() //done
     {
         Camera.main.transform.position = new Vector3((float)(width - 1) / 2f, ((float)(height - 1) / 2f) +2.5f, -10f);
 
@@ -79,25 +83,31 @@ public class Board : MonoBehaviour
         Camera.main.orthographicSize = (verticalSize > horizontalSize) ? verticalSize : horizontalSize;
     }
     
-    public void FillBoard()
+    
+    public void FillBoard() //done
     {
-        int maxIterations = 100;
-
-        for (int i = 0; i < width; i++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            for (int j = 0; j < height; j++)
-            {           
-                if (AllGamePieces[i, j] == null)
+            int maxIterations = 100;
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
                 {
-                    _itemFactory.MakeRandomGamePiece(i, j);
-                    int iteration = 0;
-
-                    while (HasMatchOnFill(i, j) && iteration < maxIterations)
+                    if (AllGamePieces[i, j] == null)
                     {
-                        _clearManager.DestroyAt(i, j);
                         _itemFactory.MakeRandomGamePiece(i, j);
+                        int iteration = 0;
+                        Debug.Log(i + " " + j);
 
-                        iteration++;
+                        /*while (HasMatchOnFill(i, j) && iteration < maxIterations)
+                        {
+                            //_clearManager.DestroyAt(i, j);
+                            photonView.RPC("RPC_DestroyAt", RpcTarget.All, i, j);
+                            _itemFactory.MakeRandomGamePiece(i, j);
+
+                            iteration++;
+                        }*/
                     }
                 }
             }
