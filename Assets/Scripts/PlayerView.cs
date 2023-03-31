@@ -23,8 +23,15 @@ public class PlayerView : MonoBehaviour
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+
+        photonView = GetComponent<PhotonView>();
             
-        var views = FindObjectsOfType<PhotonView>();
+        if (!photonView.IsMine || photonView == null)
+            return;
+        itemFactory.photonView = photonView;
+        _swapManager.photonView = photonView;
+        _board.photonView = photonView;
+        /*var views = FindObjectsOfType<PhotonView>();
         foreach (var view in views)
         {
             if (view.IsMine)
@@ -37,8 +44,8 @@ public class PlayerView : MonoBehaviour
             }
         }
         
-        if (!photonView.IsMine)
-            return;
+        if (!photonView.IsMine || photonView == null)
+            return;*/
     }
     
     [PunRPC]
