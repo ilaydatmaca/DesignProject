@@ -8,7 +8,6 @@ using Photon.Realtime;
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject quickStartButton;
-    [SerializeField] private GameObject quickCancelButton;
     [SerializeField] private int roomSize;
 
     public override void OnConnectedToMaster()
@@ -20,7 +19,6 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickStart()
     {
         quickStartButton.SetActive(false);
-        quickCancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
         Debug.Log("Delay Start");
     }
@@ -47,10 +45,5 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
         CreateRoom();
     }
 
-    public void QuickCancel()
-    {
-        quickCancelButton.SetActive(false);
-        quickStartButton.SetActive(true);
-        PhotonNetwork.LeaveRoom();
-    }
+
 }
