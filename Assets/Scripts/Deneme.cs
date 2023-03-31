@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Deneme : MonoBehaviour
 {
@@ -12,16 +9,16 @@ public class Deneme : MonoBehaviour
     {
         PhotonNetwork.AutomaticallySyncScene = true;
             
-        /*var views = FindObjectsOfType<PhotonView>();
+        var views = FindObjectsOfType<PhotonView>();
         foreach (var view in views)
         {
             if (view.IsMine)
             {
                 photonView = view;
             }
-        }*/
-        photonView = GetComponent<PhotonView>();
-        if (!photonView.AmOwner)
+        }
+        
+        if (!photonView.IsMine)
             return;
         Ins();
     }
@@ -35,14 +32,6 @@ public class Deneme : MonoBehaviour
 
             photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);
         }
-        /*else
-        {
-            photonView.RPC("RPC_piece", RpcTarget.OthersBuffered, cubePrefabs[0]);
-        }*/
-        
-        /*int randomIdx = Random.Range(0, cubePrefabs.Length);
-        Debug.Log(randomIdx);
-        photonView.RPC("RPC_piece", RpcTarget.All, randomIdx);*/
         
 
 

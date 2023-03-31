@@ -29,12 +29,10 @@ public class Board : MonoBehaviour
 
 
     private ItemFactory _itemFactory;
-    private ShuffleManager _shuffleManager;
     private ClearManager _clearManager;
     
     private void Awake()
     {
-        _shuffleManager = GetComponent<ShuffleManager>();
         _itemFactory = GetComponent<ItemFactory>();
         _clearManager = GetComponent<ClearManager>();
     }
