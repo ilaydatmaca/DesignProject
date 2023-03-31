@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplayerSceneIndex: 2
-  menuSceneIndex: 0
+  menuSceneIndex: 1
   minPlayersToStart: 2
   roomCountDisplay: {fileID: 1148814450}
   timerToStartDisplay: {fileID: 368511409}
