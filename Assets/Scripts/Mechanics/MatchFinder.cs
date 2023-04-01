@@ -2,27 +2,26 @@
 using UnityEngine;
 using System.Linq;
 
-[RequireComponent(typeof(Board))]
 public class MatchFinder : MonoBehaviour
 {
-    private Board board;
+    private Board _board;
 
     private void Awake()
     {
-        board = GetComponent<Board>();
+        _board = GetComponent<Board>();
     }
 
 
     // general method to find matches, defaulting to a minimum of three-in-a-row, passing in an (x,y) position and direction
-    List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection, int minLength = 3)
+    HashSet<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection)
     {
         HashSet<GamePiece> matches = new HashSet<GamePiece>();
 
         GamePiece startPiece = null;
 
-        if (board.IsInBorder(startX, startY))
+        if (_board.IsInBorder(startX, startY))
         {
-            startPiece = board.AllGamePieces[startX, startY];
+            startPiece = _board.AllGamePieces[startX, startY];
         }
 
         if (startPiece != null)
@@ -31,23 +30,23 @@ public class MatchFinder : MonoBehaviour
         }
         else
         {
-            return new List<GamePiece>();
+            return new HashSet<GamePiece>();
         }
 
 
-        int maxValue = (board.width > board.height) ? board.width : board.height;
+        int maxValue = (_board.width > _board.height) ? _board.width : _board.height;
 
         for (int i = 1; i < maxValue; i++)
         {
             int nextX = startX + (int)Mathf.Clamp(searchDirection.x, -1, 1) * i;
             int nextY = startY + (int)Mathf.Clamp(searchDirection.y, -1, 1) * i;
 
-            if (!board.IsInBorder(nextX, nextY))
+            if (!_board.IsInBorder(nextX, nextY))
             {
                 break;
             }
             // find the adjacent GamePiece and check its MatchValue...
-            GamePiece nextPiece = board.AllGamePieces[nextX, nextY];
+            GamePiece nextPiece = _board.AllGamePieces[nextX, nextY];
 
             if (nextPiece == null)
             {
@@ -64,20 +63,14 @@ public class MatchFinder : MonoBehaviour
                 break;
             }
         }
-        
-        // if our list is greater than our minimum (usually 3), then return the list...
-        /*if (matches.Count >= minLength)
-        {
-            return matches.ToList();
-        }*/
-        return matches.ToList();
+        return matches;
 
     }
 
     List<GamePiece> FindVerticalMatches(int startX, int startY, int minLength = 3)
     {
-        List<GamePiece> upwardMatches = FindMatches(startX, startY, new Vector2(0, 1), 2);
-        List<GamePiece> downwardMatches = FindMatches(startX, startY, new Vector2(0, -1), 2);
+        HashSet<GamePiece> upwardMatches = FindMatches(startX, startY, new Vector2(0, 1));
+        HashSet<GamePiece> downwardMatches = FindMatches(startX, startY, new Vector2(0, -1));
 
         var combinedMatches = upwardMatches.Union(downwardMatches).ToList();
 
@@ -87,8 +80,8 @@ public class MatchFinder : MonoBehaviour
 
     List<GamePiece> FindHorizontalMatches(int startX, int startY, int minLength = 3)
     {
-        List<GamePiece> rightMatches = FindMatches(startX, startY, new Vector2(1, 0), 2);
-        List<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0), 2);
+        HashSet<GamePiece> rightMatches = FindMatches(startX, startY, new Vector2(1, 0));
+        HashSet<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0));
 
         var combinedMatches = rightMatches.Union(leftMatches).ToList();
 
@@ -109,9 +102,9 @@ public class MatchFinder : MonoBehaviour
     {
         List<GamePiece> combinedMatches = new List<GamePiece>();
 
-        for (int i = 0; i < board.width; i++)
+        for (int i = 0; i < _board.width; i++)
         {
-            for (int j = 0; j < board.height; j++)
+            for (int j = 0; j < _board.height; j++)
             {
                 var matches = FindMatchesAt(i, j);
                 combinedMatches = combinedMatches.Union(matches).ToList();

@@ -82,22 +82,22 @@ public class ItemFactory : MonoBehaviour
     public int MakeRandomGamePiece(int x, int y)
     {
         int index = 0;
+        
         if (_board.IsInBorder(x, y))
         {
             index = GetRandomGamePiece();
             InitGameObject(index, x, y);
-            //photonView.RPC("RPC_InitGameObject", RpcTarget.AllBufferedViaServer, index, x, y);
         }
 
         return index;
     }
-
+    
     
     public void InitGameObject(int index, int x, int y)
     {
         GameObject randomPiece = Instantiate(cellPrefabs[index], Vector3.zero, Quaternion.identity, transform);
-        randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
         _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
+        randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
         randomPiece.GetComponent<GamePiece>().Fall();
     }
     

@@ -86,9 +86,9 @@ public class Board : MonoBehaviour
     
     public void FillBoard() //done
     {
-        if (PhotonNetwork.IsMasterClient && photonView.ViewID == 1001)
+        if (PhotonNetwork.IsMasterClient)
         {
-            int maxIterations = 100;
+            int maxIterations = 50;
 
             for (int i = 0; i < width; i++)
             {
@@ -96,18 +96,20 @@ public class Board : MonoBehaviour
                 {
                     if (AllGamePieces[i, j] == null)
                     {
-                        int index = _itemFactory.MakeRandomGamePiece(i, j);
-                        int iteration = 0;
+                        int index = _itemFactory.MakeRandomGamePiece(i, j);         
 
-                        while (HasMatchOnFill(i, j) && iteration < maxIterations)
+                        int iteration = 0;
+                        
+                        /*while (HasMatchOnFill(i, j) && iteration < maxIterations)
                         {
                             _clearManager.DestroyAt(i, j);
-                            //photonView.RPC("RPC_DestroyAt", RpcTarget.AllBufferedViaServer, i, j);
                             index = _itemFactory.MakeRandomGamePiece(i, j);
 
                             iteration++;
-                        }
-                        photonView.RPC("RPC_InitGameObject", RpcTarget.OthersBuffered, index, i, j);
+                        }*/
+                        
+                        _clearManager.DestroyAt(i, j);
+                        photonView.RPC("RPC_InitGameObject", RpcTarget.AllViaServer, index, i, j);
                         
                     }
                 }
@@ -138,16 +140,17 @@ public class Board : MonoBehaviour
     {
         if (x > 1)
         {
-            MatchValue matchType = AllGamePieces[x, y].matchValue;
-            if (AllGamePieces[x - 1, y].matchValue.Equals(matchType) && AllGamePieces[x - 2, y].matchValue.Equals(matchType))
+            MatchValue matchValue = AllGamePieces[x, y].matchValue;
+            if (AllGamePieces[x - 1, y].matchValue.Equals(matchValue) && AllGamePieces[x - 2, y].matchValue.Equals(matchValue))
             {
                 return true;
             }
         }
         if (y > 1)
         {
-            MatchValue matchType = AllGamePieces[x, y].matchValue;
-            if (AllGamePieces[x, y - 1].matchValue.Equals(matchType) && AllGamePieces[x, y - 2].matchValue.Equals(matchType))
+
+            MatchValue matchValue = AllGamePieces[x, y].matchValue;
+            if (AllGamePieces[x, y - 1].matchValue.Equals(matchValue) && AllGamePieces[x, y - 2].matchValue.Equals(matchValue))
             {
                 return true;
             }
