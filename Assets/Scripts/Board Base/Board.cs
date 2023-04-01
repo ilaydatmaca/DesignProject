@@ -86,7 +86,7 @@ public class Board : MonoBehaviour
     
     public void FillBoard() //done
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && photonView.ViewID == 1001)
         {
             int maxIterations = 100;
 
@@ -98,12 +98,11 @@ public class Board : MonoBehaviour
                     {
                         _itemFactory.MakeRandomGamePiece(i, j);
                         int iteration = 0;
-                        Debug.Log(i + " " + j);
 
                         /*while (HasMatchOnFill(i, j) && iteration < maxIterations)
                         {
                             //_clearManager.DestroyAt(i, j);
-                            photonView.RPC("RPC_DestroyAt", RpcTarget.All, i, j);
+                            photonView.RPC("RPC_DestroyAt", RpcTarget.AllBufferedViaServer, i, j);
                             _itemFactory.MakeRandomGamePiece(i, j);
 
                             iteration++;

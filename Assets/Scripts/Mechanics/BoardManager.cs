@@ -51,6 +51,8 @@ public class BoardManager : MonoBehaviour
             yield return StartCoroutine(RefillRoutine());
             
             matches = _matchFinder.FindAllMatches();
+            Debug.Log(matches.Count);
+
             yield return new WaitForSeconds(_board.delay);
 
         }
@@ -103,6 +105,7 @@ public class BoardManager : MonoBehaviour
             
             else
             {
+                Debug.Log("match count : " + allMatchesInBoard.Count);
                 _board.scoreMultiplier++;
 
                 if (SoundManager.Instance != null)
@@ -151,6 +154,7 @@ public class BoardManager : MonoBehaviour
     {
         _board.FillBoard();
 
+        Debug.Log("geldim");
         yield return null;
     }
 }

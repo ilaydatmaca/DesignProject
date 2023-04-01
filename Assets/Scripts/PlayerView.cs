@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
@@ -31,21 +28,6 @@ public class PlayerView : MonoBehaviour
         itemFactory.photonView = photonView;
         _swapManager.photonView = photonView;
         _board.photonView = photonView;
-        /*var views = FindObjectsOfType<PhotonView>();
-        foreach (var view in views)
-        {
-            if (view.IsMine)
-            {
-                photonView = view;
-                itemFactory.photonView = photonView;
-                _swapManager.photonView = photonView;
-                _board.photonView = photonView;
-
-            }
-        }
-        
-        if (!photonView.IsMine || photonView == null)
-            return;*/
     }
     
     [PunRPC]

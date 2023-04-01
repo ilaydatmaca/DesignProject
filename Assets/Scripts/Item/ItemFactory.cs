@@ -83,7 +83,7 @@ public class ItemFactory : MonoBehaviour
         if (_board.IsInBorder(x, y))
         {
             int index = GetRandomGamePiece();
-            photonView.RPC("RPC_InitGameObject", RpcTarget.AllViaServer, index, x, y);
+            photonView.RPC("RPC_InitGameObject", RpcTarget.AllBufferedViaServer, index, x, y);
         }
     }
 

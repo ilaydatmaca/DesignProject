@@ -37,7 +37,7 @@ public class MatchFinder : MonoBehaviour
 
         int maxValue = (board.width > board.height) ? board.width : board.height;
 
-        for (int i = 1; i < maxValue - 1; i++)
+        for (int i = 1; i < maxValue; i++)
         {
             int nextX = startX + (int)Mathf.Clamp(searchDirection.x, -1, 1) * i;
             int nextY = startY + (int)Mathf.Clamp(searchDirection.y, -1, 1) * i;
@@ -66,11 +66,11 @@ public class MatchFinder : MonoBehaviour
         }
         
         // if our list is greater than our minimum (usually 3), then return the list...
-        if (matches.Count >= minLength)
+        /*if (matches.Count >= minLength)
         {
             return matches.ToList();
-        }
-        return new List<GamePiece>();
+        }*/
+        return matches.ToList();
 
     }
 
