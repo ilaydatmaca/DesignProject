@@ -96,17 +96,19 @@ public class Board : MonoBehaviour
                 {
                     if (AllGamePieces[i, j] == null)
                     {
-                        _itemFactory.MakeRandomGamePiece(i, j);
+                        int index = _itemFactory.MakeRandomGamePiece(i, j);
                         int iteration = 0;
 
-                        /*while (HasMatchOnFill(i, j) && iteration < maxIterations)
+                        while (HasMatchOnFill(i, j) && iteration < maxIterations)
                         {
-                            //_clearManager.DestroyAt(i, j);
-                            photonView.RPC("RPC_DestroyAt", RpcTarget.AllBufferedViaServer, i, j);
-                            _itemFactory.MakeRandomGamePiece(i, j);
+                            _clearManager.DestroyAt(i, j);
+                            //photonView.RPC("RPC_DestroyAt", RpcTarget.AllBufferedViaServer, i, j);
+                            index = _itemFactory.MakeRandomGamePiece(i, j);
 
                             iteration++;
-                        }*/
+                        }
+                        photonView.RPC("RPC_InitGameObject", RpcTarget.OthersBuffered, index, i, j);
+                        
                     }
                 }
             }

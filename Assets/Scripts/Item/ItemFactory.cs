@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -78,13 +79,17 @@ public class ItemFactory : MonoBehaviour
     
     
 
-    public void MakeRandomGamePiece(int x, int y)
+    public int MakeRandomGamePiece(int x, int y)
     {
+        int index = 0;
         if (_board.IsInBorder(x, y))
         {
-            int index = GetRandomGamePiece();
-            photonView.RPC("RPC_InitGameObject", RpcTarget.AllBufferedViaServer, index, x, y);
+            index = GetRandomGamePiece();
+            InitGameObject(index, x, y);
+            //photonView.RPC("RPC_InitGameObject", RpcTarget.AllBufferedViaServer, index, x, y);
         }
+
+        return index;
     }
 
     
