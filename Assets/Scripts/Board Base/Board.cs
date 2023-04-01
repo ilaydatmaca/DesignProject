@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
     
     public float swapTime = 0.4f;
     public int scoreMultiplier;
-    public float delay = 0.4f;
+    public float delay = 0.8f;
 
 
     private ItemFactory _itemFactory;
@@ -48,7 +48,6 @@ public class Board : MonoBehaviour
     
     public void SetupBoard()
     {
-        PhotonNetwork.SendRate = 60;
         SetupCells();
         SetupCamera();
 

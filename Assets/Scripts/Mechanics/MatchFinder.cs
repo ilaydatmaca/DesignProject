@@ -13,7 +13,7 @@ public class MatchFinder : MonoBehaviour
 
 
     // general method to find matches, defaulting to a minimum of three-in-a-row, passing in an (x,y) position and direction
-    HashSet<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection)
+    List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection)
     {
         HashSet<GamePiece> matches = new HashSet<GamePiece>();
 
@@ -30,7 +30,7 @@ public class MatchFinder : MonoBehaviour
         }
         else
         {
-            return new HashSet<GamePiece>();
+            return new List<GamePiece>();
         }
 
 
@@ -54,7 +54,7 @@ public class MatchFinder : MonoBehaviour
             }
 
             // ... if it matches then add it our running list of GamePieces
-            if (nextPiece.matchValue == startPiece.matchValue && nextPiece.matchValue != MatchValue.None)
+            if (nextPiece.matchValue == startPiece.matchValue)
             {
                 matches.Add(nextPiece);
             }
@@ -63,14 +63,14 @@ public class MatchFinder : MonoBehaviour
                 break;
             }
         }
-        return matches;
+        return matches.ToList();
 
     }
 
     List<GamePiece> FindVerticalMatches(int startX, int startY, int minLength = 3)
     {
-        HashSet<GamePiece> upwardMatches = FindMatches(startX, startY, new Vector2(0, 1));
-        HashSet<GamePiece> downwardMatches = FindMatches(startX, startY, new Vector2(0, -1));
+        List<GamePiece> upwardMatches = FindMatches(startX, startY, new Vector2(0, 1));
+        List<GamePiece> downwardMatches = FindMatches(startX, startY, new Vector2(0, -1));
 
         var combinedMatches = upwardMatches.Union(downwardMatches).ToList();
 
@@ -80,8 +80,8 @@ public class MatchFinder : MonoBehaviour
 
     List<GamePiece> FindHorizontalMatches(int startX, int startY, int minLength = 3)
     {
-        HashSet<GamePiece> rightMatches = FindMatches(startX, startY, new Vector2(1, 0));
-        HashSet<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0));
+        List<GamePiece> rightMatches = FindMatches(startX, startY, new Vector2(1, 0));
+        List<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0));
 
         var combinedMatches = rightMatches.Union(leftMatches).ToList();
 

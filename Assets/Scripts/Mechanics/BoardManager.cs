@@ -105,7 +105,6 @@ public class BoardManager : MonoBehaviour
             
             else
             {
-                Debug.Log("match count : " + allMatchesInBoard.Count);
                 _board.scoreMultiplier++;
 
                 if (SoundManager.Instance != null)
@@ -154,7 +153,9 @@ public class BoardManager : MonoBehaviour
     {
         _board.FillBoard();
 
-        Debug.Log("geldim");
         yield return null;
+        
+        BoardChecking(_matchFinder.FindAllMatches());
+        
     }
 }
