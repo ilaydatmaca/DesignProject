@@ -42,7 +42,7 @@ public class SwapManager : MonoBehaviour
     {
         if (_board.clickedCell != null && _board.targetCell != null)
         {
-            photonView.RPC("RPC_SwapCells", RpcTarget.All,
+            photonView.RPC("RPC_SwapCells", RpcTarget.AllViaServer,
                 _board.clickedCell.xIndex,
                 _board.clickedCell.yIndex,
                 _board.targetCell.xIndex,

@@ -16,14 +16,11 @@ public class ClearManager : MonoBehaviour
     public void DestroyAt(int x, int y)
     {
         GamePiece pieceToClear = board.AllGamePieces[x, y];
-
-        board.AllGamePieces[x, y] = null;
-        Destroy(pieceToClear.gameObject);
-        /*if (pieceToClear != null)
+        if (pieceToClear != null)
         {
             board.AllGamePieces[x, y] = null;
             Destroy(pieceToClear.gameObject);
-        }*/
+        }
 
     }
 

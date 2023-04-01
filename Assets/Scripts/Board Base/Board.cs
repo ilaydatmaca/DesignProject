@@ -24,9 +24,9 @@ public class Board : MonoBehaviour
     public bool playerInputEnabled = true;
     public bool isRefilling;
     
-    public float swapTime = 0.5f;
+    public float swapTime = 0.4f;
     public int scoreMultiplier;
-    public float delay = 0.2f;
+    public float delay = 0.4f;
 
 
     private ItemFactory _itemFactory;
@@ -48,6 +48,7 @@ public class Board : MonoBehaviour
     
     public void SetupBoard()
     {
+        PhotonNetwork.SendRate = 60;
         SetupCells();
         SetupCamera();
 
@@ -116,6 +117,7 @@ public class Board : MonoBehaviour
             }
         }
     }
+
     
     public bool IsInBorder(int x, int y)
     {

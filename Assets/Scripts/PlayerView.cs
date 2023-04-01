@@ -33,6 +33,7 @@ public class PlayerView : MonoBehaviour
     [PunRPC]
     public void RPC_InitGameObject(int index, int x, int y)
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         itemFactory.InitGameObject(index, x, y);
     }
     

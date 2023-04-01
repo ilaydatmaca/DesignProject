@@ -91,7 +91,7 @@ public class ItemFactory : MonoBehaviour
 
         return index;
     }
-    
+
     
     public void InitGameObject(int index, int x, int y)
     {
