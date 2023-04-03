@@ -24,7 +24,7 @@ public class BoardManager : MonoBehaviour
         _deadlockManager = GetComponent<DeadlockManager>();
         _clearManager = GetComponent<ClearManager>();
     }
-    void BoardChecking(List<GamePiece> gamePieces)
+    public void BoardChecking(List<GamePiece> gamePieces)
     {
         StartCoroutine(BoardRoutine(gamePieces));
     }
@@ -48,20 +48,27 @@ public class BoardManager : MonoBehaviour
 
             yield return null;
             
-            yield return StartCoroutine(RefillRoutine());
-            
             matches = _matchFinder.FindAllMatches();
-            Debug.Log(matches.Count);
-
+            
             yield return new WaitForSeconds(_board.delay);
 
         }
+        
+        yield return StartCoroutine(RefillRoutine());
 
-        StartCoroutine(DeadlockCheck());
+        if (_matchFinder.FindAllMatches().Count > 0)
+        {
+            Debug.Log(_matchFinder.FindAllMatches().Count);
+            BoardChecking(_matchFinder.FindAllMatches());
+        }
+        else
+        {
+            StartCoroutine(DeadlockCheck());
+            _board.playerInputEnabled = true;
+            _board.isRefilling = false;
+        }
 
-
-        _board.playerInputEnabled = true;
-        _board.isRefilling = false;
+        
     }
 
 
@@ -130,7 +137,7 @@ public class BoardManager : MonoBehaviour
 
             yield return new WaitForSeconds(_board.delay * 5f);
 
-            yield return StartCoroutine(RefillRoutine());
+            yield return StartCoroutine(BoardRoutine(_matchFinder.FindAllMatches()));
         }
     }
     
@@ -153,9 +160,7 @@ public class BoardManager : MonoBehaviour
     {
         _board.FillBoard();
 
-        yield return null;
-        
-        BoardChecking(_matchFinder.FindAllMatches());
+        yield return new WaitForSeconds(_board.delay);
         
     }
 }

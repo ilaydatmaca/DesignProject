@@ -24,20 +24,25 @@ public class Board : MonoBehaviour
     public bool playerInputEnabled = true;
     public bool isRefilling;
     
-    public float swapTime = 0.4f;
+    public float swapTime = 0.2f;
     public int scoreMultiplier;
-    public float delay = 0.8f;
+    public float delay = 0.4f;
 
 
     private ItemFactory _itemFactory;
     private ClearManager _clearManager;
 
     public PhotonView photonView;
-    
+    private BoardManager _boardManager;
+    private MatchFinder _matchFinder;
+
     private void Awake()
     {
         _itemFactory = GetComponent<ItemFactory>();
         _clearManager = GetComponent<ClearManager>();
+        _boardManager = GetComponent<BoardManager>();
+        _matchFinder = GetComponent<MatchFinder>();
+
     }
 
     void Start()
@@ -52,6 +57,7 @@ public class Board : MonoBehaviour
         SetupCamera();
 
         FillBoard();
+        _boardManager.BoardChecking(_matchFinder.FindAllMatches());
     }
     
     void SetupCells() //done
@@ -88,7 +94,7 @@ public class Board : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            int maxIterations = 50;
+            int maxIterations = 100;
 
             for (int i = 0; i < width; i++)
             {
@@ -100,16 +106,16 @@ public class Board : MonoBehaviour
 
                         int iteration = 0;
                         
-                        /*while (HasMatchOnFill(i, j) && iteration < maxIterations)
+                        while (HasMatchOnFill(i, j) && iteration < maxIterations)
                         {
                             _clearManager.DestroyAt(i, j);
                             index = _itemFactory.MakeRandomGamePiece(i, j);
 
                             iteration++;
-                        }*/
+                        }
                         
-                        _clearManager.DestroyAt(i, j);
-                        photonView.RPC("RPC_InitGameObject", RpcTarget.AllViaServer, index, i, j);
+                        //_clearManager.DestroyAt(i, j);
+                        photonView.RPC("RPC_InitGameObject", RpcTarget.Others, index, i, j);
                         
                     }
                 }
