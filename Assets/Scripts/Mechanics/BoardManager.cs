@@ -63,7 +63,7 @@ public class BoardManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(DeadlockCheck());
+            //StartCoroutine(DeadlockCheck());
             _board.playerInputEnabled = true;
             _board.isRefilling = false;
         }
