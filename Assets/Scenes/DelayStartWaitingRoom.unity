@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe594e343df04a79aa778ce581bd0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplayerSceneIndex: 2
-  menuSceneIndex: 0
+  multiplayerSceneIndex: 3
+  menuSceneIndex: 1
   minPlayersToStart: 2
   roomCountDisplay: {fileID: 1148814450}
   timerToStartDisplay: {fileID: 368511409}
