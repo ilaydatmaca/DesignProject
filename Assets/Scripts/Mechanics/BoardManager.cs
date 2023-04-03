@@ -129,15 +129,16 @@ public class BoardManager : MonoBehaviour
     private IEnumerator DeadlockCheck()
     {
         // deadlock check
-        if (_deadlockManager.IsDeadlocked())
+        if (_deadlockManager.IsDeadlocked(_board.AllGamePieces, 3))
         {
+            Debug.Log("deadlocked");
             yield return new WaitForSeconds(_board.delay * 5f);
 
-            yield return StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
+            /*yield return StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
 
             yield return new WaitForSeconds(_board.delay * 5f);
 
-            yield return StartCoroutine(BoardRoutine(_matchFinder.FindAllMatches()));
+            yield return StartCoroutine(BoardRoutine(_matchFinder.FindAllMatches()));*/
         }
     }
     
