@@ -16,8 +16,5 @@ EditorBuildSettings:
     guid: ab8ffcc41d140429f8d10f8d020632d9
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
-    guid: bbe6b48be0992453fa6807010eb06419
-  - enabled: 0
-    path: Assets/Scenes/deneme.unity
-    guid: 7965c1c4342864fae87aa18d042d69ef
+    guid: c74503be0b012453fb3f08126107a73d
   m_configObjects: {}

@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
     public bool playerInputEnabled = true;
     public bool isRefilling;
     
-    public float swapTime = 0.2f;
+    public float swapTime = 0.1f;
     public int scoreMultiplier;
     public float delay = 0.4f;
 

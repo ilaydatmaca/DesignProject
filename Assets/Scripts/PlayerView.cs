@@ -4,16 +4,19 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour
 {
     public PhotonView photonView;
+    
     private ItemFactory _itemFactory;
     private SwapManager _swapManager;
     private Board _board;
     private ShuffleManager _shuffleManager;
+    private BoardManager _boardManager;
     private void Awake()
     {
         _swapManager = FindObjectOfType<Board>().GetComponent<SwapManager>();
         _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
         _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
+        _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
     }
 
     private void Start()
@@ -61,6 +64,18 @@ public class PlayerView : MonoBehaviour
     {
         _shuffleManager.SwapArrayItems(index1, index2);
     }
+    
+    
+    [PunRPC]
+    public void RPC_MakeColorBombBooster(int xIndex, int yIndex)
+    {
+        _itemFactory.MakeColorBombBooster(xIndex, yIndex);
+    }
 
-
+    [PunRPC]
+    public void RPC_RemoveOneGamePiece(int xIndex, int yIndex)
+    {
+        _boardManager.ClearAndRefillBoard(xIndex, yIndex);
+        
+    }
 }
