@@ -16,7 +16,6 @@ public class ItemFactory : MonoBehaviour
     private Board _board;
     private ItemManager _itemManager;
     private ClearManager _clearManager;
-    public PhotonView photonView;
 
     private void Awake()
     {
@@ -78,7 +77,6 @@ public class ItemFactory : MonoBehaviour
     }
     
     
-
     public int MakeRandomGamePiece(int x, int y)
     {
         int index = 0;
@@ -100,6 +98,7 @@ public class ItemFactory : MonoBehaviour
         randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
         randomPiece.GetComponent<GamePiece>().Fall();
     }
+    
     
     public GameObject MakeItem(ItemType ıtemType, int x, int y, MatchValue matchValue = MatchValue.Wild)
     {

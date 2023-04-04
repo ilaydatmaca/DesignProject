@@ -1,4 +1,5 @@
 ﻿using System;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     public TMP_Text amountText;
 
     public int boosterCount = 1;
+
 
     void Awake()
     {
@@ -151,6 +153,8 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     {
         if (_itemFactory != null && _targetCell != null && boosterCount > 0)
         {
+            _board.photonView.RPC("RPC_Shuffle", RpcTarget.AllBuffered);
+
             _itemFactory.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
             UpdateText();
         }
@@ -161,7 +165,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     {
         if (_shuffleManager != null && boosterCount > 0)
         {
-            StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
+            _board.photonView.RPC("RPC_Shuffle", RpcTarget.AllBuffered);
             UpdateText();
         }
     }

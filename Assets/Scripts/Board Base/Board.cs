@@ -2,6 +2,7 @@
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Board : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class Board : MonoBehaviour
         SetupCamera();
 
         FillBoard();
-        _boardManager.BoardChecking(_matchFinder.FindAllMatches());
+        //_boardManager.BoardChecking(_matchFinder.FindAllMatches());
     }
     
     void SetupCells() //done
@@ -92,7 +93,7 @@ public class Board : MonoBehaviour
     
     public void FillBoard() //done
     {
-        if (PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.IsMasterClient)
         {
             int maxIterations = 100;
 
@@ -113,8 +114,6 @@ public class Board : MonoBehaviour
 
                             iteration++;
                         }
-                        
-                        //_clearManager.DestroyAt(i, j);
                         photonView.RPC("RPC_InitGameObject", RpcTarget.Others, index, i, j);
                         
                     }
@@ -248,5 +247,6 @@ public class Board : MonoBehaviour
         }
         return allPiecesToClear;
     }
+    
 
 }
