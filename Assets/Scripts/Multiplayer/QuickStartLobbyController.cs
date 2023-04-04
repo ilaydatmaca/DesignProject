@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
-using Photon.Pun.Demo.Cockpit.Forms;
 using UnityEngine;
 using Photon.Realtime;
 

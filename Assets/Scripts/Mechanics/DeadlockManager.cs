@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Photon.Pun;
 
 public class DeadlockManager : MonoBehaviour
 {

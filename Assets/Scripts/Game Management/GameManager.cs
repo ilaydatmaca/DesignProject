@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -62,7 +61,6 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator StartGameRoutine()
     {
-        //StartUI();
         
         BeginGame();
 
@@ -71,28 +69,11 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
-        /*if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
-        {
-            UIManager.Instance.screenFader.FadeOff();
-        }*/
-
         yield return new WaitForSeconds(0.5f);
 
         if (_board != null)
         {
             _board.SetupBoard();
-        }
-    }
-
-    private static void StartUI()
-    {
-        if (UIManager.Instance != null)
-        {
-            if (UIManager.Instance.messageWindow != null)
-            {
-                UIManager.Instance.messageWindow.GetComponent<MovingScreen>().MoveOn();
-                //UIManager.Instance.messageWindow.ShowScoreMessage(ScoreManager.Instance.maxScore);
-            }
         }
     }
 
@@ -115,7 +96,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
         {
-            //TimeManager.Instance.timer.FadeOff();
             TimeManager.Instance.timer.paused = true;
         }
 
@@ -148,11 +128,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         yield return new WaitForSeconds(1f);
-
-        /*if (UIManager.Instance != null && UIManager.Instance.screenFader != null)
-        {
-            UIManager.Instance.screenFader.FadeOn();
-        }  */
 
         while (!_isReadyToReload)
         {

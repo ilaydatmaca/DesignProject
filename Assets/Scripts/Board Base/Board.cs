@@ -2,7 +2,6 @@
 using System.Linq;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Board : MonoBehaviour
 {

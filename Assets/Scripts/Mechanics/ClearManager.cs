@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class ClearManager : MonoBehaviour
 {
-    private Board board;
+    private Board _board;
     private ParticleManager _particleManager;
 
     private void Awake()
     {
-        board = GetComponent<Board>();
+        _board = GetComponent<Board>();
         _particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
     }
     
 
     public void DestroyAt(int x, int y)
     {
-        GamePiece pieceToClear = board.AllGamePieces[x, y];
+        GamePiece pieceToClear = _board.AllGamePieces[x, y];
         if (pieceToClear != null)
         {
-            board.AllGamePieces[x, y] = null;
+            _board.AllGamePieces[x, y] = null;
             Destroy(pieceToClear.gameObject);
         }
 
@@ -41,7 +41,7 @@ public class ClearManager : MonoBehaviour
 
                 if (GameManager.Instance != null)
                 {
-                    GameManager.Instance.ScorePoints(piece, board.scoreMultiplier, bonus);
+                    GameManager.Instance.ScorePoints(piece, _board.scoreMultiplier, bonus);
                 }
 
                 // play particle effects for pieces...

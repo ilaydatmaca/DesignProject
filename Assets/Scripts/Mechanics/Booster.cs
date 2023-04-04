@@ -1,8 +1,6 @@
-﻿using System;
-using Photon.Pun;
+﻿using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
@@ -136,7 +134,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         if (_boardManager != null && _targetCell != null && boosterCount > 0)
         {
             _board.photonView.RPC("RPC_RemoveOneGamePiece", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            //_boardManager.ClearAndRefillBoard(_targetCell.xIndex, _targetCell.yIndex);
             UpdateText();
         }
     }
@@ -155,7 +152,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         if (_itemFactory != null && _targetCell != null && boosterCount > 0)
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            //_itemFactory.MakeColorBombBooster(_targetCell.xIndex, _targetCell.yIndex);
             UpdateText();
         }
     }

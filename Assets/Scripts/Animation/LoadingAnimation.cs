@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -13,7 +12,7 @@ public class LoadingAnimation : MonoBehaviour
     {
         if (isRunning)
         {
-            StartCoroutine(changeText());
+            StartCoroutine(ChangeText());
             if (count < 3)
             {
                 loadingText.text += ".";
@@ -29,7 +28,7 @@ public class LoadingAnimation : MonoBehaviour
     }
 
     
-    IEnumerator changeText()
+    IEnumerator ChangeText()
     {
         yield return new WaitForSeconds(1.1f);
         isRunning = true;
