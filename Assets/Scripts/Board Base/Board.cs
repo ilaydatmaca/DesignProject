@@ -33,16 +33,11 @@ public class Board : MonoBehaviour
     private ClearManager _clearManager;
 
     public PhotonView photonView;
-    private BoardManager _boardManager;
-    private MatchFinder _matchFinder;
 
     private void Awake()
     {
         _itemFactory = GetComponent<ItemFactory>();
         _clearManager = GetComponent<ClearManager>();
-        _boardManager = GetComponent<BoardManager>();
-        _matchFinder = GetComponent<MatchFinder>();
-
     }
 
     void Start()

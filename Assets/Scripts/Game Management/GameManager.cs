@@ -4,17 +4,15 @@ using System.Collections;
 
 public class GameManager : Singleton<GameManager>
 {
-    Board _board;
-    
-    bool _isPlayerReady;
-    bool _isGameOver;
-    bool _isWinner;
-    bool _isReadyToReload;
+    private bool _isPlayerReady;
+    private bool _isGameOver;
+    private bool _isWinner;
+    private bool _isReadyToReload;
 
     public bool IsGameOver { get => _isGameOver; }
 
-    LevelGoal _levelGoal;
-
+    private LevelGoal _levelGoal;
+    private Board _board;
 
     public override void Awake()
     {
@@ -22,31 +20,13 @@ public class GameManager : Singleton<GameManager>
 
         _levelGoal = GetComponent<LevelGoal>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
-
     }
     
-    public void BeginGame()
-    {
-        _isPlayerReady = true;
-        _isReadyToReload = true;
-
-    }
     void Start()
     { 
         StartCoroutine(ExecuteGameLoop());
     }
-
-    public void UpdateMoves()
-    {
-        MovesManager.Instance.DecreaseMoveLeft();
-    }
-
-    public void AddTime(int timeValue)
-    {
-        TimeManager.Instance.AddTime(timeValue);
-    }
-
-
+    
     IEnumerator ExecuteGameLoop()
     {
         yield return StartCoroutine(StartGameRoutine());
@@ -57,13 +37,12 @@ public class GameManager : Singleton<GameManager>
 
         yield return StartCoroutine(EndGameRoutine());
     }
-    
 
     IEnumerator StartGameRoutine()
     {
+        _isPlayerReady = true;
+        _isReadyToReload = true;
         
-        BeginGame();
-
         while (!_isPlayerReady)
         {
             yield return null;
@@ -76,11 +55,9 @@ public class GameManager : Singleton<GameManager>
             _board.SetupBoard();
         }
     }
-
-
+    
     IEnumerator PlayGameRoutine()
     {
-        
         TimeManager.Instance.StartCountDown();
         
         while (!_isGameOver)
@@ -91,7 +68,7 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
     }
-
+    
     IEnumerator WaitForBoardRoutine(float delay = 0f)
     {
         if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
@@ -108,11 +85,10 @@ public class GameManager : Singleton<GameManager>
                 yield return null;
             }
         }
-
         // extra delay before we go to the EndGameRoutine
         yield return new WaitForSeconds(delay);
     }
-
+    
     // coroutine for the end of the level
     IEnumerator EndGameRoutine()
     {
@@ -122,7 +98,7 @@ public class GameManager : Singleton<GameManager>
         {
             ShowWinScreen();
         } 
-		else
+        else
         {   
             ShowLoseScreen();
         }
@@ -135,7 +111,17 @@ public class GameManager : Singleton<GameManager>
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // sahneyi yeniden yükle
-		
+    }
+
+
+    public void UpdateMoves()
+    {
+        MovesManager.Instance.DecreaseMoveLeft();
+    }
+
+    public void AddTime(int timeValue)
+    {
+        TimeManager.Instance.AddTime(timeValue);
     }
 
     void ShowWinScreen()

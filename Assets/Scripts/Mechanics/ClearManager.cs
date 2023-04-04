@@ -47,7 +47,7 @@ public class ClearManager : MonoBehaviour
                 // play particle effects for pieces...
                 if (_particleManager != null)
                 {
-                    // ... cleared by bombs
+                    // ... cleared by bombs 
                     if (bombedPieces.Contains(piece))
                     {
                         _particleManager.BombFXAt(piece.xIndex, piece.yIndex);
