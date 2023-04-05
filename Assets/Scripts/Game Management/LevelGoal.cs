@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 public class LevelGoal : MonoBehaviour
 {
     public bool gameOver;
-    public GameObject uiCanvas;
-            
+    public GameObject losingPopup;
+    public GameObject winningPopup;
+
     public bool IsGameOver()
     {
         /*if (TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
@@ -19,13 +20,16 @@ public class LevelGoal : MonoBehaviour
         {
             gameOver = false;
             Debug.Log("Game Ended");
-            uiCanvas.SetActive(true);
+            losingPopup.SetActive(true);
+            
+
         }
         return false;
     }
 
-    void Restart()
+    public void Restart()
     {
+        losingPopup.SetActive(false);
         SceneManager.LoadScene("StartMenu");
     }
 
