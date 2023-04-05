@@ -6,8 +6,13 @@ using UnityEngine;
 
 public class SmoothMovePopup : MonoBehaviour
 {
-    private bool reachedDestination = false;
-    public GameObject box;
+    RectTransform _rectTransform;
+
+    private void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+    }
+
 
     private void Start()
     {
@@ -17,10 +22,10 @@ public class SmoothMovePopup : MonoBehaviour
 
     IEnumerator SmoothTranslation( float speed)
     {
-        Vector3 target = new Vector3(box.transform.position.x, 250, box.transform.position.z);
-        
-        while (box.transform.position != target) {
-            box.transform.position = Vector3.Lerp (box.transform.position, target, Time.deltaTime * speed);
+        Vector3 target = new Vector3(_rectTransform.position.x, 250, _rectTransform.position.z);
+
+        while (_rectTransform.position.y - target.y >= 0.2f) {
+            _rectTransform.position = Vector3.Lerp (_rectTransform.position, target, Time.deltaTime * speed);
             yield return null;
         }        
     }
