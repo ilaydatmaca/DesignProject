@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MovesManager : Singleton<MovesManager>
 {
-    public GameObject movesCounterArea;
+    /*public GameObject movesCounterArea;
     public Text movesLeftText;
     
     public int movesLeft;
@@ -38,5 +38,5 @@ public class MovesManager : Singleton<MovesManager>
         {
             movesLeftText.text = movesLeft.ToString();
         }
-    }
+    }*/
 }

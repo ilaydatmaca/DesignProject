@@ -3037,7 +3037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4d8006c70694ee2893635999047923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 1099727450}
 --- !u!1 &1248487381
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,7 +4328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c00916d497240a29af251779759543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1716117175}
+  player1ScoreText: {fileID: 1716117175}
+  player2ScoreText: {fileID: 1331799762}
 --- !u!1 &1670947445
 GameObject:
   m_ObjectHideFlags: 0
@@ -7883,7 +7883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4d8006c70694ee2893635999047923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 7098200961871275731}
 --- !u!1 &7098200962055991477
 GameObject:
   m_ObjectHideFlags: 0
