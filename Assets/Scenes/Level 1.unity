@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38741468}
-  - component: {fileID: 38741469}
   - component: {fileID: 38741470}
   m_Layer: 0
   m_Name: UIManager
@@ -156,19 +155,6 @@ Transform:
   m_Father: {fileID: 1013188353}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &38741469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38741467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57d1b423c06d4423792c6cd64b331ef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messageWindow: {fileID: 38741470}
 --- !u!114 &38741470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2571,7 +2557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfe1f77f59a6407bababec7257c7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  losingPopup: {fileID: 479439332}
 --- !u!114 &1003490582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2584,7 +2569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f0d08c4c0964f0e80be5d4707ef853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundNumber: 5
+  roundNumber: 1
   currentRoundNumber: 0
   roundText: {fileID: 1878684183}
   yourTurnText: {fileID: 285338573}
@@ -6425,8 +6410,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1003490581}
-        m_TargetAssemblyTypeName: LevelGoal, Assembly-CSharp
+      - m_Target: {fileID: 38741470}
+        m_TargetAssemblyTypeName: MessageWindow, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -7440,8 +7425,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1003490581}
-        m_TargetAssemblyTypeName: LevelGoal, Assembly-CSharp
+      - m_Target: {fileID: 38741470}
+        m_TargetAssemblyTypeName: MessageWindow, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:

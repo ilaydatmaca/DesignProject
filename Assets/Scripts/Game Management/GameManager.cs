@@ -61,6 +61,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator PlayGameRoutine()
     {
         _roundManager.InitRound();
+        TimeManager.Instance.paused = false;
         
         while (!_isGameOver)
         {
@@ -128,9 +129,9 @@ public class GameManager : Singleton<GameManager>
 
     void ShowWinScreen()
     {
-        if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
+        if (MessageWindow.Instance != null)
         {
-            UIManager.Instance.messageWindow.ShowWinWindow();
+           MessageWindow.Instance.ShowWinWindow();
         }
 
         if (SoundManager.Instance != null)
@@ -141,9 +142,9 @@ public class GameManager : Singleton<GameManager>
 
     void ShowLoseScreen()
     {
-        if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
+        if (MessageWindow.Instance != null)
         {
-            UIManager.Instance.messageWindow.ShowLoseWindow();
+            MessageWindow.Instance.ShowLoseWindow();
         }
         if (SoundManager.Instance != null)
         {

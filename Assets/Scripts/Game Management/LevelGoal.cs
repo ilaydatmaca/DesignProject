@@ -1,46 +1,35 @@
-﻿
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class LevelGoal : MonoBehaviour
 {
-    public GameObject losingPopup;
 
     public bool IsGameOver()
     {
-        if (RoundManager.Instance.roundNumber == RoundManager.Instance.currentRoundNumber)
+        if (RoundManager.Instance.roundNumber < RoundManager.Instance.currentRoundNumber && TimeManager.Instance.isTimeUp)
         {
             return true;
         }
         return false;
     }
 
-    public void Restart()
-    {
-        losingPopup.SetActive(false);
-        SceneManager.LoadScene("StartMenu");
-    }
-
     public bool IsWinner()
     {
+        bool isWin = false;
         if (ScoreManager.Instance.currentScorePlayer1 > ScoreManager.Instance.currentScorePlayer2)
         {
             if (RoundManager.Instance.player1View.IsMine)
             {
-                return true;
+                isWin = true;
             }
-            return false;
         }
-        if (ScoreManager.Instance.currentScorePlayer2 > ScoreManager.Instance.currentScorePlayer1)
+        else if (ScoreManager.Instance.currentScorePlayer2 > ScoreManager.Instance.currentScorePlayer1)
         {
             if (RoundManager.Instance.player2View.IsMine)
             {
-                return true;
+                isWin = true;
             }
-            return false;
         }
-        return false;
+        return isWin;
     }
-
-
+    
 }

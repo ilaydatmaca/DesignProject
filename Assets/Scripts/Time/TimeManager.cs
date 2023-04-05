@@ -62,7 +62,6 @@ public class TimeManager : Singleton<TimeManager>
         slider.value = maxTime;
         
         isTimeUp = false;
-        paused = false;
     }
     
 }

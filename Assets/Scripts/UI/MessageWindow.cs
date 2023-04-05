@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
-
-public class MessageWindow : MonoBehaviour 
+public class MessageWindow : Singleton<MessageWindow>
 {
     
     public GameObject losingPopup;
@@ -19,5 +19,12 @@ public class MessageWindow : MonoBehaviour
 
     }
 
+    public void Restart()
+    {
+        losingPopup.SetActive(false);
+        winningPopup.SetActive(false);
+
+        SceneManager.LoadScene("StartMenu");
+    }
 
 }

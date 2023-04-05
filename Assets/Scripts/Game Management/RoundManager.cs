@@ -1,7 +1,5 @@
-using System;
 using Photon.Pun;
 using TMPro;
-using UnityEngine;
 
 public class RoundManager : Singleton<RoundManager>
 {
@@ -11,9 +9,9 @@ public class RoundManager : Singleton<RoundManager>
     public TMP_Text roundText;
     public TMP_Text yourTurnText;
     
-    [HideInInspector] public PhotonView player1View;
-    [HideInInspector] public PhotonView player2View;
-    [HideInInspector] public PhotonView turnView;
+    public PhotonView player1View;
+    public PhotonView player2View;
+    public PhotonView turnView;
     
     
     public void InitRound()
@@ -28,7 +26,7 @@ public class RoundManager : Singleton<RoundManager>
 
     public void SetRound()
     {
-        if (currentRoundNumber >= roundNumber)
+        if (currentRoundNumber > roundNumber)
         {
             return;
         }
