@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class SwapManager : MonoBehaviour
 {
-
     private Board _board;
     private BoardManager _boardManager;
     private MatchFinder _matchFinder;
     private ItemManager _itemManager;
-
-    public PhotonView photonView;
+    private RoundManager _roundManager;
     
     private void Awake()
     {
@@ -20,10 +18,14 @@ public class SwapManager : MonoBehaviour
         _boardManager = GetComponent<BoardManager>();
         _matchFinder = GetComponent<MatchFinder>();
         _itemManager = GetComponent<ItemManager>();
+        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
     }
 
     public void ClickCell(Cell cell)
     {
+        if(!_roundManager.turnView.IsMine)
+            return;
+        
         if (_board.clickedCell == null)
         {
             _board.clickedCell = cell;
@@ -41,7 +43,7 @@ public class SwapManager : MonoBehaviour
     {
         if (_board.clickedCell != null && _board.targetCell != null)
         {
-            photonView.RPC("RPC_SwapCells", RpcTarget.All,
+            _board.photonView.RPC("RPC_SwapCells", RpcTarget.All,
                 _board.clickedCell.xIndex,
                 _board.clickedCell.yIndex,
                 _board.targetCell.xIndex,

@@ -10,6 +10,7 @@ public class PlayerView : MonoBehaviour
     private Board _board;
     private ShuffleManager _shuffleManager;
     private BoardManager _boardManager;
+    private RoundManager _roundManager;
     private void Awake()
     {
         _swapManager = FindObjectOfType<Board>().GetComponent<SwapManager>();
@@ -17,16 +18,26 @@ public class PlayerView : MonoBehaviour
         _board = FindObjectOfType<Board>().GetComponent<Board>();
         _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
+        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
     }
 
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         photonView = GetComponent<PhotonView>();
+
+        if (photonView.ViewID == 1001)
+        {
+            _roundManager.player1View = photonView;
+        }
+        else if (photonView.ViewID == 2001)
+        {
+            _roundManager.player2View = photonView;
+        }
             
         if (!photonView.IsMine || photonView == null)
             return;
-        _swapManager.photonView = photonView;
+        
         _board.photonView = photonView;
     }
     
@@ -76,6 +87,13 @@ public class PlayerView : MonoBehaviour
     public void RPC_RemoveOneGamePiece(int xIndex, int yIndex)
     {
         _boardManager.ClearAndRefillBoard(xIndex, yIndex);
+        
+    }
+    
+    [PunRPC]
+    public void RPC_AddTime(int bonusTime)
+    {
+        GameManager.Instance.AddTime(bonusTime);
         
     }
 }

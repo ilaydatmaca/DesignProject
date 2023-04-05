@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     private LevelGoal _levelGoal;
     private Board _board;
+    private RoundManager _roundManager;
 
     public override void Awake()
     {
@@ -20,6 +21,7 @@ public class GameManager : Singleton<GameManager>
 
         _levelGoal = GetComponent<LevelGoal>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
+        _roundManager = GetComponent<RoundManager>();
     }
     
     void Start()
@@ -58,7 +60,7 @@ public class GameManager : Singleton<GameManager>
     
     IEnumerator PlayGameRoutine()
     {
-        TimeManager.Instance.StartCountDown();
+        _roundManager.InitRound();
         
         while (!_isGameOver)
         {
@@ -73,7 +75,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
         {
-            TimeManager.Instance.timer.paused = true;
+            TimeManager.Instance.paused = true;
         }
 
         if (_board != null)

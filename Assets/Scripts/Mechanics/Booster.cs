@@ -22,6 +22,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     private ItemFactory _itemFactory;
     private ShuffleManager _shuffleManager;
     private SoundManager _soundManager;
+    private RoundManager _roundManager;
     
     private RectTransform _rectform;
     public TMP_Text amountText;
@@ -37,7 +38,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
         _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
         _soundManager = FindObjectOfType<SoundManager>();
-
+        _roundManager = FindObjectOfType<RoundManager>();
     }
 
     void Start()
@@ -81,7 +82,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable)
+        if (isEnabled && isDraggable && _roundManager.turnView.IsMine)
         {
             _startPosition = gameObject.transform.position;
         }
@@ -89,7 +90,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable)
+        if (isEnabled && isDraggable && _roundManager.turnView.IsMine)
         {
             Vector3 onscreenPosition;
             RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectform, eventData.position, 
@@ -105,7 +106,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     // frame where we end drag
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable)
+        if (isEnabled && isDraggable && _roundManager.turnView.IsMine)
         {
             gameObject.transform.position = _startPosition;
 
@@ -131,7 +132,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void RemoveOneGamePiece()
     {
-        if (_boardManager != null && _targetCell != null && boosterCount > 0)
+        if (_targetCell != null && boosterCount > 0)
         {
             _board.photonView.RPC("RPC_RemoveOneGamePiece", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
             UpdateText();
@@ -140,16 +141,16 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void AddTime()
     {
-        if (GameManager.Instance != null && boosterCount > 0)
+        if (boosterCount > 0 && _roundManager.turnView.IsMine)
         {
-            GameManager.Instance.AddTime(bonusTime);
+            _board.photonView.RPC("RPC_AddTime", RpcTarget.AllBuffered, bonusTime);
             UpdateText();
         }
     }
 
     public void DropColorBomb()
     {
-        if (_itemFactory != null && _targetCell != null && boosterCount > 0)
+        if (_targetCell != null && boosterCount > 0)
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
             UpdateText();
@@ -159,7 +160,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         
     public void ShuffleBoard()
     {
-        if (_shuffleManager != null && boosterCount > 0)
+        if (boosterCount > 0 && _roundManager.turnView.IsMine)
         {
             _board.photonView.RPC("RPC_Shuffle", RpcTarget.AllBuffered);
             UpdateText();
