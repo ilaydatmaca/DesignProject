@@ -1,8 +1,11 @@
 ﻿
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelGoal : MonoBehaviour
 {
+    public bool gameOver;
+    public GameObject uiCanvas;
             
     public bool IsGameOver()
     {
@@ -12,7 +15,18 @@ public class LevelGoal : MonoBehaviour
         }
 
         return false;*/
+        if (gameOver)
+        {
+            gameOver = false;
+            Debug.Log("Game Ended");
+            uiCanvas.SetActive(true);
+        }
         return false;
+    }
+
+    void Restart()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 
     public bool IsWinner()
