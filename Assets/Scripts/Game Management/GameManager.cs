@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     private bool _isWinner;
     private bool _isReadyToReload;
 
-    public bool IsGameOver { get => _isGameOver; }
+    public bool IsGameOver { get; }
 
     private LevelGoal _levelGoal;
     private Board _board;
@@ -130,7 +130,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.ShowWinMessage();
+            UIManager.Instance.messageWindow.ShowWinWindow();
         }
 
         if (SoundManager.Instance != null)
@@ -143,7 +143,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (UIManager.Instance != null && UIManager.Instance.messageWindow != null)
         {
-            UIManager.Instance.messageWindow.ShowLoseMessage();
+            UIManager.Instance.messageWindow.ShowLoseWindow();
         }
         if (SoundManager.Instance != null)
         {

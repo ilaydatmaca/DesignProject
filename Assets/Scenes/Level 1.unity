@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 38741468}
   - component: {fileID: 38741469}
+  - component: {fileID: 38741470}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -167,7 +168,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d1b423c06d4423792c6cd64b331ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageWindow: {fileID: 0}
+  messageWindow: {fileID: 38741470}
+--- !u!114 &38741470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38741467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3db2e8ae92c94bddbb986ec8d0766c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  losingPopup: {fileID: 479439332}
+  winningPopup: {fileID: 7098200962605640056}
 --- !u!1 &181513970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -33.000183}
+  m_AnchoredPosition: {x: 0, y: -33.000244}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &494817599
@@ -2556,9 +2571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfe1f77f59a6407bababec7257c7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: 0
   losingPopup: {fileID: 479439332}
-  winningPopup: {fileID: 7098200962605640056}
 --- !u!114 &1003490582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,6 +2585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundNumber: 5
+  currentRoundNumber: 0
   roundText: {fileID: 1878684183}
   yourTurnText: {fileID: 285338573}
   player1View: {fileID: 0}
@@ -4093,6 +4107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c00916d497240a29af251779759543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScorePlayer1: 0
+  currentScorePlayer2: 0
   player1ScoreText: {fileID: 1716117175}
   player2ScoreText: {fileID: 1331799762}
 --- !u!1 &1670947445
@@ -8355,7 +8371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -33.000183}
+  m_AnchoredPosition: {x: 0, y: -33.000244}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7098200962698166432

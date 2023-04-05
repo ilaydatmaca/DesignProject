@@ -2,8 +2,8 @@
 
 public class ScoreManager : Singleton<ScoreManager> 
 {
-	private int _currentScorePlayer1;
-	private int _currentScorePlayer2;
+	public int currentScorePlayer1;
+	public int currentScorePlayer2;
 	
 	public Text player1ScoreText;
 	public Text player2ScoreText;
@@ -24,12 +24,12 @@ public class ScoreManager : Singleton<ScoreManager>
 	{
 		if (player1ScoreText != null) 
 		{
-			player1ScoreText.text = _currentScorePlayer1.ToString ();
+			player1ScoreText.text = currentScorePlayer1.ToString ();
 		}
 		
 		if (player2ScoreText != null) 
 		{
-			player2ScoreText.text = _currentScorePlayer2.ToString ();
+			player2ScoreText.text = currentScorePlayer2.ToString ();
 		}
 	}
 
@@ -37,11 +37,11 @@ public class ScoreManager : Singleton<ScoreManager>
 	{
 		if (_roundManager.turnView == _roundManager.player1View)
 		{
-			_currentScorePlayer1 += value;
+			currentScorePlayer1 += value;
 		}
 		else if (_roundManager.turnView == _roundManager.player2View)
 		{
-			_currentScorePlayer2 += value;
+			currentScorePlayer2 += value;
 		}
 		UpdateScoreText();
 

@@ -1,11 +1,12 @@
+using System;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
-public class RoundManager : MonoBehaviour
+public class RoundManager : Singleton<RoundManager>
 {
     public int roundNumber = 5;
-    private int _currentRoundNumber;
+    public int currentRoundNumber;
 
     public TMP_Text roundText;
     public TMP_Text yourTurnText;
@@ -27,8 +28,10 @@ public class RoundManager : MonoBehaviour
 
     public void SetRound()
     {
-        if(_currentRoundNumber > roundNumber)
+        if (currentRoundNumber >= roundNumber)
+        {
             return;
+        }
 
         if (TimeManager.Instance.isTimeUp)
         {
@@ -48,12 +51,12 @@ public class RoundManager : MonoBehaviour
 
     private void IncreaseRoundNumber()
     {
-        _currentRoundNumber++;
+        currentRoundNumber++;
         SetRoundText();
     }
     private void SetRoundText()
     {
-        roundText.text = "ROUND " + _currentRoundNumber;
+        roundText.text = "ROUND " + currentRoundNumber;
     }
 
     private void SetStateTurnText()

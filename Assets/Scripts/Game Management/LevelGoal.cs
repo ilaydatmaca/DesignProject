@@ -4,25 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelGoal : MonoBehaviour
 {
-    public bool gameOver;
     public GameObject losingPopup;
-    public GameObject winningPopup;
 
     public bool IsGameOver()
     {
-        /*if (TimeManager.Instance.currentTime <= 0 || MovesManager.Instance.movesLeft <= 0)
+        if (RoundManager.Instance.roundNumber == RoundManager.Instance.currentRoundNumber)
         {
             return true;
-        }
-
-        return false;*/
-        if (gameOver)
-        {
-            gameOver = false;
-            Debug.Log("Game Ended");
-            losingPopup.SetActive(true);
-            
-
         }
         return false;
     }
@@ -35,9 +23,21 @@ public class LevelGoal : MonoBehaviour
 
     public bool IsWinner()
     {
-        if (ScoreManager.Instance != null)
+        if (ScoreManager.Instance.currentScorePlayer1 > ScoreManager.Instance.currentScorePlayer2)
         {
-            return true;
+            if (RoundManager.Instance.player1View.IsMine)
+            {
+                return true;
+            }
+            return false;
+        }
+        if (ScoreManager.Instance.currentScorePlayer2 > ScoreManager.Instance.currentScorePlayer1)
+        {
+            if (RoundManager.Instance.player2View.IsMine)
+            {
+                return true;
+            }
+            return false;
         }
         return false;
     }

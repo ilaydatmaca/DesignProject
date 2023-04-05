@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovingScreen : MonoBehaviour 
 {
-	public Vector3 startPosition;
+	/*public Vector3 startPosition;
 	public Vector3 onscreenPosition;
 	public Vector3 offScreenPosition;
 
@@ -63,6 +63,8 @@ public class MovingScreen : MonoBehaviour
 				yield return null;
 			}
 		}
-	}
+	}*/
+	
+	
 
 }

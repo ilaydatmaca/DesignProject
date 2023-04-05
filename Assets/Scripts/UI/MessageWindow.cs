@@ -1,56 +1,23 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 
 public class MessageWindow : MonoBehaviour 
 {
-	public Image messageImage;
-	public Text messageText;
-	public Text buttonText;
-
-    // sprite for losers
-    public Sprite loseIcon;
-
-    // sprite for winners
-    public Sprite winIcon;
-
-    // sprite for the level goal
-    public Sprite goalIcon;
     
-
-    void ShowMessage(Sprite sprite = null, string message = "", string buttonMsg = "start")
-	{
-		if (messageImage != null) 
-		{
-			messageImage.sprite = sprite;
-		}
-
-        if (messageText != null)
-        {
-            messageText.text = message;
-        }
-			
-        if (buttonText != null)
-        {
-            buttonText.text = buttonMsg;
-        }
-	}
+    public GameObject losingPopup;
+    public GameObject winningPopup;
     
-    public void ShowLoseMessage()
+    public void ShowLoseWindow()
     {
-        GetComponent<MovingScreen>().MoveOn();
-        ShowMessage(loseIcon, "level\nfailed", "ok");
+        losingPopup.SetActive(true);
+
     }
     
-    public void ShowWinMessage()
+    public void ShowWinWindow()
     {
-        GetComponent<MovingScreen>().MoveOn();
-        ShowMessage(winIcon, "level\ncomplete", "ok");
+        winningPopup.SetActive(true);
+
     }
-    
-    public void ShowScoreMessage(int scoreGoal)
-    {
-        string message = "score goal \n" + scoreGoal;
-        ShowMessage(goalIcon, message, "start");
-    }
+
+
 }
