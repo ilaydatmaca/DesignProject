@@ -73,7 +73,7 @@ public class GameManager : Singleton<GameManager>
     
     IEnumerator WaitForBoardRoutine(float delay = 0f)
     {
-        if (TimeManager.Instance != null && TimeManager.Instance.timer != null)
+        if (TimeManager.Instance != null)
         {
             TimeManager.Instance.paused = true;
         }

@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeManager : Singleton<TimeManager>
 {
-    public Timer timer;
-
-    public float currentTime;
     public int maxTime;
+
+    private float _currentTime;
     
     public bool paused = true;
     public bool isTimeUp = false;
@@ -22,28 +20,6 @@ public class TimeManager : Singleton<TimeManager>
         base.Awake();
         _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
     }
-
-    private void Start()
-    {
-        EnableTimerArea();
-    }
-    
-    
-    void EnableTimerArea()
-    {
-        if (timer != null)
-        {
-            timer.gameObject.SetActive(true);
-        }
-    }
-
-    void InitTimer()
-    {
-        currentTime = maxTime;
-        slider.maxValue = maxTime;
-        slider.value = maxTime;
-        isTimeUp = false;
-    }
     
     public void Update()
     {
@@ -51,29 +27,24 @@ public class TimeManager : Singleton<TimeManager>
         {
             return;
         }
-        currentTime -= Time.deltaTime;
+        _currentTime -= Time.deltaTime;
 
-        if (currentTime <= 0)
+        if (_currentTime <= 0)
         {
             isTimeUp = true;
             _roundManager.SetRound();
+            ResetTimer();
         }
         if (!isTimeUp)
         {
-            slider.value = currentTime;
+            slider.value = _currentTime;
         }
 
     }
-    
-    void StartCountDown()
-    {
-        paused = false;
-    }
-
     public void AddTime(int timeValue)
     {
-        currentTime += timeValue;
-        currentTime = Mathf.Clamp(currentTime, 0, maxTime);
+        _currentTime += timeValue;
+        _currentTime = Mathf.Clamp(_currentTime, 0, maxTime);
     }
 
     public void ResetTimer()
@@ -85,11 +56,13 @@ public class TimeManager : Singleton<TimeManager>
     {
         yield return new WaitForSeconds(1f);
         
-        InitTimer();
-        StartCountDown();
-
+        //Reset slider
+        _currentTime = maxTime;
+        slider.maxValue = maxTime;
+        slider.value = maxTime;
+        
+        isTimeUp = false;
+        paused = false;
     }
-
-
-
+    
 }

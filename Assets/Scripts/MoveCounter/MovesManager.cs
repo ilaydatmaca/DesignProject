@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 public class MovesManager : Singleton<MovesManager>
 {
+    public bool noMoreMoves;
+
+    public void InitMoves()
+    {
+        
+    }
     /*public GameObject movesCounterArea;
     public Text movesLeftText;
     

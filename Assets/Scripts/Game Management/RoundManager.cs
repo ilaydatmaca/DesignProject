@@ -7,32 +7,28 @@ public class RoundManager : MonoBehaviour
     public int roundNumber = 5;
     public int moveNumberPerRound = 2;
 
-    public PhotonView player1View;
-    public PhotonView player2View;
-
-    public PhotonView turnView;
-
-    public bool startRound;
-
-    public int currentRoundNumber;
+    private int _currentRoundNumber;
 
     public TMP_Text roundText;
-
     public TMP_Text yourTurnText;
-
+    
+    [HideInInspector] public PhotonView player1View;
+    [HideInInspector] public PhotonView player2View;
+    [HideInInspector] public PhotonView turnView;
+    
+    
     public void InitRound()
     {
-        startRound = true;
-        currentRoundNumber = 1;
-        
         turnView = player1View;
-        SetRoundText();
+        
+        IncreaseRoundNumber();
+        SetStateTurnText();
         TimeManager.Instance.ResetTimer();
     }
 
     public void SetRound()
     {
-        if(!startRound || currentRoundNumber > roundNumber)
+        if(_currentRoundNumber > roundNumber)
             return;
 
         if (TimeManager.Instance.isTimeUp)
@@ -45,22 +41,19 @@ public class RoundManager : MonoBehaviour
             {
                 turnView = player1View;
                 IncreaseRoundNumber();
-                SetRoundText();
             }
-            
-            TimeManager.Instance.ResetTimer();
             SetStateTurnText();
-           
         }
     }
 
     private void IncreaseRoundNumber()
     {
-        currentRoundNumber++;
+        _currentRoundNumber++;
+        SetRoundText();
     }
     private void SetRoundText()
     {
-        roundText.text = "ROUND " + currentRoundNumber;
+        roundText.text = "ROUND " + _currentRoundNumber;
     }
 
     private void SetStateTurnText()
