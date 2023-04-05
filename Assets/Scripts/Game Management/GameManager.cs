@@ -118,7 +118,7 @@ public class GameManager : Singleton<GameManager>
 
     public void UpdateMoves()
     {
-        //MovesManager.Instance.DecreaseMoveLeft();
+        MovesManager.Instance.DecreaseMoveLeft();
     }
 
     public void AddTime(int timeValue)

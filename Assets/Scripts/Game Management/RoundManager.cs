@@ -5,8 +5,6 @@ using UnityEngine;
 public class RoundManager : MonoBehaviour
 {
     public int roundNumber = 5;
-    public int moveNumberPerRound = 2;
-
     private int _currentRoundNumber;
 
     public TMP_Text roundText;
@@ -24,6 +22,7 @@ public class RoundManager : MonoBehaviour
         IncreaseRoundNumber();
         SetStateTurnText();
         TimeManager.Instance.ResetTimer();
+        MovesManager.Instance.InitMoves();
     }
 
     public void SetRound()
@@ -43,6 +42,7 @@ public class RoundManager : MonoBehaviour
                 IncreaseRoundNumber();
             }
             SetStateTurnText();
+            MovesManager.Instance.InitMoves();
         }
     }
 

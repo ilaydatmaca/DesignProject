@@ -1,48 +1,53 @@
 
-using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class MovesManager : Singleton<MovesManager>
 {
-    public bool noMoreMoves;
+    public bool noMoreMoves = false;
+
+    public int moveNumberPerRound = 2;
+    private int _moveLeft;
+
+    public TMP_Text moveText;
+
+    private RoundManager _roundManager;
+
+    public override void Awake()
+    {
+        base.Awake();
+        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
+    }
 
     public void InitMoves()
     {
-        
-    }
-    /*public GameObject movesCounterArea;
-    public Text movesLeftText;
-    
-    public int movesLeft;
-
-    private void Start()
-    {
-        EnableMovesCounterArea();
+        noMoreMoves = false;
+        _moveLeft = moveNumberPerRound;
         UpdateMovesText();
+        SetStateMoveLeft();
+
     }
-    
-    
-    void EnableMovesCounterArea()
-    {
-        if (movesCounterArea != null)
-        {
-            movesCounterArea.SetActive(true);
-        }
-    }
-    
     public void DecreaseMoveLeft()
     {
-        movesLeft--;
-
+        _moveLeft--;
         UpdateMovesText();
+
+        if (_moveLeft == 0)
+        {
+            noMoreMoves = true;
+        }
     }
-
-
+    
     void UpdateMovesText()
     {
-        if (movesLeftText != null)
+        if (moveText != null)
         {
-            movesLeftText.text = movesLeft.ToString();
+            moveText.text = _moveLeft + " moves left";
         }
-    }*/
+    }
+
+    void SetStateMoveLeft()
+    {
+        moveText.enabled = _roundManager.turnView.IsMine;
+    }
+    
 }
