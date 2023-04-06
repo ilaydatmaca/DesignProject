@@ -59,7 +59,6 @@ public class GameManager : Singleton<GameManager>
     IEnumerator PlayGameRoutine()
     {
         RoundManager.Instance.InitRound();
-        TimeManager.Instance.paused = false;
         
         while (!_isGameOver)
         {

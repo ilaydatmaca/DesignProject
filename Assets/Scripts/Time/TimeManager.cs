@@ -47,16 +47,17 @@ public class TimeManager : Singleton<TimeManager>
     IEnumerator ResetTimerRoutine()
     {
         paused = true;
-        yield return new WaitForSeconds(waitTime);
-        
-        //Reset slider
         isTimeUp = false;
-        paused = false;
-
-        _currentTime = maxTime;
         slider.maxValue = maxTime;
         slider.value = maxTime;
-       
+        _currentTime = maxTime;
+        
+        yield return new WaitForSeconds(waitTime);
+        
+
+        //Reset slider
+        paused = false;
+
     }
     
 }
