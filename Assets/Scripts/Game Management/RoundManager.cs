@@ -12,7 +12,8 @@ public class RoundManager : Singleton<RoundManager>
     public PhotonView player1View;
     public PhotonView player2View;
     public PhotonView turnView;
-    
+
+    public bool isEnded = false;
     
     public void InitRound()
     {

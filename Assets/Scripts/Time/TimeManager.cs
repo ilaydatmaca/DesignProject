@@ -12,14 +12,7 @@ public class TimeManager : Singleton<TimeManager>
     public bool isTimeUp = false;
 
     public Slider slider;
-
-    private RoundManager _roundManager;
-
-    public override void Awake()
-    {
-        base.Awake();
-        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
-    }
+    
     
     public void Update()
     {
@@ -32,7 +25,7 @@ public class TimeManager : Singleton<TimeManager>
         if (_currentTime <= 0)
         {
             isTimeUp = true;
-            _roundManager.SetRound();
+            RoundManager.Instance.SetRound();
             ResetTimer();
         }
         if (!isTimeUp)
@@ -54,14 +47,14 @@ public class TimeManager : Singleton<TimeManager>
 
     IEnumerator ResetTimerRoutine()
     {
+        isTimeUp = false;
+        _currentTime = maxTime;
+
         yield return new WaitForSeconds(1f);
         
         //Reset slider
-        _currentTime = maxTime;
         slider.maxValue = maxTime;
         slider.value = maxTime;
-        
-        isTimeUp = false;
     }
     
 }

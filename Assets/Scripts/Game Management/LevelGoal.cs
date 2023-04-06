@@ -2,10 +2,9 @@
 
 public class LevelGoal : MonoBehaviour
 {
-
     public bool IsGameOver()
     {
-        if (RoundManager.Instance.roundNumber < RoundManager.Instance.currentRoundNumber && TimeManager.Instance.isTimeUp)
+        if (RoundManager.Instance.roundNumber < RoundManager.Instance.currentRoundNumber)
         {
             return true;
         }
