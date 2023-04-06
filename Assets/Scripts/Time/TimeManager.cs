@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class TimeManager : Singleton<TimeManager>
 {
-    public int maxTime;
-
+    public int maxTime = 10;
+    public float waitTime = 2f;
+    
     private float _currentTime;
     
     public bool paused = true;
-    public bool isTimeUp = false;
+    public bool isTimeUp;
 
     public Slider slider;
-    
     
     public void Update()
     {
@@ -26,7 +26,6 @@ public class TimeManager : Singleton<TimeManager>
         {
             isTimeUp = true;
             RoundManager.Instance.SetRound();
-            ResetTimer();
         }
         if (!isTimeUp)
         {
@@ -47,14 +46,17 @@ public class TimeManager : Singleton<TimeManager>
 
     IEnumerator ResetTimerRoutine()
     {
-        isTimeUp = false;
-        _currentTime = maxTime;
-
-        yield return new WaitForSeconds(1f);
+        paused = true;
+        yield return new WaitForSeconds(waitTime);
         
         //Reset slider
+        isTimeUp = false;
+        paused = false;
+
+        _currentTime = maxTime;
         slider.maxValue = maxTime;
         slider.value = maxTime;
+       
     }
     
 }

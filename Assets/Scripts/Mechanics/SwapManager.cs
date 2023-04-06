@@ -23,7 +23,7 @@ public class SwapManager : MonoBehaviour
 
     public void ClickCell(Cell cell)
     {
-        if(!_roundManager.turnView.IsMine || MovesManager.Instance.noMoreMoves)
+        if(!_roundManager.turnView.IsMine || MovesManager.Instance.noMoreMoves || TimeManager.Instance.paused)
             return;
         
         if (_board.clickedCell == null)

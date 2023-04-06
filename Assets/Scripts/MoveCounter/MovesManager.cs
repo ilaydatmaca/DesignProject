@@ -1,27 +1,19 @@
-
 using TMPro;
 
 public class MovesManager : Singleton<MovesManager>
 {
-    public bool noMoreMoves = false;
-
+    public bool noMoreMoves;
     public int moveNumberPerRound = 2;
+    
     private int _moveLeft;
 
     public TMP_Text moveText;
 
-    private RoundManager _roundManager;
-
-    public override void Awake()
-    {
-        base.Awake();
-        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
-    }
-
-    public void InitMoves()
+    public void Init()
     {
         noMoreMoves = false;
         _moveLeft = moveNumberPerRound;
+        
         UpdateMovesText();
         SetStateMoveLeft();
 
@@ -47,7 +39,7 @@ public class MovesManager : Singleton<MovesManager>
 
     void SetStateMoveLeft()
     {
-        moveText.enabled = _roundManager.turnView.IsMine;
+        moveText.enabled = RoundManager.Instance.turnView.IsMine;
     }
     
 }

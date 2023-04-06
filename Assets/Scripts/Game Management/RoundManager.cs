@@ -12,17 +12,15 @@ public class RoundManager : Singleton<RoundManager>
     public PhotonView player1View;
     public PhotonView player2View;
     public PhotonView turnView;
-
-    public bool isEnded = false;
     
     public void InitRound()
     {
         turnView = player1View;
         
         IncreaseRoundNumber();
-        SetStateTurnText();
-        TimeManager.Instance.ResetTimer();
-        MovesManager.Instance.InitMoves();
+        EnableRoundText();
+        EnableTurnStateText();
+        Set();
     }
 
     public void SetRound()
@@ -31,21 +29,25 @@ public class RoundManager : Singleton<RoundManager>
         {
             return;
         }
-
-        if (TimeManager.Instance.isTimeUp)
+        
+        if (turnView == player1View)
         {
-            if (turnView == player1View)
-            {
-                turnView = player2View;
-            }
-            else if (turnView == player2View)
-            {
-                turnView = player1View;
-                IncreaseRoundNumber();
-            }
-            SetStateTurnText();
-            MovesManager.Instance.InitMoves();
+            turnView = player2View;
         }
+        else if (turnView == player2View)
+        {
+            turnView = player1View;
+            IncreaseRoundNumber();
+        }
+        Set();
+    }
+    
+    void Set()
+    {
+        SetTurnStateText();
+        
+        TimeManager.Instance.ResetTimer();
+        MovesManager.Instance.Init();
     }
 
     private void IncreaseRoundNumber()
@@ -58,8 +60,26 @@ public class RoundManager : Singleton<RoundManager>
         roundText.text = "ROUND " + currentRoundNumber;
     }
 
-    private void SetStateTurnText()
+    private void EnableRoundText()
     {
-        yourTurnText.enabled = turnView.IsMine;
+        roundText.enabled = true;
+    }
+    
+    private void SetTurnStateText()
+    {
+        if (turnView.IsMine)
+        {
+            yourTurnText.text = "Your Turn";
+        }
+        else
+        {
+            yourTurnText.text = "The Opponent's Turn";
+        }
+    }
+
+    private void EnableTurnStateText()
+    {
+        yourTurnText.enabled = true;
+
     }
 }

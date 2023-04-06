@@ -8,13 +8,6 @@ public class ScoreManager : Singleton<ScoreManager>
 	public Text player1ScoreText;
 	public Text player2ScoreText;
 
-	private RoundManager _roundManager;
-	public override void Awake()
-	{
-		base.Awake();
-		_roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
-	}
-
 	void Start() 
 	{
 		UpdateScoreText();
@@ -35,16 +28,31 @@ public class ScoreManager : Singleton<ScoreManager>
 
 	public void AddScore(int value)
 	{
-		if (_roundManager.turnView == _roundManager.player1View)
+		if (RoundManager.Instance.turnView == RoundManager.Instance.player1View)
 		{
 			currentScorePlayer1 += value;
 		}
-		else if (_roundManager.turnView == _roundManager.player2View)
+		else if (RoundManager.Instance.turnView == RoundManager.Instance.player2View)
 		{
 			currentScorePlayer2 += value;
 		}
 		UpdateScoreText();
 
+	}
+
+	public int GetMyScore()
+	{
+		int myScore = 0;
+		if (RoundManager.Instance.player1View.IsMine)
+		{
+			myScore = currentScorePlayer1;
+		}
+		else if (RoundManager.Instance.player2View.IsMine)
+		{
+			myScore = currentScorePlayer2;
+		}
+
+		return myScore;
 	}
 
 }

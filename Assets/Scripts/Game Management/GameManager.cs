@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : Singleton<GameManager>
@@ -13,7 +12,6 @@ public class GameManager : Singleton<GameManager>
 
     private LevelGoal _levelGoal;
     private Board _board;
-    private RoundManager _roundManager;
 
     public override void Awake()
     {
@@ -21,7 +19,6 @@ public class GameManager : Singleton<GameManager>
 
         _levelGoal = GetComponent<LevelGoal>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
-        _roundManager = GetComponent<RoundManager>();
     }
     
     void Start()
@@ -34,7 +31,8 @@ public class GameManager : Singleton<GameManager>
         yield return StartCoroutine(StartGameRoutine());
         yield return StartCoroutine(PlayGameRoutine());
 
-        // wait for board to refill
+        
+        
         yield return StartCoroutine(WaitForBoardRoutine(0.5f));
 
         yield return StartCoroutine(EndGameRoutine());
@@ -60,7 +58,7 @@ public class GameManager : Singleton<GameManager>
     
     IEnumerator PlayGameRoutine()
     {
-        _roundManager.InitRound();
+        RoundManager.Instance.InitRound();
         TimeManager.Instance.paused = false;
         
         while (!_isGameOver)
@@ -112,8 +110,6 @@ public class GameManager : Singleton<GameManager>
         {
             yield return null;
         }
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // sahneyi yeniden yükle
     }
 
 
@@ -128,28 +124,15 @@ public class GameManager : Singleton<GameManager>
     }
 
     void ShowWinScreen()
-    {
-        if (MessageWindow.Instance != null)
-        {
-           MessageWindow.Instance.ShowWinWindow();
-        }
-
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PlayWinSound();
-        }
+    { 
+        PopupWindow.Instance.ShowWinWindow();
+        SoundManager.Instance.PlayWinSound();
     }
 
     void ShowLoseScreen()
     {
-        if (MessageWindow.Instance != null)
-        {
-            MessageWindow.Instance.ShowLoseWindow();
-        }
-        if (SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PlayLoseSound();
-        }
+        PopupWindow.Instance.ShowLoseWindow();
+        SoundManager.Instance.PlayLoseSound();
     }
 
 
