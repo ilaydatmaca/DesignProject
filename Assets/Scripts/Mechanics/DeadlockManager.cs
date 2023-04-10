@@ -7,7 +7,7 @@ public class DeadlockManager : MonoBehaviour
     private Board _board;
     private Directions _directions;
 
-    private int _matchLength = 3;
+    private readonly int _matchLength = 3;
     private void Awake()
     {
         _board = GetComponent<Board>();

@@ -101,7 +101,7 @@ public class ItemManager : MonoBehaviour
     }
     
     // find all GamePieces on the Board with a certain MatchValue
-    public List<GamePiece> FindAllMatchValue(MatchValue mValue)
+    List<GamePiece> FindAllMatchValue(MatchValue mValue)
     {
         if (_board == null)
             return null;
@@ -137,7 +137,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    // initializes any bombs created on the clicked or target tile
+    // initializes any items created on the clicked or target tile
     public void InitAllItems()
     {
         if (_board.clickedCellItem != null)

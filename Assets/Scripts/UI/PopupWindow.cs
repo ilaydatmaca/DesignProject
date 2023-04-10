@@ -15,7 +15,6 @@ public class PopupWindow : Singleton<PopupWindow>
     {
         losingScoreText.text = ScoreManager.Instance.GetMyScore().ToString();
         losingPopup.SetActive(true);
-
     }
     
     public void ShowWinWindow()

@@ -5,13 +5,11 @@ public class GamePiece : MonoBehaviour {
 	
 	public int xIndex;
 	public int yIndex;
-	
-	private bool _isMoving;
-	private readonly int _fallOffset = 10;
-	private readonly float _moveTime = 0.35f;
-
 	public MatchValue matchValue;
 
+	private bool _isMoving;
+	private readonly int _fallOffset = 10;
+	
 	public int scoreValue = 20;
 	public AudioClip clearSound;
 
@@ -27,7 +25,7 @@ public class GamePiece : MonoBehaviour {
     public void Fall()
     {
 	    transform.position = new Vector3(xIndex, yIndex + _fallOffset, 0);
-	    Move(xIndex, yIndex, _moveTime);
+	    Move(xIndex, yIndex, _board.swapTime);
     }
 
 
@@ -42,13 +40,7 @@ public class GamePiece : MonoBehaviour {
 	    yIndex = y;
     }
 
-    public bool IsSetup()
-    {
-	    Vector2 destination = new Vector2(xIndex, yIndex);
-	    return Vector2.Distance(transform.position, destination) < 0.01f;
-    }
-    
-	public void Move (int destX, int destY, float timeToMove)
+    public void Move (int destX, int destY, float timeToMove)
 	{
 		if (!_isMoving)
 		{

@@ -4,7 +4,6 @@ using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class ShuffleManager : MonoBehaviour
 {
     private Board _board;
@@ -26,7 +25,7 @@ public class ShuffleManager : MonoBehaviour
         StartCoroutine(ShuffleBoardRoutine());
     }
     
-    public IEnumerator ShuffleBoardRoutine()
+    IEnumerator ShuffleBoardRoutine()
     {
         
         List<GamePiece> allPieces = new List<GamePiece>();
@@ -47,24 +46,19 @@ public class ShuffleManager : MonoBehaviour
             ShuffleWithFisherYates();
 
             _board.photonView.RPC("RPC_FillBoardFromList", RpcTarget.All);
-            
             _board.photonView.RPC("RPC_MovePieces", RpcTarget.All);
 
         }
         
         yield return new WaitForSeconds(_board.delay);
         
-        // in the event some matches form, clear and refill the Board
         List<GamePiece> matches = _matchFinder.FindAllMatches();
-        StartCoroutine(_boardManager.BoardRoutine(matches));
-
-
+        _boardManager.BoardChecking(matches);
     }
 
 
     List<GamePiece> GetNonItems()
     {
-
         nonItems = new List<GamePiece>();
 
         int width = _board.AllGamePieces.GetLength(0);
@@ -137,7 +131,6 @@ public class ShuffleManager : MonoBehaviour
             }
         }
     }
-
 
     public void MovePieces()
     {

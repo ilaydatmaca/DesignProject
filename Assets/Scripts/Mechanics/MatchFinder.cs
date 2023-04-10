@@ -45,15 +45,12 @@ public class MatchFinder : MonoBehaviour
             {
                 break;
             }
-            // find the adjacent GamePiece and check its MatchValue...
             GamePiece nextPiece = _board.AllGamePieces[nextX, nextY];
 
             if (nextPiece == null)
             {
                 break;
             }
-
-            // ... if it matches then add it our running list of GamePieces
             if (nextPiece.matchValue == startPiece.matchValue)
             {
                 matches.Add(nextPiece);
