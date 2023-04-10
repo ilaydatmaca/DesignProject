@@ -29,6 +29,7 @@ public class PlayerView : MonoBehaviour
         if (photonView.ViewID == 1001)
         {
             _roundManager.player1View = photonView;
+            _roundManager.turnView = _roundManager.turnView;
         }
         else if (photonView.ViewID == 2001)
         {

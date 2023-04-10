@@ -20,6 +20,8 @@ public class LevelLoader : MonoBehaviour
   
     IEnumerator LoadAsynchronously (int sceneIndex)
     {
+        //yield return new WaitForSeconds(2f);
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);                        /////////IT WORKS !!!!!!!
         loadingScreen.SetActive(true);
         while (!operation.isDone)
@@ -31,6 +33,8 @@ public class LevelLoader : MonoBehaviour
 
             yield return null;
         }
+
+        yield return new WaitForSeconds(3f);
     }
 
    
