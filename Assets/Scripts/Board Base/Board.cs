@@ -7,6 +7,7 @@ public class Board : MonoBehaviour
 {
     public int width;
     public int height;
+
     public int borderSize;
 
     public GameObject cellPrefab;
@@ -14,18 +15,19 @@ public class Board : MonoBehaviour
     [HideInInspector] public GameObject clickedCellItem;
     [HideInInspector] public GameObject targetCellItem;
     
-    [HideInInspector] public Cell clickedCell;
-    [HideInInspector] public Cell targetCell;
+    public Cell clickedCell;
+    public Cell targetCell;
     
-    public Cell[,] AllTiles;
+    public Cell[,] _allTiles;
     public GamePiece[,] AllGamePieces;
     
     public bool playerInputEnabled = true;
     public bool isRefilling;
     
-    public float swapTime;
+    public float swapTime = 0.1f;
     public int scoreMultiplier;
-    public float delay;
+    public float delay = 0.4f;
+
 
     private ItemFactory _itemFactory;
     private ClearManager _clearManager;
@@ -40,7 +42,7 @@ public class Board : MonoBehaviour
 
     void Start()
     {
-        AllTiles = new Cell[width, height];
+        _allTiles = new Cell[width, height];
         AllGamePieces = new GamePiece[width, height];
     }
     
@@ -48,7 +50,9 @@ public class Board : MonoBehaviour
     {
         SetupCells();
         SetupCamera();
+
         FillBoard();
+        //_boardManager.BoardChecking(_matchFinder.FindAllMatches());
     }
     
     void SetupCells() //done
@@ -57,11 +61,11 @@ public class Board : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                if (AllTiles[x, y] == null)
+                if (_allTiles[x, y] == null)
                 {
                     GameObject tile = Instantiate(cellPrefab, Vector3.zero, Quaternion.identity, transform);
-                    AllTiles[x, y] = tile.GetComponent<Cell>();
-                    AllTiles[x, y].Init(x, y);
+                    _allTiles[x, y] = tile.GetComponent<Cell>();
+                    _allTiles[x, y].Init(x, y);
                 }
             }
         }
@@ -225,7 +229,7 @@ public class Board : MonoBehaviour
                             piecesToClear = GetRowPieces(ıtem.yIndex);
                             break;
                         case ItemType.Bomb:
-                            piecesToClear = GetAdjacentPieces(ıtem.xIndex, ıtem.yIndex);
+                            piecesToClear = GetAdjacentPieces(ıtem.xIndex, ıtem.yIndex, 1);
                             break;
                         case ItemType.Disco:
 

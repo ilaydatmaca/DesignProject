@@ -18,6 +18,9 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     public int bonusTime = 15;
 
     private Board _board;
+    private BoardManager _boardManager;
+    private ItemFactory _itemFactory;
+    private ShuffleManager _shuffleManager;
     private SoundManager _soundManager;
     private RoundManager _roundManager;
     
@@ -31,6 +34,9 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     {
         _rectform = GetComponent<RectTransform>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
+        _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
+        _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
+        _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
         _soundManager = FindObjectOfType<SoundManager>();
         _roundManager = FindObjectOfType<RoundManager>();
     }

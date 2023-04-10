@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
         StartCoroutine(BoardRoutine(gamePieces));
     }
 
-    IEnumerator BoardRoutine(List<GamePiece> gamePieces)
+    public IEnumerator BoardRoutine(List<GamePiece> gamePieces)
     {
 
         _board.playerInputEnabled = false;
@@ -66,6 +66,7 @@ public class BoardManager : MonoBehaviour
             _board.playerInputEnabled = true;
             _board.isRefilling = false;
         }
+
         
     }
 
@@ -90,6 +91,7 @@ public class BoardManager : MonoBehaviour
 
             _itemManager.InitAllItems();
 
+            
             yield return new WaitForSeconds(_board.delay);
 
             List<GamePiece> movingPieces = _fallManager.FallPieces();
@@ -131,11 +133,11 @@ public class BoardManager : MonoBehaviour
         {
             yield return new WaitForSeconds(_board.delay * 5f);
 
-            _shuffleManager.ShuffleBoard();
+            yield return StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
 
             yield return new WaitForSeconds(_board.delay * 5f);
-            
-            BoardChecking(_matchFinder.FindAllMatches());
+
+            yield return StartCoroutine(BoardRoutine(_matchFinder.FindAllMatches()));
         }
     }
     
@@ -146,7 +148,8 @@ public class BoardManager : MonoBehaviour
         if (_board.IsInBorder(x, y))
         {
             GamePiece pieceToClear = _board.AllGamePieces[x, y];
-            List<GamePiece> listOfOne = new List<GamePiece> {pieceToClear};
+            List<GamePiece> listOfOne = new List<GamePiece>();
+            listOfOne.Add(pieceToClear);
             BoardChecking(listOfOne);
         }
     }

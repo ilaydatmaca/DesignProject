@@ -2,10 +2,12 @@
 
 public class ParticleManager : MonoBehaviour
 {
+	
 	public GameObject clearFXPrefab;
 	public GameObject bombFXPrefab;
 
-	// play the clear GamePiece effect
+	
+    // play the clear GamePiece effect
 	public void ClearPieceFXAt(int x, int y, int z = 0)
 	{
 		if (clearFXPrefab != null)
@@ -22,8 +24,8 @@ public class ParticleManager : MonoBehaviour
 	}
 	
 
-    // play the item effect
-	public void ItemFXAt(int x, int y, int z = 0)
+    // play the bomb effect
+	public void BombFXAt(int x, int y, int z = 0)
 	{
 		if (bombFXPrefab !=null)
 		{

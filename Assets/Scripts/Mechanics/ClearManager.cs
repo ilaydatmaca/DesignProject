@@ -9,8 +9,9 @@ public class ClearManager : MonoBehaviour
     private void Awake()
     {
         _board = GetComponent<Board>();
-        _particleManager = FindObjectOfType<ParticleManager>().GetComponent<ParticleManager>();
+        _particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
     }
+    
 
     public void DestroyAt(int x, int y)
     {
@@ -23,7 +24,8 @@ public class ClearManager : MonoBehaviour
 
     }
 
-    public void DestroyAt(List<GamePiece> gamePieces, List<GamePiece> itemPieces)
+    // clear a list of GamePieces (plus a potential sublist of GamePieces destroyed by items)
+    public void DestroyAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces)
     {
         foreach (GamePiece piece in gamePieces)
         {
@@ -42,12 +44,15 @@ public class ClearManager : MonoBehaviour
                     GameManager.Instance.ScorePoints(piece, _board.scoreMultiplier, bonus);
                 }
 
+                // play particle effects for pieces...
                 if (_particleManager != null)
                 {
-                    if (itemPieces.Contains(piece))
+                    // ... cleared by bombs 
+                    if (bombedPieces.Contains(piece))
                     {
-                        _particleManager.ItemFXAt(piece.xIndex, piece.yIndex);
+                        _particleManager.BombFXAt(piece.xIndex, piece.yIndex);
                     }
+                    // ... cleared normally
                     else
                     {
                         _particleManager.ClearPieceFXAt(piece.xIndex, piece.yIndex);

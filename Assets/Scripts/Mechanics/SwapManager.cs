@@ -10,6 +10,7 @@ public class SwapManager : MonoBehaviour
     private BoardManager _boardManager;
     private MatchFinder _matchFinder;
     private ItemManager _itemManager;
+    private RoundManager _roundManager;
     
     private void Awake()
     {
@@ -17,11 +18,12 @@ public class SwapManager : MonoBehaviour
         _boardManager = GetComponent<BoardManager>();
         _matchFinder = GetComponent<MatchFinder>();
         _itemManager = GetComponent<ItemManager>();
+        _roundManager = FindObjectOfType<GameManager>().GetComponent<RoundManager>();
     }
 
     public void ClickCell(Cell cell)
     {
-        if(!RoundManager.Instance.turnView.IsMine || MovesManager.Instance.noMoreMoves || TimeManager.Instance.paused)
+        if(!_roundManager.turnView.IsMine || MovesManager.Instance.noMoreMoves || TimeManager.Instance.paused)
             return;
         
         if (_board.clickedCell == null)
@@ -54,8 +56,8 @@ public class SwapManager : MonoBehaviour
 
     public void SwapCells(int cell1X, int cell1Y, int cell2X, int cell2Y)
     {
-        Cell cell1 = _board.AllTiles[cell1X, cell1Y];
-        Cell cell2 = _board.AllTiles[cell2X, cell2Y];
+        Cell cell1 = _board._allTiles[cell1X, cell1Y];
+        Cell cell2 = _board._allTiles[cell2X, cell2Y];
 
         StartCoroutine(SwapCellsRoutine(cell1, cell2));
     }
@@ -98,7 +100,9 @@ public class SwapManager : MonoBehaviour
 
                     List<GamePiece> piecesToClear = cellAMatches.Union(cellBMatches).ToList().Union(colorMatches).ToList();
                     
-                    _boardManager.BoardChecking(piecesToClear);
+                    //Debug.Log("pieces " + piecesToClear.Count);
+                    yield return StartCoroutine(_boardManager.BoardRoutine(piecesToClear));
+
 
                     // otherwise, we decrement our moves left
                     if (GameManager.Instance != null)

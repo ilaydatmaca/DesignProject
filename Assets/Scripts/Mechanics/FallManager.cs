@@ -50,17 +50,12 @@ public class FallManager : MonoBehaviour
         {
             if (piece != null)
             {
-                return IsSetup(piece);
+                return piece.IsSetup();
             }
         }
+
         return true;
     }
 
-    
-    bool IsSetup(GamePiece piece)
-    {
-        Vector2 destination = new Vector2(piece.xIndex, piece.yIndex);
-        return Vector2.Distance(transform.position, destination) < 0.01f;
-    }
 
 }

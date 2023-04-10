@@ -8,6 +8,7 @@ public class ItemFactory : MonoBehaviour
     public GameObject[] rocketColumnPrefab;
     public GameObject[] rocketRowPrefab;
     public GameObject discoPrefab;
+    
     public GameObject[] cellPrefabs;
 
     private Board _board;
@@ -106,6 +107,7 @@ public class ItemFactory : MonoBehaviour
             bomb.GetComponent<Item>().Init(_board, x, y);
             return bomb;
         }
+
         return null;
     }
     

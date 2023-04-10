@@ -71,7 +71,7 @@ public class RoundManager : Singleton<RoundManager>
     
     private void SetTurnStateText()
     {
-        if(turnView.IsMine)
+        if (turnView.IsMine)
         {
             yourTurnText.text = "Your Turn";
         }
