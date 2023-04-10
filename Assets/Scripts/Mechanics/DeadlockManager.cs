@@ -118,7 +118,6 @@ public class DeadlockManager : MonoBehaviour
 
     public bool IsDeadlocked()
     {
-
         int width = _board.AllGamePieces.GetLength(0);
         int height = _board.AllGamePieces.GetLength(1);
 
@@ -126,7 +125,7 @@ public class DeadlockManager : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if (HasMoveAt(i, j, true) || 
+                if (HasMoveAt(i, j) || 
                     HasMoveAt(i, j, false))
                 {
                     return false;

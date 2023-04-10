@@ -8,7 +8,7 @@ public class GamePiece : MonoBehaviour {
 	
 	private bool _isMoving;
 	private readonly int _fallOffset = 10;
-	private readonly float _moveTime = 0.35f;
+	private readonly float _fallTime = 0.25f;
 
 	public MatchValue matchValue;
 
@@ -27,7 +27,7 @@ public class GamePiece : MonoBehaviour {
     public void Fall()
     {
 	    transform.position = new Vector3(xIndex, yIndex + _fallOffset, 0);
-	    Move(xIndex, yIndex, _moveTime);
+	    Move(xIndex, yIndex, _fallTime);
     }
 
 

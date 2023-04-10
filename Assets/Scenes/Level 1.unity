@@ -2579,6 +2579,7 @@ MonoBehaviour:
   player1View: {fileID: 0}
   player2View: {fileID: 0}
   turnView: {fileID: 0}
+  roundComplete: 0
 --- !u!1 &1013188352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4257,7 +4258,7 @@ MonoBehaviour:
   targetCell: {fileID: 0}
   playerInputEnabled: 1
   isRefilling: 0
-  swapTime: 0.25
+  swapTime: 0.2
   scoreMultiplier: 0
   delay: 0.2
   photonView: {fileID: 0}

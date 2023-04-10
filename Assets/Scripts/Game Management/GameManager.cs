@@ -30,11 +30,8 @@ public class GameManager : Singleton<GameManager>
     {
         yield return StartCoroutine(StartGameRoutine());
         yield return StartCoroutine(PlayGameRoutine());
-
-        
         
         yield return StartCoroutine(WaitForBoardRoutine(0.5f));
-
         yield return StartCoroutine(EndGameRoutine());
     }
 

@@ -26,7 +26,7 @@ public class ShuffleManager : MonoBehaviour
         StartCoroutine(ShuffleBoardRoutine());
     }
     
-    public IEnumerator ShuffleBoardRoutine()
+    IEnumerator ShuffleBoardRoutine()
     {
         
         List<GamePiece> allPieces = new List<GamePiece>();
@@ -56,9 +56,7 @@ public class ShuffleManager : MonoBehaviour
         
         // in the event some matches form, clear and refill the Board
         List<GamePiece> matches = _matchFinder.FindAllMatches();
-        StartCoroutine(_boardManager.BoardRoutine(matches));
-
-
+        _boardManager.BoardChecking(matches);
     }
 
 

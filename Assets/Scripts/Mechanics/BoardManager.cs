@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
         StartCoroutine(BoardRoutine(gamePieces));
     }
 
-    public IEnumerator BoardRoutine(List<GamePiece> gamePieces)
+    IEnumerator BoardRoutine(List<GamePiece> gamePieces)
     {
 
         _board.playerInputEnabled = false;
@@ -133,7 +133,7 @@ public class BoardManager : MonoBehaviour
         {
             yield return new WaitForSeconds(_board.delay * 5f);
 
-            yield return StartCoroutine(_shuffleManager.ShuffleBoardRoutine());
+            _shuffleManager.ShuffleBoard();
 
             yield return new WaitForSeconds(_board.delay * 5f);
 

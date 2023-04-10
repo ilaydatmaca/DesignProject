@@ -5,25 +5,25 @@ using TMPro;
 public class LoadingAnimation : MonoBehaviour
 {
     [SerializeField] private TMP_Text loadingText;
-    private int count;
-    private bool isRunning = true;
+    private int _count;
+    private bool _isRunning = true;
 
     void Update()
     {
-        if (isRunning)
+        if (_isRunning)
         {
             StartCoroutine(ChangeText());
-            if (count < 3)
+            if (_count < 3)
             {
                 loadingText.text += ".";
-                count++;
+                _count++;
             }
             else
             {
                 loadingText.text = "Loading";
-                count = 0;
+                _count = 0;
             }
-            isRunning = false;
+            _isRunning = false;
         }
     }
 
@@ -31,7 +31,7 @@ public class LoadingAnimation : MonoBehaviour
     IEnumerator ChangeText()
     {
         yield return new WaitForSeconds(1.1f);
-        isRunning = true;
+        _isRunning = true;
     }
     
    

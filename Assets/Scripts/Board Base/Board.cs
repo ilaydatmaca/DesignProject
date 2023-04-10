@@ -7,7 +7,6 @@ public class Board : MonoBehaviour
 {
     public int width;
     public int height;
-
     public int borderSize;
 
     public GameObject cellPrefab;
@@ -24,14 +23,12 @@ public class Board : MonoBehaviour
     public bool playerInputEnabled = true;
     public bool isRefilling;
     
-    public float swapTime = 0.1f;
+    public float swapTime;
     public int scoreMultiplier;
-    public float delay = 0.4f;
-
+    public float delay;
 
     private ItemFactory _itemFactory;
     private ClearManager _clearManager;
-
     public PhotonView photonView;
 
     private void Awake()
@@ -50,9 +47,7 @@ public class Board : MonoBehaviour
     {
         SetupCells();
         SetupCamera();
-
         FillBoard();
-        //_boardManager.BoardChecking(_matchFinder.FindAllMatches());
     }
     
     void SetupCells() //done
@@ -229,7 +224,7 @@ public class Board : MonoBehaviour
                             piecesToClear = GetRowPieces(ıtem.yIndex);
                             break;
                         case ItemType.Bomb:
-                            piecesToClear = GetAdjacentPieces(ıtem.xIndex, ıtem.yIndex, 1);
+                            piecesToClear = GetAdjacentPieces(ıtem.xIndex, ıtem.yIndex);
                             break;
                         case ItemType.Disco:
 

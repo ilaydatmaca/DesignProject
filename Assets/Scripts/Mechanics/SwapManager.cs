@@ -101,7 +101,7 @@ public class SwapManager : MonoBehaviour
                     List<GamePiece> piecesToClear = cellAMatches.Union(cellBMatches).ToList().Union(colorMatches).ToList();
                     
                     //Debug.Log("pieces " + piecesToClear.Count);
-                    yield return StartCoroutine(_boardManager.BoardRoutine(piecesToClear));
+                    _boardManager.BoardChecking(piecesToClear);
 
 
                     // otherwise, we decrement our moves left

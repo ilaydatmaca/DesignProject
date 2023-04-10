@@ -100,8 +100,7 @@ public class ItemManager : MonoBehaviour
         return colorMatches;
     }
     
-    // find all GamePieces on the Board with a certain MatchValue
-    public List<GamePiece> FindAllMatchValue(MatchValue mValue)
+    List<GamePiece> FindAllMatchValue(MatchValue mValue)
     {
         if (_board == null)
             return null;
@@ -125,7 +124,6 @@ public class ItemManager : MonoBehaviour
     }
     
 
-    // puts the bomb into the game Board and treats it as a normal GamePiece
     public void InitItem(GameObject item)
     {
         int x = item.GetComponent<GamePiece>().xIndex;
@@ -137,7 +135,6 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    // initializes any bombs created on the clicked or target tile
     public void InitAllItems()
     {
         if (_board.clickedCellItem != null)
