@@ -57,7 +57,6 @@ public class BoardManager : MonoBehaviour
 
         if (_matchFinder.FindAllMatches().Count > 0)
         {
-            Debug.Log(_matchFinder.FindAllMatches().Count);
             BoardChecking(_matchFinder.FindAllMatches());
         }
         else
@@ -69,8 +68,7 @@ public class BoardManager : MonoBehaviour
 
         
     }
-
-
+    
     IEnumerator ClearAndFallRoutine(List<GamePiece> gamePieces)
     {
 
@@ -128,7 +126,6 @@ public class BoardManager : MonoBehaviour
     private IEnumerator DeadlockCheck()
     {
         // deadlock check
-        
         if (_deadlockManager.IsDeadlocked())
         {
             yield return new WaitForSeconds(_board.delay * 5f);

@@ -84,7 +84,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable && _roundManager.turnView.IsMine)
+        if (isEnabled && isDraggable)
         {
             Vector3 onscreenPosition;
             RectTransformUtility.ScreenPointToWorldPointInRectangle(_rectform, eventData.position, 
@@ -100,7 +100,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     // frame where we end drag
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isEnabled && isDraggable && _roundManager.turnView.IsMine)
+        if (isEnabled && isDraggable)
         {
             gameObject.transform.position = _startPosition;
 

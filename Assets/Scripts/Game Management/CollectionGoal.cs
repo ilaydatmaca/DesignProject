@@ -8,6 +8,8 @@ public class CollectionGoal : MonoBehaviour
     private int _countGoal = 6;
 
     private MatchValue _matchValue;
+
+    private bool _canUseBooster = false;
     private void Start()
     {
         if (RoundManager.Instance.player1View.IsMine)
@@ -24,7 +26,14 @@ public class CollectionGoal : MonoBehaviour
     {
         if (RoundManager.Instance.turnView.IsMine && matchValue == _matchValue)
         {
-            _countGoal = 6;
+            _countGoal--;
+
+            if (_countGoal == 0)
+            {
+                _canUseBooster = true;
+                _countGoal = 6;
+            }
+
         }
     }
 }
