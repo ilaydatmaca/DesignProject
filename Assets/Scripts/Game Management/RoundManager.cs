@@ -12,6 +12,8 @@ public class RoundManager : Singleton<RoundManager>
     public PhotonView player1View;
     public PhotonView player2View;
     public PhotonView turnView;
+
+    public bool roundComplete;
     
     public void InitRound()
     {
@@ -26,8 +28,9 @@ public class RoundManager : Singleton<RoundManager>
 
     public void SetRound()
     {
-        if (currentRoundNumber > roundNumber)
+        if (currentRoundNumber == roundNumber && turnView == player2View)
         {
+            roundComplete = true;
             return;
         }
         

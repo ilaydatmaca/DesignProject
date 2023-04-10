@@ -4,7 +4,7 @@ public class LevelGoal : MonoBehaviour
 {
     public bool IsGameOver()
     {
-        if (RoundManager.Instance.roundNumber < RoundManager.Instance.currentRoundNumber)
+        if (RoundManager.Instance.roundComplete)
         {
             return true;
         }
