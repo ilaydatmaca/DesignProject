@@ -19,8 +19,9 @@ public class RoundManager : Singleton<RoundManager>
         
         IncreaseRoundNumber();
         EnableRoundText();
-        EnableTurnStateText();
         Set();
+        EnableTurnStateText();
+
     }
 
     public void SetRound()

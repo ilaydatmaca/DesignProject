@@ -2215,7 +2215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTime: 10
-  waitTime: 5
+  waitTime: 1.2
   paused: 1
   isTimeUp: 0
   slider: {fileID: 7752918358404567173}
