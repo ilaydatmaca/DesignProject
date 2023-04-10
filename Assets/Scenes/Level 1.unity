@@ -4258,7 +4258,7 @@ MonoBehaviour:
   targetCell: {fileID: 0}
   playerInputEnabled: 1
   isRefilling: 0
-  swapTime: 0.2
+  swapTime: 0.1
   scoreMultiplier: 0
   delay: 0.2
   photonView: {fileID: 0}
