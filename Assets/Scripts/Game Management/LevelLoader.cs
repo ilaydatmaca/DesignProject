@@ -20,10 +20,14 @@ public class LevelLoader : MonoBehaviour
   
     IEnumerator LoadAsynchronously (int sceneIndex)
     {
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);                        /////////IT WORKS !!!!!!!
+        SceneManager.LoadScene(sceneIndex);
+
+        /*AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);         
         loadingScreen.SetActive(true);
+        
+        /////////IT WORKS !!!!!!!
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
@@ -32,9 +36,8 @@ public class LevelLoader : MonoBehaviour
             progressText.text = progress * 100f + "%";
 
             yield return null;
-        }
+        }*/
 
-        yield return new WaitForSeconds(3f);
     }
 
    

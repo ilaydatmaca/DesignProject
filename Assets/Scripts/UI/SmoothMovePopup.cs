@@ -4,6 +4,7 @@ using UnityEngine;
 public class SmoothMovePopup : MonoBehaviour
 {
     RectTransform _rectTransform;
+    private float _speed = 2f;
 
     private void Awake()
     {
@@ -13,18 +14,21 @@ public class SmoothMovePopup : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SmoothTranslation(5f));
+        StartCoroutine(SmoothTranslation());
     }
 
 
-    IEnumerator SmoothTranslation( float speed)
+    IEnumerator SmoothTranslation()
     {
-        Vector3 target = new Vector3(_rectTransform.position.x, 180, _rectTransform.position.z);
+        Vector3 target = new Vector3(_rectTransform.anchoredPosition.x, 0);
 
-        while (_rectTransform.position.y - target.y >= 0.2f) {
-            _rectTransform.position = Vector3.Lerp (_rectTransform.position, target, Time.deltaTime * speed);
-            yield return null;
-        }        
+        while (Vector3.Distance(target, _rectTransform.anchoredPosition) > 0.1f)
+        {
+            _rectTransform.anchoredPosition = Vector3.Lerp (_rectTransform.anchoredPosition, target, Time.deltaTime * _speed);
+
+        }
+
+        yield return null;
     }
 
 
