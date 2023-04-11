@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CollectionGoal : MonoBehaviour
@@ -9,7 +7,9 @@ public class CollectionGoal : MonoBehaviour
 
     private MatchValue _matchValue;
 
-    private bool _canUseBooster = false;
+    public bool canUseBooster;
+
+    public TMP_Text goalText;
     private void Start()
     {
         if (RoundManager.Instance.player1View.IsMine)
@@ -30,10 +30,15 @@ public class CollectionGoal : MonoBehaviour
 
             if (_countGoal == 0)
             {
-                _canUseBooster = true;
+                canUseBooster = true;
                 _countGoal = 6;
             }
-
+            UpdateGoalText();
         }
+    }
+
+    private void UpdateGoalText()
+    {
+        goalText.text = _countGoal.ToString();
     }
 }
