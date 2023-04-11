@@ -118,7 +118,7 @@ public class ShuffleManager : MonoBehaviour
         {
             for (int j = 0; j < _board.height; j++)
             {
-                if (_board.AllGamePieces[i, j] == null)
+                if (_board.AllGamePieces[i, j] == null && unusedPieces.Count != 0)
                 {
                     _board.AllGamePieces[i, j] = unusedPieces.Dequeue();
                     

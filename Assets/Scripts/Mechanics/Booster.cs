@@ -123,46 +123,53 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
             }
         }
     }
-
-    public void RemoveOneGamePiece()
-    {
-        if (_targetCell != null && boosterCount > 0 && CollectionGoal.Instance.canUseBooster)
-        {
-            _board.photonView.RPC("RPC_RemoveOneGamePiece", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            UpdateText();
-            CollectionGoal.Instance.canUseBooster = false;
-        }
-    }
-
-    public void AddTime()
-    {
-        if (boosterCount > 0 && _roundManager.turnView.IsMine && CollectionGoal.Instance.canUseBooster)
-        {
-            _board.photonView.RPC("RPC_AddTime", RpcTarget.AllBuffered, bonusTime);
-            UpdateText();
-            CollectionGoal.Instance.canUseBooster = false;
-        }
-    }
-
+    
     public void DropColorBomb()
     {
-        if (_targetCell != null && boosterCount > 0 && CollectionGoal.Instance.canUseBooster)
+        if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            UpdateText();
+            //UpdateText();
             CollectionGoal.Instance.canUseBooster = false;
 
         }
     }
     
-        
+    public void RocketBooster()
+    {
+        if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
+        {
+            _board.photonView.RPC("RPC_RemoveColumn", RpcTarget.AllBuffered, _targetCell.xIndex);
+            //UpdateText();
+            CollectionGoal.Instance.canUseBooster = false;
+
+        }
+    }
     public void ShuffleBoard()
     {
-        if (boosterCount > 0 && _roundManager.turnView.IsMine && CollectionGoal.Instance.canUseBooster)
+        if (boosterCount > 0 && _roundManager.turnView.IsMine)
         {
             _board.photonView.RPC("RPC_Shuffle", RpcTarget.AllBuffered);
             UpdateText();
-            CollectionGoal.Instance.canUseBooster = false;
+        }
+    }
+    
+    public void RemoveOneGamePiece()
+    {
+        if (_targetCell != null && boosterCount > 0)
+        {
+            _board.photonView.RPC("RPC_RemoveOneGamePiece", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
+            UpdateText();
+        }
+    }
+
+    
+    public void AddTime()
+    {
+        if (_roundManager.turnView.IsMine && boosterCount > 0)
+        {
+            _board.photonView.RPC("RPC_AddTime", RpcTarget.AllBuffered, bonusTime);
+            UpdateText();
         }
     }
 

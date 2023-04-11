@@ -5,11 +5,14 @@ public class ClearManager : MonoBehaviour
 {
     private Board _board;
     private ParticleManager _particleManager;
+    private BoardManager _boardManager;
 
     private void Awake()
     {
         _board = GetComponent<Board>();
         _particleManager = FindObjectOfType<ParticleManager>().GetComponent<ParticleManager>();
+        _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
+
     }
     
 
@@ -23,6 +26,15 @@ public class ClearManager : MonoBehaviour
             Destroy(pieceToClear.gameObject);
         }
     }
+    
+    
+    public void RemoveColumns(int y)
+    {
+        List<GamePiece> list = _board.GetColumnPieces(y);
+
+        _boardManager.BoardChecking(list);
+    }
+
 
     public void DestroyAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces)
     {

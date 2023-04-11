@@ -53,7 +53,7 @@ public class BoardManager : MonoBehaviour
 
         }
         
-        yield return StartCoroutine(RefillRoutine());
+        Refill();
 
         if (_matchFinder.FindAllMatches().Count > 0)
         {
@@ -150,8 +150,11 @@ public class BoardManager : MonoBehaviour
             BoardChecking(listOfOne);
         }
     }
-    
-    
+
+    public void Refill()
+    {
+        StartCoroutine(RefillRoutine());
+    }
     // coroutine to refill the Board
     IEnumerator RefillRoutine()
     {

@@ -80,7 +80,7 @@ public class Board : MonoBehaviour
     }
     
     
-    public void FillBoard() //done
+    public void FillBoard()
     {
         if(PhotonNetwork.IsMasterClient)
         {
@@ -167,7 +167,7 @@ public class Board : MonoBehaviour
         return gamePieces;
     }
 
-    List<GamePiece> GetColumnPieces(int column)
+    public List<GamePiece> GetColumnPieces(int column)
     {
         List<GamePiece> gamePieces = new List<GamePiece>();
 
@@ -180,7 +180,7 @@ public class Board : MonoBehaviour
         }
         return gamePieces;
     }
-
+    
     List<GamePiece> GetAdjacentPieces(int x, int y, int offset = 1)
     {
         List<GamePiece> gamePieces = new List<GamePiece>();
@@ -236,6 +236,8 @@ public class Board : MonoBehaviour
         }
         return allPiecesToClear;
     }
+    
+    
     
 
 }
