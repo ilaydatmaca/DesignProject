@@ -1,44 +1,63 @@
 using TMPro;
 using UnityEngine;
 
-public class CollectionGoal : MonoBehaviour
+public class CollectionGoal : Singleton<CollectionGoal>
 {
-    private int _countGoal = 6;
+    private int _countGoalPlayer1 = 6;
+    private int _countGoalPlayer2 = 6;
 
-    private MatchValue _matchValue;
+    private MatchValue _matchValue1 = MatchValue.Blue;
+    private MatchValue _matchValue2 = MatchValue.Red;
 
     public bool canUseBooster;
 
-    public TMP_Text goalText;
-    private void Start()
+    public TMP_Text player1GoalText;
+    public TMP_Text player2GoalText;
+    
+    
+    public void UpdateGoal(MatchValue matchValue)
     {
-        if (RoundManager.Instance.player1View.IsMine)
+        if (RoundManager.Instance.turnView == RoundManager.Instance.player1View && matchValue == _matchValue1)
         {
-            _matchValue = MatchValue.Blue;
-        }
-        else if (RoundManager.Instance.player2View.IsMine)
-        {
-            _matchValue = MatchValue.Red;
-        }
-    }
-
-    private void UpdateGoal(MatchValue matchValue)
-    {
-        if (RoundManager.Instance.turnView.IsMine && matchValue == _matchValue)
-        {
-            _countGoal--;
-
-            if (_countGoal == 0)
+            _countGoalPlayer1--;
+            
+            if (_countGoalPlayer1 == 0)
             {
-                canUseBooster = true;
-                _countGoal = 6;
+                _countGoalPlayer1 = 6;
+                if (RoundManager.Instance.turnView.IsMine)
+                {
+                    canUseBooster = true;
+                }
             }
-            UpdateGoalText();
+
         }
+        else if (RoundManager.Instance.turnView == RoundManager.Instance.player2View && matchValue == _matchValue2)
+        {
+            _countGoalPlayer2--;
+            
+            if (_countGoalPlayer2 == 0)
+            {
+                _countGoalPlayer2 = 6;
+                if (RoundManager.Instance.turnView.IsMine)
+                {
+                    canUseBooster = true;
+                }
+            }
+
+        }
+        UpdateGoalText();
+        
     }
 
     private void UpdateGoalText()
     {
-        goalText.text = _countGoal.ToString();
+        if (player1GoalText != null)
+        {
+            player1GoalText.text = _countGoalPlayer1.ToString() + " / 6";
+        }
+        if (player2GoalText != null)
+        {
+            player2GoalText.text = _countGoalPlayer2.ToString() + " / 6";
+        }
     }
 }

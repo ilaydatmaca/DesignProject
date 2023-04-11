@@ -17,10 +17,7 @@ public class PlayerView : MonoBehaviour
         _board = FindObjectOfType<Board>().GetComponent<Board>();
         _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
-    }
-
-    private void Start()
-    {
+        
         PhotonNetwork.AutomaticallySyncScene = true;
         photonView = GetComponent<PhotonView>();
 

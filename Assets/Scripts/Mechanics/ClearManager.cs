@@ -16,12 +16,12 @@ public class ClearManager : MonoBehaviour
     public void DestroyAt(int x, int y)
     {
         GamePiece pieceToClear = _board.AllGamePieces[x, y];
+
         if (pieceToClear != null)
         {
             _board.AllGamePieces[x, y] = null;
             Destroy(pieceToClear.gameObject);
         }
-
     }
 
     public void DestroyAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces)
@@ -30,6 +30,9 @@ public class ClearManager : MonoBehaviour
         {
             if (piece != null)
             {
+                GamePiece pieceToClear = _board.AllGamePieces[piece.xIndex, piece.yIndex];
+                CollectionGoal.Instance.UpdateGoal(pieceToClear.matchValue);
+                
                 DestroyAt(piece.xIndex, piece.yIndex);
 
                 int bonus = 0;

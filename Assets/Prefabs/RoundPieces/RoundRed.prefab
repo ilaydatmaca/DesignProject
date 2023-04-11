@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xIndex: 0
   yIndex: 0
-  matchValue: 6
+  matchValue: 3
   scoreValue: 20
   clearSound: {fileID: 8300000, guid: 6dce900c6b57748dbb2ee112588b2bd9, type: 3}
 --- !u!1 &1900896272963172
