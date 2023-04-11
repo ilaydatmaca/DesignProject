@@ -7,10 +7,12 @@ public class PopupWindow : Singleton<PopupWindow>
     
     public GameObject losingPopup;
     public GameObject winningPopup;
-
+    public GameObject drawPopup;
+    
     public TMP_Text losingScoreText;
     public TMP_Text winningScoreText;
-    
+    public TMP_Text drawScoreText;
+
     public void ShowLoseWindow()
     {
         losingScoreText.text = ScoreManager.Instance.GetMyScore().ToString();
@@ -22,6 +24,12 @@ public class PopupWindow : Singleton<PopupWindow>
     {
         winningScoreText.text = ScoreManager.Instance.GetMyScore().ToString();
         winningPopup.SetActive(true);
+    }
+    
+    public void ShowDrawWindow()
+    {
+        drawScoreText.text = ScoreManager.Instance.GetMyScore().ToString();
+        drawPopup.SetActive(true);
     }
 
     public void Restart()

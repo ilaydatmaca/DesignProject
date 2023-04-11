@@ -169,8 +169,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   losingPopup: {fileID: 479439332}
   winningPopup: {fileID: 7098200962605640056}
+  drawPopup: {fileID: 1891147340}
   losingScoreText: {fileID: 378722497}
   winningScoreText: {fileID: 7098200962894770295}
+  drawScoreText: {fileID: 1556170438}
 --- !u!1 &85083426
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,7 +4083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f0d08c4c0964f0e80be5d4707ef853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundNumber: 5
+  roundNumber: 1
   currentRoundNumber: 0
   roundText: {fileID: 1878684183}
   yourTurnText: {fileID: 285338573}

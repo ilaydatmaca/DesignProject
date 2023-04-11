@@ -5,7 +5,7 @@ public class GameManager : Singleton<GameManager>
 {
     private bool _isPlayerReady;
     private bool _isGameOver;
-    private bool _isWinner;
+    private GameState _gameState;
     private bool _isReadyToReload;
 
     public bool IsGameOver { get; }
@@ -60,7 +60,7 @@ public class GameManager : Singleton<GameManager>
         while (!_isGameOver)
         {
             _isGameOver = _levelGoal.IsGameOver();
-            _isWinner = _levelGoal.IsWinner();
+            _gameState = _levelGoal.IsWinner();
 
             yield return null;
         }
@@ -91,13 +91,17 @@ public class GameManager : Singleton<GameManager>
     {
         _isReadyToReload = false;
 
-        if (_isWinner)
+        if (_gameState == GameState.Win)
         {
             ShowWinScreen();
         } 
-        else
+        else if (_gameState == GameState.Lose)
         {   
             ShowLoseScreen();
+        }
+        else
+        {
+            ShowDrawScreen();
         }
 
         yield return new WaitForSeconds(1f);
@@ -131,6 +135,11 @@ public class GameManager : Singleton<GameManager>
         SoundManager.Instance.PlayLoseSound();
     }
 
+    void ShowDrawScreen()
+    {
+        PopupWindow.Instance.ShowDrawWindow();
+        SoundManager.Instance.PlayLoseSound();
+    }
 
     public void ScorePoints(GamePiece piece, int multiplier = 1, int bonus = 0)
     {
