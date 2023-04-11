@@ -4,7 +4,7 @@ using UnityEngine;
 public class SmoothMovePopup : MonoBehaviour
 {
     RectTransform _rectTransform;
-    private float _speed = 2f;
+    private float _speed = 0.5f;
 
     private void Awake()
     {

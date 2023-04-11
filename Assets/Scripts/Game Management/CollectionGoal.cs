@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CollectionGoal : Singleton<CollectionGoal>
 {
-    private int _countGoalPlayer1 = 6;
-    private int _countGoalPlayer2 = 6;
+    private int _countGoalPlayer1;
+    private int _countGoalPlayer2;
 
     private MatchValue _matchValue1 = MatchValue.Blue;
     private MatchValue _matchValue2 = MatchValue.Red;
@@ -19,11 +19,11 @@ public class CollectionGoal : Singleton<CollectionGoal>
     {
         if (RoundManager.Instance.turnView == RoundManager.Instance.player1View && matchValue == _matchValue1)
         {
-            _countGoalPlayer1--;
+            _countGoalPlayer1++;
             
-            if (_countGoalPlayer1 == 0)
+            if (_countGoalPlayer1 == 6)
             {
-                _countGoalPlayer1 = 6;
+                _countGoalPlayer1 = 0;
                 if (RoundManager.Instance.turnView.IsMine)
                 {
                     canUseBooster = true;
@@ -33,11 +33,11 @@ public class CollectionGoal : Singleton<CollectionGoal>
         }
         else if (RoundManager.Instance.turnView == RoundManager.Instance.player2View && matchValue == _matchValue2)
         {
-            _countGoalPlayer2--;
+            _countGoalPlayer2++;
             
-            if (_countGoalPlayer2 == 0)
+            if (_countGoalPlayer2 == 6)
             {
-                _countGoalPlayer2 = 6;
+                _countGoalPlayer2 = 0;
                 if (RoundManager.Instance.turnView.IsMine)
                 {
                     canUseBooster = true;
