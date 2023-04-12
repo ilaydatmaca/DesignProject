@@ -15,7 +15,7 @@ public class RoundManager : Singleton<RoundManager>
 
     public bool roundComplete;
 
-    public float waitTimeForRounds = 1.5f;
+    public float waitTimeForRounds = 2f;
     public void InitRound()
     {
         IncreaseRoundNumber();
@@ -25,14 +25,15 @@ public class RoundManager : Singleton<RoundManager>
         EnableRoundText();
     }
 
-    public void UpdateRound()
+    public void CheckAllRoundsComplete()
     {
         if (currentRoundNumber == roundNumber && turnView == player2View)
         {
             roundComplete = true;
-            return;
         }
-        
+    }
+    public void UpdateRound()
+    {
         if (turnView == player1View)
         {
             turnView = player2View;

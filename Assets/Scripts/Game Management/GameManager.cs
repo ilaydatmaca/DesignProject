@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -63,7 +64,10 @@ public class GameManager : Singleton<GameManager>
         paused = false;
         RoundManager.Instance.InitRound();
         MovesManager.Instance.Init();
-        PhotonTimer.SetStartTime();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonTimer.SetStartTime();
+        }
 
         while (!_isGameOver)
         {

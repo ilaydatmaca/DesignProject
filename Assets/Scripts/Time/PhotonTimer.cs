@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Photon.Pun;
 using TMPro;
@@ -18,7 +19,15 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     public float maxTime = 30f;
     public TMP_Text Text;
     public Slider slider;
-    
+
+    private Board _board;
+    private ClearManager _clearManager;
+    private void Awake()
+    {
+        _board = FindObjectOfType<Board>().GetComponent<Board>();
+        _clearManager = FindObjectOfType<ClearManager>().GetComponent<ClearManager>();
+    }
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -29,9 +38,10 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     
     public void Update()
     {
-        if (!isTimerRunning) return;
+        if (!isTimerRunning || GameManager.Instance.paused || RoundManager.Instance.roundComplete) return;
         
         _currentTime = TimeRemaining();
+        Text.text = _currentTime.ToString();
         slider.value = _currentTime;
 
         if (MovesManager.Instance.noMoreMoves)
@@ -66,13 +76,26 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     IEnumerator CoroutineTime()
     {
         GameManager.Instance.paused = true;
+        
+        while (_board.isRefilling && !_board.playerInputEnabled)
+        {
+            yield return null;
+        }
+
+        RoundManager.Instance.CheckAllRoundsComplete();
+        
+        yield return new WaitForSeconds(RoundManager.Instance.waitTimeForRounds);
+
         ResetTime();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SetStartTime();
+        }
+        
+        RoundManager.Instance.UpdateRound();
         MovesManager.Instance.Init();
 
-        yield return new WaitForSeconds(RoundManager.Instance.waitTimeForRounds);
-        
-        SetStartTime();
-        RoundManager.Instance.UpdateRound();
         GameManager.Instance.paused = false;
     }
     

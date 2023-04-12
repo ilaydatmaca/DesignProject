@@ -8,7 +8,7 @@ public class GamePiece : MonoBehaviour {
 	
 	private bool _isMoving;
 	private readonly int _fallOffset = 10;
-	private readonly float _fallTime = 0.25f;
+	private readonly float _fallTime = 0.2f;
 
 	public MatchValue matchValue;
 
@@ -79,7 +79,6 @@ public class GamePiece : MonoBehaviour {
 			{
 				elapsedTime += Time.deltaTime;
 
-				// calculate the Lerp value
 				float t = Mathf.Clamp(elapsedTime / timeToMove, 0f, 1f);
 				t =  t*t*t*(t*(t*6 - 15) + 10);
 				
