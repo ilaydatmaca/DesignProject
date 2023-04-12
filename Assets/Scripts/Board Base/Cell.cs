@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Cell : MonoBehaviour {
 
 	[HideInInspector] public int xIndex;
@@ -20,23 +19,22 @@ public class Cell : MonoBehaviour {
 		
 		transform.position = new Vector3(x, y, 0);
 		UpdateLabel();
-
 	}
 	
 	void UpdateLabel()
 	{
 		var cellName = "Cell " + xIndex + "," + yIndex;
 		gameObject.name = cellName;
-
 	}
+	
 	void OnMouseDown()
 	{
 		if (_swapManager !=null)
 		{
 			_swapManager.ClickCell(this);
 		}
-
 	}
+	
 	void OnMouseEnter()
 	{
 		if (_swapManager !=null)
@@ -44,6 +42,7 @@ public class Cell : MonoBehaviour {
 			_swapManager.DragCell(this);
 		}
 	}
+	
 	void OnMouseUp()
 	{
 		if (_swapManager !=null)

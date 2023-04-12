@@ -26,17 +26,11 @@ public class LoadingAnimation : MonoBehaviour
             _isRunning = false;
         }
     }
-
     
     IEnumerator ChangeText()
     {
         yield return new WaitForSeconds(1.1f);
         _isRunning = true;
     }
-    
-   
 
-
-
-   
 }

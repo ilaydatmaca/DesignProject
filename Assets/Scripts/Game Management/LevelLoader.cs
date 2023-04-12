@@ -26,7 +26,6 @@ public class LevelLoader : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);         
         loadingScreen.SetActive(true);
         
-        /////////IT WORKS !!!!!!!
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
@@ -38,6 +37,4 @@ public class LevelLoader : MonoBehaviour
         }
 
     }
-
-   
 }

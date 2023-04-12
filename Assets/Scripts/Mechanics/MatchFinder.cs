@@ -11,8 +11,7 @@ public class MatchFinder : MonoBehaviour
         _board = GetComponent<Board>();
     }
 
-
-    // general method to find matches, defaulting to a minimum of three-in-a-row, passing in an (x,y) position and direction
+    
     List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection)
     {
         HashSet<GamePiece> matches = new HashSet<GamePiece>();

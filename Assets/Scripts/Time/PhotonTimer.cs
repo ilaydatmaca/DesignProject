@@ -67,12 +67,12 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     {
         GameManager.Instance.paused = true;
         ResetTime();
-        RoundManager.Instance.UpdateRound();
         MovesManager.Instance.Init();
 
         yield return new WaitForSeconds(RoundManager.Instance.waitTimeForRounds);
         
         SetStartTime();
+        RoundManager.Instance.UpdateRound();
         GameManager.Instance.paused = false;
     }
     

@@ -26,7 +26,6 @@ public class PlayerView : MonoBehaviour
         {
             RoundManager.Instance.player1View = photonView;
             RoundManager.Instance.turnView = photonView;
-            Debug.Log(RoundManager.Instance.turnView);
         }
         else if (photonView.ViewID == 2001)
         {

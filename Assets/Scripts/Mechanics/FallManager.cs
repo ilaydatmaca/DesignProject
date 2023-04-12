@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Linq;
 
-
 public class FallManager : MonoBehaviour
 {
     private Board _board;

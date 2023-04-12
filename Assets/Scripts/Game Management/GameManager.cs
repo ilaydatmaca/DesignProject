@@ -5,10 +5,11 @@ public class GameManager : Singleton<GameManager>
 {
     private bool _isPlayerReady;
     private bool _isGameOver;
-    private GameState _gameState;
     private bool _isReadyToReload;
 
-    public bool IsGameOver { get; }
+    private GameState _gameState;
+
+    public bool IsGameOver;
 
     private LevelGoal _levelGoal;
     private Board _board;
@@ -60,9 +61,10 @@ public class GameManager : Singleton<GameManager>
     IEnumerator PlayGameRoutine()
     {
         paused = false;
-        PhotonTimer.SetStartTime();
         RoundManager.Instance.InitRound();
-        
+        MovesManager.Instance.Init();
+        PhotonTimer.SetStartTime();
+
         while (!_isGameOver)
         {
             _isGameOver = _levelGoal.IsGameOver();
@@ -149,12 +151,10 @@ public class GameManager : Singleton<GameManager>
         {
             if (ScoreManager.Instance != null)
             {
-                // score points
                 int addingScore = piece.scoreValue * multiplier + bonus;
                 ScoreManager.Instance.AddScore(addingScore);
             }
 
-            // play scoring sound clip
             if (SoundManager.Instance != null && piece.clearSound != null)
             {
                 SoundManager.Instance.PlayClipAtPoint(piece.clearSound, Vector3.zero, SoundManager.Instance.fxVolume);

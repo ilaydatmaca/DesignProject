@@ -14,8 +14,8 @@ public class Board : MonoBehaviour
     [HideInInspector] public GameObject clickedCellItem;
     [HideInInspector] public GameObject targetCellItem;
     
-    public Cell clickedCell;
-    public Cell targetCell;
+    [HideInInspector] public Cell clickedCell;
+    [HideInInspector] public Cell targetCell;
     
     public Cell[,] _allTiles;
     public GamePiece[,] AllGamePieces;
@@ -46,10 +46,14 @@ public class Board : MonoBehaviour
     public void SetupBoard()
     {
         SetupCells();
-        SetupCamera();
         FillBoard();
     }
-    
+
+    private void LateUpdate()
+    {
+        SetupCamera();
+    }
+
     void SetupCells() //done
     {
         for (int x = 0; x < width; x++)

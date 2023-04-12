@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEngine;
 
 public class CollectionGoal : Singleton<CollectionGoal>
 {
@@ -53,11 +52,11 @@ public class CollectionGoal : Singleton<CollectionGoal>
     {
         if (player1GoalText != null)
         {
-            player1GoalText.text = _countGoalPlayer1.ToString() + " / 6";
+            player1GoalText.text = _countGoalPlayer1 + " / 6";
         }
         if (player2GoalText != null)
         {
-            player2GoalText.text = _countGoalPlayer2.ToString() + " / 6";
+            player2GoalText.text = _countGoalPlayer2 + " / 6";
         }
     }
 }

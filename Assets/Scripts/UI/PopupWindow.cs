@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class PopupWindow : Singleton<PopupWindow>
 {
-    
     public GameObject losingPopup;
     public GameObject winningPopup;
     public GameObject drawPopup;
@@ -17,7 +16,6 @@ public class PopupWindow : Singleton<PopupWindow>
     {
         losingScoreText.text = ScoreManager.Instance.GetMyScore().ToString();
         losingPopup.SetActive(true);
-
     }
     
     public void ShowWinWindow()

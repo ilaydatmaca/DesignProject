@@ -4,15 +4,14 @@ using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class ShuffleManager : MonoBehaviour
 {
+    private List<GamePiece> _nonItems;
+
     private Board _board;
     private BoardManager _boardManager;
     private MatchFinder _matchFinder;
     private FallManager _fallManager;
-    public List<GamePiece> nonItems;
-
     private void Awake()
     {
         _board = GetComponent<Board>();
@@ -40,21 +39,18 @@ public class ShuffleManager : MonoBehaviour
             yield return null;
         }
 
-        nonItems = GetNonItems();
+        _nonItems = GetNonItems();
 
         if (PhotonNetwork.IsMasterClient)
         {
             ShuffleWithFisherYates();
 
             _board.photonView.RPC("RPC_FillBoardFromList", RpcTarget.All);
-            
             _board.photonView.RPC("RPC_MovePieces", RpcTarget.All);
-
         }
         
         yield return new WaitForSeconds(_board.delay);
         
-        // in the event some matches form, clear and refill the Board
         List<GamePiece> matches = _matchFinder.FindAllMatches();
         _boardManager.BoardChecking(matches);
     }
@@ -63,7 +59,7 @@ public class ShuffleManager : MonoBehaviour
     List<GamePiece> GetNonItems()
     {
 
-        nonItems = new List<GamePiece>();
+        _nonItems = new List<GamePiece>();
 
         int width = _board.AllGamePieces.GetLength(0);
         int height = _board.AllGamePieces.GetLength(1);
@@ -78,18 +74,18 @@ public class ShuffleManager : MonoBehaviour
                     
                     if (item == null)
                     {
-                        nonItems.Add(_board.AllGamePieces[i, j]);
+                        _nonItems.Add(_board.AllGamePieces[i, j]);
                         _board.AllGamePieces[i, j] = null;
                     }
                 }
             }
         }
-        return nonItems;
+        return _nonItems;
     }
 
     void ShuffleWithFisherYates()
     {
-        int maxCount = nonItems.Count;
+        int maxCount = _nonItems.Count;
 
         for (int i = 0; i < maxCount - 1; i++)
         {
@@ -105,12 +101,12 @@ public class ShuffleManager : MonoBehaviour
 
     public void SwapArrayItems(int index1, int index2)
     {
-        (nonItems[index1], nonItems[index2]) = (nonItems[index2], nonItems[index1]);
+        (_nonItems[index1], _nonItems[index2]) = (_nonItems[index2], _nonItems[index1]);
     }
     
     public void FillBoardFromList()
     {
-        Queue<GamePiece> unusedPieces = new Queue<GamePiece>(nonItems);
+        Queue<GamePiece> unusedPieces = new Queue<GamePiece>(_nonItems);
 
         int maxIterations = 100;
 
@@ -139,7 +135,6 @@ public class ShuffleManager : MonoBehaviour
 
     public void MovePieces()
     {
-
         int width = _board.AllGamePieces.GetLength(0);
         int height = _board.AllGamePieces.GetLength(1);
 

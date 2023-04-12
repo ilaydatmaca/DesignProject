@@ -110,8 +110,6 @@ public class DeadlockManager : MonoBehaviour
                 return true;
             }
         }
-
-        // otherwise, return false
         return false;
     }
 

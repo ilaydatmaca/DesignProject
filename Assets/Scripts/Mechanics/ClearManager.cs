@@ -12,9 +12,7 @@ public class ClearManager : MonoBehaviour
         _board = GetComponent<Board>();
         _particleManager = FindObjectOfType<ParticleManager>().GetComponent<ParticleManager>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
-
     }
-    
 
     public void DestroyAt(int x, int y)
     {
@@ -31,7 +29,6 @@ public class ClearManager : MonoBehaviour
     public void RemoveColumns(int y)
     {
         List<GamePiece> list = _board.GetColumnPieces(y);
-
         _boardManager.BoardChecking(list);
     }
 

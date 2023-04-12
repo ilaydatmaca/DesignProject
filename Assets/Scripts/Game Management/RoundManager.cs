@@ -21,8 +21,6 @@ public class RoundManager : Singleton<RoundManager>
         IncreaseRoundNumber();
         
         SetTurnStateText();
-        MovesManager.Instance.Init();
-
         EnableTurnStateText();
         EnableRoundText();
     }
