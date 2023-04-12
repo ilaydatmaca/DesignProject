@@ -58,7 +58,6 @@ public class ShuffleManager : MonoBehaviour
 
     List<GamePiece> GetNonItems()
     {
-
         _nonItems = new List<GamePiece>();
 
         int width = _board.AllGamePieces.GetLength(0);

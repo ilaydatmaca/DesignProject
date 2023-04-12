@@ -17,19 +17,19 @@ public class MatchFinder : MonoBehaviour
         HashSet<GamePiece> matches = new HashSet<GamePiece>();
 
         GamePiece startPiece = null;
-
+        
         if (_board.IsInBorder(startX, startY))
         {
             startPiece = _board.AllGamePieces[startX, startY];
-        }
-
-        if (startPiece != null)
-        {
-            matches.Add(startPiece);
-        }
-        else
-        {
-            return new List<GamePiece>();
+            
+            if (startPiece != null)
+            {
+                matches.Add(startPiece);
+            }
+            else
+            {
+                return new List<GamePiece>();
+            }
         }
 
 
@@ -44,7 +44,7 @@ public class MatchFinder : MonoBehaviour
             {
                 break;
             }
-            // find the adjacent GamePiece and check its MatchValue...
+
             GamePiece nextPiece = _board.AllGamePieces[nextX, nextY];
 
             if (nextPiece == null)
@@ -52,7 +52,6 @@ public class MatchFinder : MonoBehaviour
                 break;
             }
 
-            // ... if it matches then add it our running list of GamePieces
             if (nextPiece.matchValue == startPiece.matchValue)
             {
                 matches.Add(nextPiece);
