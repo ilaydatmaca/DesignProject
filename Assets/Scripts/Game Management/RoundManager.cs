@@ -20,9 +20,9 @@ public class RoundManager : Singleton<RoundManager>
     {
         IncreaseRoundNumber();
         
-        SetTurnStateText();
-        EnableTurnStateText();
-        EnableRoundText();
+        SetTurnText();
+        SetStateTurnText(true);
+        SetStateRoundText(true);
     }
 
     public void CheckAllRoundsComplete()
@@ -30,6 +30,9 @@ public class RoundManager : Singleton<RoundManager>
         if (currentRoundNumber == roundNumber && turnView == player2View)
         {
             roundComplete = true;
+            SetStateTurnText(false);
+            SetStateRoundText(false);
+
         }
     }
     public void UpdateRound()
@@ -43,7 +46,7 @@ public class RoundManager : Singleton<RoundManager>
             turnView = player1View;
             IncreaseRoundNumber();
         }
-        SetTurnStateText();
+        SetTurnText();
     }
     
 
@@ -57,13 +60,13 @@ public class RoundManager : Singleton<RoundManager>
         roundText.text = "ROUND " + currentRoundNumber;
     }
 
-    private void EnableRoundText()
+    private void SetStateRoundText(bool state)
     {
-        roundText.enabled = true;
+        roundText.enabled = state;
     }
     
     
-    private void SetTurnStateText()
+    private void SetTurnText()
     {
         if (turnView.IsMine)
         {
@@ -75,9 +78,9 @@ public class RoundManager : Singleton<RoundManager>
         }
     }
 
-    private void EnableTurnStateText()
+    private void SetStateTurnText(bool state)
     {
-        yourTurnText.enabled = true;
+        yourTurnText.enabled = state;
 
     }
 }

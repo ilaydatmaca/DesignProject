@@ -143,6 +143,12 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     }
 
 
+    public void AddTime(int bonusTime)
+    {
+        float clampTime = Mathf.Clamp(bonusTime, 0f, maxTime- TimeRemaining());
+        
+        startTime += (int)clampTime * 1000;
+    }
     public static void SetStartTime()
     {
         int startTime = 0;

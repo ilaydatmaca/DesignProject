@@ -17,20 +17,6 @@ public class SmoothMovePopup : MonoBehaviour
         StartCoroutine(MoveRoutine());
     }
 
-
-    IEnumerator SmoothTranslation()
-    {
-        Vector3 target = new Vector3(_rectTransform.anchoredPosition.x, 0);
-
-        while (Vector3.Distance(target, _rectTransform.anchoredPosition) > 0.1f)
-        {
-            _rectTransform.anchoredPosition = Vector3.Lerp (_rectTransform.anchoredPosition, target, Time.deltaTime * _timeToMove);
-
-        }
-
-        yield return null;
-    }
-    
     IEnumerator MoveRoutine()
     {
         Vector3 endPos = new Vector3(_rectTransform.anchoredPosition.x, 0);

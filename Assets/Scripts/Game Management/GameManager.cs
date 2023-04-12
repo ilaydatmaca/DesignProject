@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
 
     private LevelGoal _levelGoal;
     private Board _board;
+    private PhotonTimer _photonTimer;
 
     public bool paused = true;
 
@@ -23,6 +24,7 @@ public class GameManager : Singleton<GameManager>
 
         _levelGoal = GetComponent<LevelGoal>();
         _board = FindObjectOfType<Board>().GetComponent<Board>();
+        _photonTimer = FindObjectOfType<PhotonTimer>().GetComponent<PhotonTimer>();
     }
     
     void Start()
@@ -128,7 +130,7 @@ public class GameManager : Singleton<GameManager>
 
     public void AddTime(int timeValue)
     {
-        //PhotonTimer.Add;
+        _photonTimer.AddTime(timeValue);
     }
 
     void ShowWinScreen()
