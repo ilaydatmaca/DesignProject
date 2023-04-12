@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class SmoothMovePopup : MonoBehaviour
 {
-    RectTransform _rectTransform;
-    private float _speed = 0.5f;
+    private RectTransform _rectTransform;
+    private float _speed = 0.1f;
 
     private void Awake()
     {
