@@ -1,3 +1,4 @@
+using Photon.Pun;
 using TMPro;
 
 public class MovesManager : Singleton<MovesManager>
@@ -8,7 +9,7 @@ public class MovesManager : Singleton<MovesManager>
     private int _moveLeft;
 
     public TMP_Text moveText;
-
+    
     public void Init()
     {
         noMoreMoves = false;

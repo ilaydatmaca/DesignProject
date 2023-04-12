@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
     private LevelGoal _levelGoal;
     private Board _board;
 
+    public bool paused = true;
+
     public override void Awake()
     {
         base.Awake();
@@ -37,7 +39,6 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator StartGameRoutine()
     {
-        yield return new WaitForSeconds(0.5f);
         _isPlayerReady = true;
         _isReadyToReload = true;
         
@@ -52,10 +53,14 @@ public class GameManager : Singleton<GameManager>
         {
             _board.SetupBoard();
         }
+        yield return new WaitForSeconds(RoundManager.Instance.waitTimeForRounds);
+
     }
     
     IEnumerator PlayGameRoutine()
     {
+        paused = false;
+        PhotonTimer.SetStartTime();
         RoundManager.Instance.InitRound();
         
         while (!_isGameOver)
@@ -69,10 +74,7 @@ public class GameManager : Singleton<GameManager>
     
     IEnumerator WaitForBoardRoutine(float delay = 0f)
     {
-        if (TimeManager.Instance != null)
-        {
-            TimeManager.Instance.paused = true;
-        }
+        paused = true;
 
         if (_board != null)
         {
@@ -83,11 +85,10 @@ public class GameManager : Singleton<GameManager>
                 yield return null;
             }
         }
-        // extra delay before we go to the EndGameRoutine
         yield return new WaitForSeconds(delay);
     }
     
-    // coroutine for the end of the level
+    
     IEnumerator EndGameRoutine()
     {
         _isReadyToReload = false;
@@ -121,7 +122,7 @@ public class GameManager : Singleton<GameManager>
 
     public void AddTime(int timeValue)
     {
-        TimeManager.Instance.AddTime(timeValue);
+        //PhotonTimer.Add;
     }
 
     void ShowWinScreen()

@@ -11,7 +11,7 @@ public class PlayerView : MonoBehaviour
     private ShuffleManager _shuffleManager;
     private BoardManager _boardManager;
     private ClearManager _clearManager;
-    private void Awake()
+    void Awake()
     {
         _swapManager = FindObjectOfType<Board>().GetComponent<SwapManager>();
         _itemFactory = FindObjectOfType<Board>().GetComponent<ItemFactory>();
@@ -26,6 +26,7 @@ public class PlayerView : MonoBehaviour
         {
             RoundManager.Instance.player1View = photonView;
             RoundManager.Instance.turnView = photonView;
+            Debug.Log(RoundManager.Instance.turnView);
         }
         else if (photonView.ViewID == 2001)
         {

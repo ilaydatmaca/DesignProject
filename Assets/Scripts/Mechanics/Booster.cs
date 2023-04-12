@@ -129,7 +129,6 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            //UpdateText();
             CollectionGoal.Instance.canUseBooster = false;
 
         }
@@ -140,9 +139,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
         if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
         {
             _board.photonView.RPC("RPC_RemoveColumn", RpcTarget.AllBuffered, _targetCell.xIndex);
-            //UpdateText();
             CollectionGoal.Instance.canUseBooster = false;
-
         }
     }
     public void ShuffleBoard()
