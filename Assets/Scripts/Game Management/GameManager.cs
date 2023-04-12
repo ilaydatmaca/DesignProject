@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator StartGameRoutine()
     {
+        yield return new WaitForSeconds(0.5f);
         _isPlayerReady = true;
         _isReadyToReload = true;
         

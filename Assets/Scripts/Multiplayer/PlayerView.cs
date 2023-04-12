@@ -19,9 +19,7 @@ public class PlayerView : MonoBehaviour
         _shuffleManager = FindObjectOfType<Board>().GetComponent<ShuffleManager>();
         _boardManager = FindObjectOfType<Board>().GetComponent<BoardManager>();
         _clearManager = FindObjectOfType<Board>().GetComponent<ClearManager>();
-
         
-        PhotonNetwork.AutomaticallySyncScene = true;
         photonView = GetComponent<PhotonView>();
 
         if (photonView.ViewID == 1001)
@@ -74,8 +72,7 @@ public class PlayerView : MonoBehaviour
     {
         _shuffleManager.SwapArrayItems(index1, index2);
     }
-    
-    
+
     [PunRPC]
     public void RPC_MakeColorBombBooster(int xIndex, int yIndex)
     {
@@ -86,20 +83,17 @@ public class PlayerView : MonoBehaviour
     public void RPC_RemoveOneGamePiece(int xIndex, int yIndex)
     {
         _boardManager.ClearAndRefillBoard(xIndex, yIndex);
-        
     }
     
     [PunRPC]
     public void RPC_AddTime(int bonusTime)
     {
         GameManager.Instance.AddTime(bonusTime);
-        
     }
     
     [PunRPC]
     public void RPC_RemoveColumn(int y)
     {
         _clearManager.RemoveColumns(y);
-        
     }
 }

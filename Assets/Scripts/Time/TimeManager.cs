@@ -1,10 +1,12 @@
 using System.Collections;
+using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimeManager : Singleton<TimeManager>
 {
-    public int maxTime = 10;
+    public int maxTime = 30;
     public float waitTime = 2f;
     
     private float _currentTime;
@@ -13,14 +15,16 @@ public class TimeManager : Singleton<TimeManager>
     public bool isTimeUp;
 
     public Slider slider;
+    public TMP_Text timeText;
     
     public void Update()
     {
-        if (paused || isTimeUp)
+        if (paused || isTimeUp )
         {
             return;
         }
         _currentTime -= Time.deltaTime;
+        timeText.text = _currentTime.ToString();
 
         if (_currentTime <= 0)
         {
