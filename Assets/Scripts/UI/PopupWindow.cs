@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,6 +36,7 @@ public class PopupWindow : Singleton<PopupWindow>
         losingPopup.SetActive(false);
         winningPopup.SetActive(false);
 
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("StartMenu");
     }
 
