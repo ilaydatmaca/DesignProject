@@ -40,7 +40,7 @@ public class MovesManager : Singleton<MovesManager>
 
     void SetStateMoveLeft()
     {
-        moveText.enabled = RoundManager.Instance.turnView.IsMine;
+        moveText.enabled = RoundManager.Instance.turnView.IsMine && !RoundManager.Instance.roundComplete;
     }
     
 }

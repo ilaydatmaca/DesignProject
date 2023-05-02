@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Photon.Pun;
 using TMPro;
