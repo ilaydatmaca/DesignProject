@@ -8,9 +8,15 @@ using UnityEngine;
 
 public class PlayFabLogin : MonoBehaviour
 {
+    public PlayFabLogin instance;
+    public UpdateCoin updatecoins;
+    int coins, stars;
 
-    public static int coins;
-    public static int stars;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -49,7 +55,26 @@ public class PlayFabLogin : MonoBehaviour
     {
         coins = result.VirtualCurrency["CN"];
         stars = result.VirtualCurrency["ST"];
+        updatecoins.Updatecoins(coins);
+        updatecoins.UpdateStars(stars);
 
+    }
+
+    public void GrantVirtualCurrency()
+    {
+        var request = new AddUserVirtualCurrencyRequest
+        {
+            VirtualCurrency = "CN",
+            Amount = 50
+
+        };
+        PlayFabClientAPI.AddUserVirtualCurrency(request, OnGrantVirtualCurrencySuccess, OnError);
+    }
+
+    void OnGrantVirtualCurrencySuccess(ModifyUserVirtualCurrencyResult result)
+    {
+        Debug.Log("Currency Granted!");
+        GetVirtualCurrencies();
     }
 
     void OnError(PlayFabError error)
