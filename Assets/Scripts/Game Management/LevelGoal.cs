@@ -5,6 +5,12 @@ public class LevelGoal : MonoBehaviour
 {
     public PlayFabLogin playfabLogin;
     public ScoreManager scoremanage;
+    
+    private void Awake()
+    {
+        playfabLogin = GetComponent<PlayFabLogin>();
+        scoremanage = GetComponent<ScoreManager>();
+    }
 
     public bool IsGameOver()
     {
