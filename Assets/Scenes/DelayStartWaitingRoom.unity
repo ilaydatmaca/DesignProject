@@ -183,7 +183,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26a3d6044fd3e45b29453212971830a1, type: 2}
   m_sharedMaterial: {fileID: -1272772664532312822, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0.000030517578, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &368511410
@@ -390,10 +390,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: CANCEL
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
-  m_sharedMaterial: {fileID: -1272772664532312822, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26a3d6044fd3e45b29453212971830a1, type: 2}
+  m_sharedMaterial: {fileID: -3993793567997901175, guid: 26a3d6044fd3e45b29453212971830a1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -526,10 +526,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loading
+  m_text: LOADING
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
-  m_sharedMaterial: {fileID: -1272772664532312822, guid: 78ee657f795484f38ab71990e0491d0b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 26a3d6044fd3e45b29453212971830a1, type: 2}
+  m_sharedMaterial: {fileID: -3993793567997901175, guid: 26a3d6044fd3e45b29453212971830a1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -553,8 +553,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 139
+  m_fontSizeBase: 139
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aa3bf53c498deb44b80ad60af801942c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56cdae3db73974b2a90a249ced263738, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
