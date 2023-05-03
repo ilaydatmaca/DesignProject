@@ -9,16 +9,22 @@ public class UpdateCoin : MonoBehaviour
     public TMP_Text coinText;
     public TMP_Text starText;
 
-    
-    public void Updatecoins(int coins)
+    void Start()
     {
-        coinText.text = coins.ToString();
+        Updatecoins();
+        UpdateStars();
     }
 
 
-    public void UpdateStars(int stars)
+    public void Updatecoins()
     {
-        starText.text = stars.ToString();
+        coinText.text = PlayFabLogin.coins.ToString();
+    }
+
+
+    public void UpdateStars()
+    {
+        starText.text = PlayFabLogin.stars.ToString();
     }
 
 }

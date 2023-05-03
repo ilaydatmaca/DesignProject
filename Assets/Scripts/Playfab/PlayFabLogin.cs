@@ -9,8 +9,7 @@ using UnityEngine;
 public class PlayFabLogin : MonoBehaviour
 {
     public PlayFabLogin instance;
-    public UpdateCoin updatecoins;
-    int coins, stars;
+    public static int coins, stars;
 
 
     private void Awake()
@@ -55,8 +54,8 @@ public class PlayFabLogin : MonoBehaviour
     {
         coins = result.VirtualCurrency["CN"];
         stars = result.VirtualCurrency["ST"];
-        updatecoins.Updatecoins(coins);
-        updatecoins.UpdateStars(stars);
+        //updatecoins.Updatecoins(coins);
+        //updatecoins.UpdateStars(stars);
 
     }
 
