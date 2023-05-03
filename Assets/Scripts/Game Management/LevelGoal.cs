@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelGoal : MonoBehaviour
 {
+    public PlayFabLogin playfabLogin;
+    public ScoreManager scoremanage;
+
     public bool IsGameOver()
     {
         if (RoundManager.Instance.roundComplete)
         {
+            playfabLogin.SendLeaderboard(scoremanage.GetMyScore());
             return true;
         }
         return false;
