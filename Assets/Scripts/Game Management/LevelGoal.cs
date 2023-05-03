@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using ExitGames.Client.Photon.StructWrapping;
+using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelGoal : MonoBehaviour
 {
-    public PlayFabLogin playfabLogin;
-    public ScoreManager scoremanage;
+    private static PlayFabLogin playfabLogin;
     
     private void Awake()
     {
-        playfabLogin = GetComponent<PlayFabLogin>();
-        scoremanage = GetComponent<ScoreManager>();
+        playfabLogin = FindObjectOfType<PlayFabLogin>().GetComponent<PlayFabLogin>();
+        Console.WriteLine();
     }
 
     public bool IsGameOver()
     {
         if (RoundManager.Instance.roundComplete)
         {
-            playfabLogin.SendLeaderboard(scoremanage.GetMyScore());
+            int score = ScoreManager.Instance.GetMyScore();
+            playfabLogin.SendLeaderboard(score);
             return true;
         }
         return false;
