@@ -16,7 +16,7 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     private float _currentTime;
     
     public float maxTime = 30f;
-    public TMP_Text Text;
+    //public TMP_Text Text;
     public Slider slider;
 
     private Board _board;
@@ -40,7 +40,7 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
         if (!isTimerRunning || GameManager.Instance.paused || RoundManager.Instance.roundComplete) return;
         
         _currentTime = TimeRemaining();
-        Text.text = _currentTime.ToString();
+        //Text.text = _currentTime.ToString();
         slider.value = _currentTime;
 
         if (MovesManager.Instance.noMoreMoves)
