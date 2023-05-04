@@ -17,11 +17,11 @@ public class Board : MonoBehaviour
     [HideInInspector] public Cell clickedCell;
     [HideInInspector] public Cell targetCell;
     
-    public Cell[,] _allTiles;
-    public GamePiece[,] AllGamePieces;
+    [HideInInspector] public Cell[,] _allTiles;
+    [HideInInspector] public GamePiece[,] AllGamePieces;
     
-    public bool playerInputEnabled = true;
-    public bool isRefilling;
+    [HideInInspector] public bool playerInputEnabled = true;
+    [HideInInspector] public bool isRefilling;
     
     public float swapTime;
     public int scoreMultiplier;
@@ -29,7 +29,7 @@ public class Board : MonoBehaviour
 
     private ItemFactory _itemFactory;
     private ClearManager _clearManager;
-    public PhotonView photonView;
+    [HideInInspector] public PhotonView photonView;
 
     private void Awake()
     {

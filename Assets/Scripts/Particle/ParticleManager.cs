@@ -5,7 +5,6 @@ public class ParticleManager : MonoBehaviour
 	public GameObject clearFXPrefab;
 	public GameObject bombFXPrefab;
 
-	
 	public void ClearPieceFXAt(int x, int y, int z = 0)
 	{
 		if (clearFXPrefab != null)

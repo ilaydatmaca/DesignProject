@@ -1,9 +1,9 @@
-using Photon.Pun;
 using TMPro;
+using UnityEngine;
 
 public class MovesManager : Singleton<MovesManager>
 {
-    public bool noMoreMoves;
+    [HideInInspector] public bool noMoreMoves;
     public int moveNumberPerRound = 2;
     
     private int _moveLeft;
@@ -30,11 +30,17 @@ public class MovesManager : Singleton<MovesManager>
         }
     }
     
+    public void IncreaseMoveLeft()
+    {
+        _moveLeft++;
+        UpdateMovesText();
+    }
+    
     void UpdateMovesText()
     {
         if (moveText != null)
         {
-            moveText.text = _moveLeft + " moves left";
+            moveText.text = _moveLeft + " MOVES LEFT";
         }
     }
 

@@ -1,23 +1,29 @@
 using Photon.Pun;
 using TMPro;
+using UnityEngine;
 
 public class RoundManager : Singleton<RoundManager>
 {
-    public int roundNumber = 5;
-    public int currentRoundNumber;
+    public int roundNumber;
+    [HideInInspector] public int currentRoundNumber;
 
     public TMP_Text roundText;
     public TMP_Text yourTurnText;
     
-    public PhotonView player1View;
-    public PhotonView player2View;
-    public PhotonView turnView;
+    [HideInInspector] public PhotonView player1View;
+    [HideInInspector] public PhotonView player2View;
+    [HideInInspector] public PhotonView turnView;
 
-    public bool roundComplete;
+    [HideInInspector] public bool roundComplete;
 
-    public float waitTimeForRounds = 2f;
+    public float waitTimeForRounds;
+
+    public TMP_Text user1Text;
+    public TMP_Text user2Text;
+
     public void InitRound()
     {
+        SetYouText();
         IncreaseRoundNumber();
         
         SetTurnText();
@@ -82,5 +88,19 @@ public class RoundManager : Singleton<RoundManager>
     {
         yourTurnText.enabled = state;
 
+    }
+
+    private void SetYouText()
+    {
+        if (player1View.IsMine)
+        {
+            user1Text.text = "You";
+            user2Text.text = "User123";
+        }
+        else
+        {
+            user2Text.text = "You";
+            user1Text.text = "User123";
+        }
     }
 }

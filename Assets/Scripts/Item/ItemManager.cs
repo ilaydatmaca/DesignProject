@@ -47,10 +47,12 @@ public class ItemManager : MonoBehaviour
                 if (Mathf.Abs(swapDirection.x) > Math.Abs(swapDirection.y))
                 {
                     item = _itemFactory.MakeItem(ItemType.RocketRow, x, y, matchValue);
+                    MovesManager.Instance.IncreaseMoveLeft();
                 }
                 else
                 {
                     item = _itemFactory.MakeItem(ItemType.RocketColumn, x, y, matchValue);
+                    MovesManager.Instance.IncreaseMoveLeft();
                 }
             }
             else if (gamePieces.Count == 5 && matchValue != MatchValue.None)

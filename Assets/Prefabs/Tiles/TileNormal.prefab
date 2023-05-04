@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 417690}
   - component: {fileID: 21248246}
   - component: {fileID: 11441490}
-  - component: {fileID: 61000012237500030}
+  - component: {fileID: 6388266884981779581}
   m_Layer: 0
   m_Name: TileNormal
   m_TagString: Untagged
@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187378}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 91c8f759a0ff74c4e928de51a5f76d75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 481578c59880048c988e4c2d89462956, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xIndex: 0
   yIndex: 0
---- !u!61 &61000012237500030
+--- !u!61 &6388266884981779581
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,19 +110,19 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.390625, y: 0.390625, z: 0.390625, w: 0.390625}
+    border: {x: 0.013793103, y: 0.013793103, z: 0.013793103, w: 0.013793103}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8827586, y: 0.8827586}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 0.8827586, y: 0.8827586}
   m_EdgeRadius: 0

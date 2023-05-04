@@ -1,6 +1,5 @@
 using System.Collections;
 using Photon.Pun;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -15,8 +14,7 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
     private int startTime;
     private float _currentTime;
     
-    public float maxTime = 30f;
-    //public TMP_Text Text;
+    public float maxTime;
     public Slider slider;
 
     private Board _board;
@@ -40,7 +38,6 @@ public class PhotonTimer : MonoBehaviourPunCallbacks
         if (!isTimerRunning || GameManager.Instance.paused || RoundManager.Instance.roundComplete) return;
         
         _currentTime = TimeRemaining();
-        //Text.text = _currentTime.ToString();
         slider.value = _currentTime;
 
         if (MovesManager.Instance.noMoreMoves)
