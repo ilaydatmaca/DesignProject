@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class UpdateCoin : MonoBehaviour
+public class UpdateCurrencies : MonoBehaviour
 {
     public TMP_Text coinText;
     public TMP_Text starText;
@@ -18,13 +18,13 @@ public class UpdateCoin : MonoBehaviour
 
     public void Updatecoins()
     {
-        coinText.text = PlayFabLogin.coins.ToString();
+        coinText.text = PlayFabManager.coins.ToString();
     }
 
 
     public void UpdateStars()
     {
-        starText.text = PlayFabLogin.stars.ToString();
+        starText.text = PlayFabManager.stars.ToString();
     }
 
 }
