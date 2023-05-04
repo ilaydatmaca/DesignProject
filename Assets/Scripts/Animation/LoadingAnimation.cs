@@ -20,7 +20,7 @@ public class LoadingAnimation : MonoBehaviour
             }
             else
             {
-                loadingText.text = "Loading";
+                loadingText.text = "LOADING";
                 _count = 0;
             }
             _isRunning = false;
