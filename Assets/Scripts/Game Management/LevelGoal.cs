@@ -5,11 +5,11 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelGoal : MonoBehaviour
 {
-    private static PlayFabLogin playfabLogin;
+    private static PlayFabManager playfabLogin;
     
     private void Awake()
     {
-        playfabLogin = FindObjectOfType<PlayFabLogin>().GetComponent<PlayFabLogin>();
+        playfabLogin = FindObjectOfType<PlayFabManager>().GetComponent<PlayFabManager>();
         Console.WriteLine();
     }
 

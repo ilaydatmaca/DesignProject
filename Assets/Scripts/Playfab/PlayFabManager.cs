@@ -6,12 +6,11 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 
-public class PlayFabLogin : MonoBehaviour
+public class PlayFabManager : MonoBehaviour
 {
-    public PlayFabLogin instance;
+    public PlayFabManager instance;
     public static int coins, stars;
-
-
+    
     private void Awake()
     {
         instance = this;
@@ -33,12 +32,12 @@ public class PlayFabLogin : MonoBehaviour
                 GetPlayerProfile = true
             }
         };
-        PlayFabClientAPI.LoginWithCustomID(request, OnSuccess, OnError);
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
     }
 
-    void OnSuccess(LoginResult result)
+    void OnLoginSuccess(LoginResult result)
     {
-        Debug.Log("Successful login/account create!");
+        Debug.LogFormat("Player {0} login/account successfully!", result.PlayFabId);
         string name = null;
         if(result.InfoResultPayload.PlayerProfile != null)
             name = result.InfoResultPayload.PlayerProfile.DisplayName;
@@ -65,7 +64,6 @@ public class PlayFabLogin : MonoBehaviour
         {
             VirtualCurrency = "CN",
             Amount = 50
-
         };
         PlayFabClientAPI.AddUserVirtualCurrency(request, OnGrantVirtualCurrencySuccess, OnError);
     }
@@ -79,6 +77,7 @@ public class PlayFabLogin : MonoBehaviour
     void OnError(PlayFabError error)
     {
         Debug.Log("Error while logging in/creating account!");
+        Debug.Log("Here's some debug informations:");
         Debug.Log(error.GenerateErrorReport());
     }
 
@@ -95,12 +94,18 @@ public class PlayFabLogin : MonoBehaviour
                 }
             }
         };
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardUpdate, OnError);
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnLeaderboardSuccess, OnLeaderboardFailure);
     }
 
-    void OnLeaderboardUpdate(UpdatePlayerStatisticsResult result)
+    void OnLeaderboardSuccess(UpdatePlayerStatisticsResult result)
     {
         Debug.Log("Successful leaderboard sent");
+    }
+    
+    void OnLeaderboardFailure(PlayFabError error)
+    {
+        Debug.LogWarning("Failed to update leaderbord");
+        Debug.Log(error.GenerateErrorReport());
     }
 
     public void GetLeaderboard()
@@ -118,7 +123,28 @@ public class PlayFabLogin : MonoBehaviour
     {
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log(item.PlayFabId + " " + item.StatValue);
+            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }
     }
+
+    void SubmitName()
+    {
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            //DisplayName = name
+        };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnDisplayNameFailure);
+    }
+    
+    void OnDisplayNameFailure(PlayFabError error)
+    {
+        Debug.LogWarning("Failed to update name");
+        Debug.Log(error.GenerateErrorReport());
+    }
+
+    void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log("Updated display name!");
+    }
+    
 }
