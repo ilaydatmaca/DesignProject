@@ -26,9 +26,9 @@ public class FallManager : MonoBehaviour
                     nullCount++;
                 }
                 else if (nullCount > 0)
-                {
-                    _board.AllGamePieces[x, y].Move(x, y - nullCount, collapseTime * (nullCount));
+                {                    
                     _board.AllGamePieces[x, y - nullCount] = _board.AllGamePieces[x, y];
+                    _board.AllGamePieces[x, y].Move(x, y - nullCount, collapseTime * (nullCount));
                     movingPieces.Add(_board.AllGamePieces[x, y - nullCount]);
                     _board.AllGamePieces[x, y] = null;
 

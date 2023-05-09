@@ -7,13 +7,12 @@ public class GamePiece : MonoBehaviour {
 	public int yIndex;
 	
 	private bool _isMoving;
-	private readonly int _fallOffset = 10;
+	private readonly int _fallOffset = 8;
 	private readonly float _fallTime = 0.2f;
 
 	public MatchValue matchValue;
 
 	public int scoreValue = 20;
-	public AudioClip clearSound;
 
     private Board _board;
 
@@ -58,6 +57,10 @@ public class GamePiece : MonoBehaviour {
 	
 	IEnumerator MoveRoutine(Vector3 destination, float timeToMove)
 	{
+		if (_board.IsInBorder((int) destination.x, (int) destination.y))
+		{
+			_board.AllGamePieces[(int) destination.x, (int) destination.y] = this;
+		}
 		Vector3 startPosition = transform.position;
 		
 		bool isReached = false;

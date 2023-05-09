@@ -151,7 +151,7 @@ public class GameManager : Singleton<GameManager>
         SoundManager.Instance.PlayLoseSound();
     }
 
-    public void ScorePoints(GamePiece piece, int multiplier = 1, int bonus = 0)
+    public void ScorePoints(GamePiece piece, int multiplier, int bonus)
     {
         if (piece != null)
         {
@@ -159,11 +159,6 @@ public class GameManager : Singleton<GameManager>
             {
                 int addingScore = piece.scoreValue * multiplier + bonus;
                 ScoreManager.Instance.AddScore(addingScore);
-            }
-
-            if (SoundManager.Instance != null && piece.clearSound != null)
-            {
-                SoundManager.Instance.PlayClipAtPoint(piece.clearSound, Vector3.zero, SoundManager.Instance.fxVolume);
             }
         }
     }

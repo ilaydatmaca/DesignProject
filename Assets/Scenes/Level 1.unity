@@ -1072,8 +1072,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 118, y: -101}
-  m_SizeDelta: {x: 141.56, y: 200.19}
+  m_AnchoredPosition: {x: 115.00002, y: -115.00002}
+  m_SizeDelta: {x: 124.57, y: 176.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &152279613
 MonoBehaviour:
@@ -2138,8 +2138,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115.00006, y: -100.1}
-  m_SizeDelta: {x: 141.56, y: 200.19}
+  m_AnchoredPosition: {x: 115.00002, y: -114.999985}
+  m_SizeDelta: {x: 124.57, y: 176.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446815609
 MonoBehaviour:
@@ -2419,8 +2419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3f65956c6b5489ea25cccbc9783b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearFXPrefab: {fileID: 1000010615010014, guid: 97273a9a2bbe94ed0aa22cfda47432fa, type: 3}
-  bombFXPrefab: {fileID: 1000013172160682, guid: 1940f5a8b14d242afa10ee49495ba85a, type: 3}
+  clearFXPrefab: {fileID: 101082, guid: 6b88dc69c37f0ac47825973a9c9dcb1a, type: 3}
+  bombFXPrefab: {fileID: 1534551324735168, guid: c8ea9db979f63c340a834340dafdc884, type: 3}
 --- !u!4 &469936788
 Transform:
   m_ObjectHideFlags: 0
@@ -3638,7 +3638,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1024, y: 2048}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -4208,7 +4208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172241, y: 4}
+  m_AnchoredPosition: {x: -12.172302, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983490514
@@ -4727,10 +4727,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 4
   m_Spacing: 2
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -5363,10 +5363,10 @@ RectTransform:
   m_Father: {fileID: 1727312869}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 526.07}
-  m_SizeDelta: {x: 0, y: -1052.1599}
+  m_AnchoredPosition: {x: 0, y: -486}
+  m_SizeDelta: {x: 0, y: 995.8501}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1331799760
 GameObject:
@@ -5846,8 +5846,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.33007812, y: 0.4000244}
-  m_SizeDelta: {x: -0.6999512, y: 0.8000488}
+  m_AnchoredPosition: {x: -0.2626953, y: -85}
+  m_SizeDelta: {x: 0.5253906, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1369022269
 MonoBehaviour:
@@ -6192,7 +6192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172241, y: 4}
+  m_AnchoredPosition: {x: -12.172302, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404935505
@@ -6972,8 +6972,8 @@ MonoBehaviour:
   playerInputEnabled: 1
   isRefilling: 0
   swapTime: 0.1
-  scoreMultiplier: 0
-  delay: 0.3
+  scoreMultiplier: 1
+  delay: 0.25
   photonView: {fileID: 0}
 --- !u!4 &1688913552
 Transform:
@@ -7470,7 +7470,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1024, y: 2048}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -7635,7 +7635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -16929, y: 19751}
+  m_AnchoredPosition: {x: -16929, y: 23138}
   m_SizeDelta: {x: 516, y: 256}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1768570102
@@ -8579,10 +8579,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 2
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -9178,16 +9178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicClips:
-  - {fileID: 8300000, guid: e75e89afb6e1648e7a4a2ac64328a7c0, type: 3}
-  - {fileID: 8300000, guid: e5e029a21fda14206a9ff1423a1302a9, type: 3}
+  - {fileID: 8300000, guid: 696ca7cd5c281418bb7bc60d3514f366, type: 3}
   winClips:
   - {fileID: 8300000, guid: 5f9fb0bfcf06e4304aab13b97645fe13, type: 3}
   loseClips:
   - {fileID: 8300000, guid: ed4ad50d33af142e6be4b65f4d37e37c, type: 3}
-  bonusClips:
-  - {fileID: 8300000, guid: 56e813bd88354448fb9f0a52536449a1, type: 3}
-  - {fileID: 8300000, guid: eadcfb9a0c2cb4bea8112ac470640c8e, type: 3}
-  - {fileID: 8300000, guid: 6dce900c6b57748dbb2ee112588b2bd9, type: 3}
+  bonusClips: []
   musicVolume: 0.5
   fxVolume: 1
   lowPitch: 0.95
@@ -10812,7 +10808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172241, y: 4}
+  m_AnchoredPosition: {x: -12.172302, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7098200962698166438
@@ -11507,7 +11503,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ReferenceResolution: {x: 1024, y: 2048}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3

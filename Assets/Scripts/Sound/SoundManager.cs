@@ -6,7 +6,6 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip[] musicClips;
     public AudioClip[] winClips;
     public AudioClip[] loseClips;
-    public AudioClip[] bonusClips;
 
     [Range(0,1)]
     public float musicVolume = 0.5f;
@@ -42,9 +41,9 @@ public class SoundManager : Singleton<SoundManager>
             }
 
             source.volume = volume;
-            source.Play();
 
-            // destroy the AudioSource after the clip is done playing
+            source.Play();
+            
             Destroy(go, clip.length);
             
         }
@@ -83,10 +82,10 @@ public class SoundManager : Singleton<SoundManager>
         PlayRandom(loseClips, Vector3.zero, fxVolume * 0.5f);
     }
 
-   public void PlayBonusSound()
+   /*public void PlayBonusSound()
     {
         PlayRandom(bonusClips, Vector3.zero, fxVolume);
-    }
+    }*/
 
 
 }

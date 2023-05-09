@@ -173,7 +173,7 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     private void UpdateText()
     {
         boosterCount--;
-        _soundManager.PlayBonusSound();
+        //_soundManager.PlayBonusSound();
         amountText.text = boosterCount.ToString();
     }
 }

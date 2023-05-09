@@ -111,10 +111,10 @@ public class BoardManager : MonoBehaviour
             {
                 _board.scoreMultiplier++;
 
-                if (SoundManager.Instance != null)
+                /*if (SoundManager.Instance != null)
                 {
                     SoundManager.Instance.PlayBonusSound();
-                }
+                }*/
                 yield return StartCoroutine(ClearAndFallRoutine(allMatchesInBoard));
             }
         }
