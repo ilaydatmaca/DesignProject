@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6224af248ec33437b80c904a0b6803f9
+guid: e7e12d66109e240ef850905571c1e4f9
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Lemon Days
+  - Curse Casual
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
