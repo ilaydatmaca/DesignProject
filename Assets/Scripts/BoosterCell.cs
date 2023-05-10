@@ -12,19 +12,26 @@ public class BoosterCell : Singleton<BoosterCell>
     public Booster discoBooster;
     public Booster rocketBooster;
 
+    public float waitTime = 5f;
+
     public void CallHammer()
     {
         isHammerActive = true;
+        hammerBooster.SetStateParticle(true);
+        Invoke("SetDisableOthers", waitTime);
     }
-
     public void CallRocket()
     {
         isRocketActive = true;
+        rocketBooster.SetStateParticle(true);
+        Invoke("SetDisableOthers", waitTime);
     }
     
     public void CallDisco()
     {
         isDiscoActive = true;
+        discoBooster.SetStateParticle(true);
+        Invoke("SetDisableOthers", waitTime);
     }
 
     void SetDisableOthers()
@@ -32,6 +39,11 @@ public class BoosterCell : Singleton<BoosterCell>
         isHammerActive = false;
         isDiscoActive = false;
         isRocketActive = false;
+        targetCell = null;
+        
+        hammerBooster.SetStateParticle(false);
+        rocketBooster.SetStateParticle(false);
+        discoBooster.SetStateParticle(false);
 
     }
 
@@ -50,6 +62,5 @@ public class BoosterCell : Singleton<BoosterCell>
             rocketBooster.RocketBooster();
         }
         SetDisableOthers();
-        targetCell = null;
     }
 }

@@ -95,12 +95,12 @@ public class RoundManager : Singleton<RoundManager>
         if (player1View.IsMine)
         {
             user1Text.text = "You";
-            user2Text.text = "User123";
+            user2Text.text = "Opponent";
         }
         else
         {
             user2Text.text = "You";
-            user1Text.text = "User123";
+            user1Text.text = "Opponent";
         }
     }
 }

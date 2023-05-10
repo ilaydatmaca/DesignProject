@@ -10,10 +10,16 @@ public class Booster : MonoBehaviour
     
     private Board _board;
 
+    public GameObject particle;
 
     void Awake()
     {
         _board = FindObjectOfType<Board>().GetComponent<Board>();
+    }
+
+    public void SetStateParticle(bool state)
+    {
+        particle.SetActive(state);
     }
     
     public void DropColorBomb()
@@ -22,6 +28,7 @@ public class Booster : MonoBehaviour
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, BoosterCell.Instance.targetCell.xIndex, BoosterCell.Instance.targetCell.yIndex);
             CollectionGoal.Instance.boosterCount--;
+            SetStateParticle(false);
         }
     }
     
@@ -31,6 +38,7 @@ public class Booster : MonoBehaviour
         {
             _board.photonView.RPC("RPC_RemoveColumn", RpcTarget.AllBuffered, BoosterCell.Instance.targetCell .xIndex);
             CollectionGoal.Instance.boosterCount--;
+            SetStateParticle(false);
         }
     }
     public void ShuffleBoard()
@@ -48,6 +56,7 @@ public class Booster : MonoBehaviour
         {
             _board.photonView.RPC("RPC_RemoveOneGamePiece", RpcTarget.AllBuffered, BoosterCell.Instance.targetCell.xIndex, BoosterCell.Instance.targetCell.yIndex);
             UpdateText();
+            SetStateParticle(false);
         }
     }
 

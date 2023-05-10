@@ -41,7 +41,7 @@ public class ClearManager : MonoBehaviour
             {
                 GamePiece pieceToClear = _board.AllGamePieces[piece.xIndex, piece.yIndex];
                 CollectionGoal.Instance.UpdateGoal(pieceToClear.matchValue);
-                
+
                 DestroyAt(piece.xIndex, piece.yIndex);
 
                 int bonus = 0;
