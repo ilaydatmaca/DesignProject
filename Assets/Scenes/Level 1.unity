@@ -1200,9 +1200,10 @@ GameObject:
   - component: {fileID: 198282666}
   - component: {fileID: 198282668}
   - component: {fileID: 198282667}
+  - component: {fileID: 198282669}
   m_Layer: 5
   m_Name: RocketBooster
-  m_TagString: Untagged
+  m_TagString: Booster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1275,9 +1276,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 470942422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ToggleBooster
+      - m_Target: {fileID: 398890116}
+        m_TargetAssemblyTypeName: BoosterCell, Assembly-CSharp
+        m_MethodName: CallRocket
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1295,6 +1296,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198282665}
   m_CullTransparentMesh: 0
+--- !u!114 &198282669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198282665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTime: 15
+  amountText: {fileID: 1780634086}
+  boosterCount: 1
 --- !u!1 &215397530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,6 +1984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 398890114}
   - component: {fileID: 398890115}
+  - component: {fileID: 398890116}
   m_Layer: 5
   m_Name: Bottom Panel
   m_TagString: Untagged
@@ -2026,6 +2043,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &398890116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398890113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0c1b8e67fc74a29979e232fc6859dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCell: {fileID: 0}
+  isHammerActive: 0
+  isDiscoActive: 0
+  isRocketActive: 0
+  hammerBooster: {fileID: 1966899159}
+  discoBooster: {fileID: 855692356}
+  rocketBooster: {fileID: 198282669}
 --- !u!1 &421991464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,7 +2483,6 @@ GameObject:
   - component: {fileID: 470942421}
   - component: {fileID: 470942424}
   - component: {fileID: 470942423}
-  - component: {fileID: 470942422}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -2475,38 +2510,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000016212, y: 0.000034332}
   m_SizeDelta: {x: 118.96, y: 118.96}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &470942422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 470942420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  isDraggable: 1
-  boostEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 470942422}
-        m_TargetAssemblyTypeName: Booster, Assembly-CSharp
-        m_MethodName: RocketBooster
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  bonusTime: 15
-  amountText: {fileID: 1780634086}
-  boosterCount: 1
 --- !u!114 &470942423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2908,6 +2911,7 @@ GameObject:
   - component: {fileID: 613307244}
   - component: {fileID: 613307247}
   - component: {fileID: 613307245}
+  - component: {fileID: 613307248}
   m_Layer: 5
   m_Name: ShuffleBooster
   m_TagString: Untagged
@@ -2983,7 +2987,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 733282763}
+      - m_Target: {fileID: 613307248}
         m_TargetAssemblyTypeName: Booster, Assembly-CSharp
         m_MethodName: ShuffleBoard
         m_Mode: 1
@@ -3003,6 +3007,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613307243}
   m_CullTransparentMesh: 0
+--- !u!114 &613307248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613307243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTime: 15
+  amountText: {fileID: 1353722755}
+  boosterCount: 1
 --- !u!1 &631139358
 GameObject:
   m_ObjectHideFlags: 0
@@ -3290,7 +3309,6 @@ GameObject:
   - component: {fileID: 733282759}
   - component: {fileID: 733282762}
   - component: {fileID: 733282761}
-  - component: {fileID: 733282763}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -3356,26 +3374,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733282758}
   m_CullTransparentMesh: 0
---- !u!114 &733282763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733282758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  isDraggable: 0
-  boostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  bonusTime: 15
-  amountText: {fileID: 1353722755}
-  boosterCount: 1
 --- !u!1 &781491851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3699,9 +3697,10 @@ GameObject:
   - component: {fileID: 855692352}
   - component: {fileID: 855692355}
   - component: {fileID: 855692353}
+  - component: {fileID: 855692356}
   m_Layer: 5
-  m_Name: BombBooster
-  m_TagString: Untagged
+  m_Name: DiscoBooster
+  m_TagString: Booster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3774,9 +3773,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670947449}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ToggleBooster
+      - m_Target: {fileID: 398890116}
+        m_TargetAssemblyTypeName: BoosterCell, Assembly-CSharp
+        m_MethodName: CallDisco
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3794,6 +3793,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855692351}
   m_CullTransparentMesh: 0
+--- !u!114 &855692356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855692351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTime: 15
+  amountText: {fileID: 449773228}
+  boosterCount: 1
 --- !u!1 &889462970
 GameObject:
   m_ObjectHideFlags: 0
@@ -4208,7 +4222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172302, y: 4}
+  m_AnchoredPosition: {x: -12.172241, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983490514
@@ -4496,7 +4510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb90bbf423af427c96043e2402b4084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canUseBooster: 0
+  boosterCount: 0
   player1GoalText: {fileID: 1785344161}
   player2GoalText: {fileID: 1004834602}
 --- !u!1 &1004834600
@@ -6192,7 +6206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172302, y: 4}
+  m_AnchoredPosition: {x: -12.172241, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404935505
@@ -6244,7 +6258,6 @@ GameObject:
   - component: {fileID: 1461416853}
   - component: {fileID: 1461416855}
   - component: {fileID: 1461416854}
-  - component: {fileID: 1461416856}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -6310,26 +6323,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461416852}
   m_CullTransparentMesh: 0
---- !u!114 &1461416856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1461416852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  isDraggable: 0
-  boostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  bonusTime: 15
-  amountText: {fileID: 1371404210}
-  boosterCount: 1
 --- !u!1 &1465215048
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,7 +6817,6 @@ GameObject:
   - component: {fileID: 1670947446}
   - component: {fileID: 1670947448}
   - component: {fileID: 1670947447}
-  - component: {fileID: 1670947449}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -6890,38 +6882,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670947445}
   m_CullTransparentMesh: 0
---- !u!114 &1670947449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670947445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  isDraggable: 1
-  boostEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1670947449}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: DropColorBomb
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  bonusTime: 15
-  amountText: {fileID: 449773228}
-  boosterCount: 1
 --- !u!1 &1688913550
 GameObject:
   m_ObjectHideFlags: 0
@@ -8599,6 +8559,7 @@ GameObject:
   - component: {fileID: 1907812361}
   - component: {fileID: 1907812364}
   - component: {fileID: 1907812362}
+  - component: {fileID: 1907812365}
   m_Layer: 5
   m_Name: TimeBooster
   m_TagString: Untagged
@@ -8674,7 +8635,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1461416856}
+      - m_Target: {fileID: 1907812365}
         m_TargetAssemblyTypeName: Booster, Assembly-CSharp
         m_MethodName: AddTime
         m_Mode: 1
@@ -8694,6 +8655,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1907812360}
   m_CullTransparentMesh: 0
+--- !u!114 &1907812365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907812360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTime: 15
+  amountText: {fileID: 1371404210}
+  boosterCount: 1
 --- !u!1001 &1911328500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9038,9 +9014,10 @@ GameObject:
   - component: {fileID: 1966899155}
   - component: {fileID: 1966899158}
   - component: {fileID: 1966899156}
+  - component: {fileID: 1966899159}
   m_Layer: 5
   m_Name: RemoveBooster
-  m_TagString: Untagged
+  m_TagString: Booster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9113,9 +9090,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2042045607}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ToggleBooster
+      - m_Target: {fileID: 398890116}
+        m_TargetAssemblyTypeName: BoosterCell, Assembly-CSharp
+        m_MethodName: CallHammer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9133,6 +9110,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966899154}
   m_CullTransparentMesh: 0
+--- !u!114 &1966899159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966899154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusTime: 15
+  amountText: {fileID: 781491853}
+  boosterCount: 1
 --- !u!1 &1983026989
 GameObject:
   m_ObjectHideFlags: 0
@@ -9177,12 +9169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7a475504a0d4e5e99182c612ce725d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicClips:
-  - {fileID: 8300000, guid: 696ca7cd5c281418bb7bc60d3514f366, type: 3}
-  winClips:
-  - {fileID: 8300000, guid: 5f9fb0bfcf06e4304aab13b97645fe13, type: 3}
-  loseClips:
-  - {fileID: 8300000, guid: ed4ad50d33af142e6be4b65f4d37e37c, type: 3}
+  musicClip: {fileID: 8300000, guid: 696ca7cd5c281418bb7bc60d3514f366, type: 3}
+  winClip: {fileID: 8300000, guid: 5f9fb0bfcf06e4304aab13b97645fe13, type: 3}
+  loseClip: {fileID: 8300000, guid: ed4ad50d33af142e6be4b65f4d37e37c, type: 3}
   musicVolume: 0.5
   fxVolume: 1
   lowPitch: 0.95
@@ -9198,7 +9187,6 @@ GameObject:
   - component: {fileID: 2042045604}
   - component: {fileID: 2042045606}
   - component: {fileID: 2042045605}
-  - component: {fileID: 2042045607}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -9264,38 +9252,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042045603}
   m_CullTransparentMesh: 0
---- !u!114 &2042045607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042045603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e2ef08fcf9040eba16434eee215ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnabled: 0
-  isDraggable: 1
-  boostEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2042045607}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: RemoveOneGamePiece
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  bonusTime: 15
-  amountText: {fileID: 781491853}
-  boosterCount: 1
 --- !u!1 &2056637099
 GameObject:
   m_ObjectHideFlags: 0
@@ -10807,7 +10763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.172302, y: 4}
+  m_AnchoredPosition: {x: -12.172241, y: 4}
   m_SizeDelta: {x: 24.3445, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7098200962698166438

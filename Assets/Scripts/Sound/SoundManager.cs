@@ -3,9 +3,9 @@
 public class SoundManager : Singleton<SoundManager>
 {
 
-    public AudioClip[] musicClips;
-    public AudioClip[] winClips;
-    public AudioClip[] loseClips;
+    public AudioClip musicClip;
+    public AudioClip winClip;
+    public AudioClip loseClip;
 
     [Range(0,1)]
     public float musicVolume = 0.5f;
@@ -22,7 +22,7 @@ public class SoundManager : Singleton<SoundManager>
         PlayRandomMusic();
 	}
     
-    public void PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f, bool randomizePitch = true)
+    public void PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f, bool randomizePitch = true, bool loop = false)
     {
         if (clip != null)
         {
@@ -41,51 +41,35 @@ public class SoundManager : Singleton<SoundManager>
             }
 
             source.volume = volume;
+            source.loop = loop;
 
             source.Play();
-            
-            Destroy(go, clip.length);
-            
-        }
-    }
-    
 
-    // play a random sound from an array of sounds
-    void PlayRandom(AudioClip[] clips, Vector3 position, float volume = 1f)
-    {
-        if (clips != null)
-        {
-            if (clips.Length != 0)
+            if (loop)
             {
-                int randomIndex = Random.Range(0, clips.Length);
-
-                if (clips[randomIndex] != null)
+                if (GameManager.Instance.IsGameOver)
                 {
-                   PlayClipAtPoint(clips[randomIndex], position, volume);
+                    Destroy(go);
                 }
             }
+            
         }
     }
 
     void PlayRandomMusic()
     {
-        PlayRandom(musicClips, Vector3.zero, musicVolume);
+        PlayClipAtPoint(musicClip, Vector3.zero, musicVolume, true, true);
     }
 
     public void PlayWinSound()
     {
-        PlayRandom(winClips, Vector3.zero, fxVolume);
+        PlayClipAtPoint(winClip, Vector3.zero, fxVolume);
     }
 
     public void PlayLoseSound()
     {
-        PlayRandom(loseClips, Vector3.zero, fxVolume * 0.5f);
+        PlayClipAtPoint(loseClip, Vector3.zero, fxVolume * 0.5f);
     }
-
-   /*public void PlayBonusSound()
-    {
-        PlayRandom(bonusClips, Vector3.zero, fxVolume);
-    }*/
 
 
 }

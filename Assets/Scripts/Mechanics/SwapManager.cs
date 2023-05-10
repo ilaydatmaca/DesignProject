@@ -25,6 +25,13 @@ public class SwapManager : MonoBehaviour
     {
         if(!_roundManager.turnView.IsMine || MovesManager.Instance.noMoreMoves || GameManager.Instance.paused)
             return;
+
+        if (BoosterCell.Instance.isHammerActive || BoosterCell.Instance.isDiscoActive ||
+            BoosterCell.Instance.isRocketActive)
+        {
+            BoosterCell.Instance.targetCell = cell;
+            BoosterCell.Instance.CallEvent();
+        }
         
         if (_board.clickedCell == null)
         {
