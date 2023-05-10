@@ -8,7 +8,7 @@ public class CollectionGoal : Singleton<CollectionGoal>
     private MatchValue _matchValue1 = MatchValue.Blue;
     private MatchValue _matchValue2 = MatchValue.Red;
 
-    public bool canUseBooster;
+    public int boosterCount;
 
     public TMP_Text player1GoalText;
     public TMP_Text player2GoalText;
@@ -25,7 +25,7 @@ public class CollectionGoal : Singleton<CollectionGoal>
                 _countGoalPlayer1 = 0;
                 if (RoundManager.Instance.turnView.IsMine)
                 {
-                    canUseBooster = true;
+                    boosterCount++;
                 }
             }
 
@@ -39,7 +39,7 @@ public class CollectionGoal : Singleton<CollectionGoal>
                 _countGoalPlayer2 = 0;
                 if (RoundManager.Instance.turnView.IsMine)
                 {
-                    canUseBooster = true;
+                    boosterCount++;
                 }
             }
 

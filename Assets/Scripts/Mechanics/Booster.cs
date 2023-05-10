@@ -126,20 +126,19 @@ public class Booster : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     
     public void DropColorBomb()
     {
-        if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
+        if (_targetCell != null && CollectionGoal.Instance.boosterCount > 0)
         {
             _board.photonView.RPC("RPC_MakeColorBombBooster", RpcTarget.AllBuffered, _targetCell.xIndex, _targetCell.yIndex);
-            CollectionGoal.Instance.canUseBooster = false;
-
+            CollectionGoal.Instance.boosterCount--;
         }
     }
     
     public void RocketBooster()
     {
-        if (_targetCell != null && CollectionGoal.Instance.canUseBooster)
+        if (_targetCell != null && CollectionGoal.Instance.boosterCount > 0)
         {
             _board.photonView.RPC("RPC_RemoveColumn", RpcTarget.AllBuffered, _targetCell.xIndex);
-            CollectionGoal.Instance.canUseBooster = false;
+            CollectionGoal.Instance.boosterCount--;
         }
     }
     public void ShuffleBoard()
