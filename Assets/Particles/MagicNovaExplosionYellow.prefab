@@ -14399,7 +14399,7 @@ GameObject:
   - component: {fileID: 82458044305838282}
   - component: {fileID: 108181088290975496}
   - component: {fileID: 114785979185852772}
-  - component: {fileID: 8321667374423093660}
+  - component: {fileID: 3357630628011054855}
   m_Layer: 0
   m_Name: MagicNovaExplosionYellow
   m_TagString: Untagged
@@ -19376,7 +19376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 0.3
   killAfterLife: 0
---- !u!114 &8321667374423093660
+--- !u!114 &3357630628011054855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19390,7 +19390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allParticles: []
   lifetime: 1
-  destroyImmediately: 1
+  destroyImmediately: 0
 --- !u!1 &1600573778498772
 GameObject:
   m_ObjectHideFlags: 0

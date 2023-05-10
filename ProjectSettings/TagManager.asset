@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ParticleManager
   - Booster
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Particle
   - 
   - 
   - 
