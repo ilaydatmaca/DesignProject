@@ -6933,7 +6933,7 @@ MonoBehaviour:
   isRefilling: 0
   swapTime: 0.1
   scoreMultiplier: 1
-  delay: 0.25
+  delay: 0.1
   photonView: {fileID: 0}
 --- !u!4 &1688913552
 Transform:
