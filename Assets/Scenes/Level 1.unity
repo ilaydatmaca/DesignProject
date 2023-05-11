@@ -9856,7 +9856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: User123
+  m_text: Opponents
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 248a9430948d547e0913437bab991720, type: 2}
   m_sharedMaterial: {fileID: -1263159807964499621, guid: 248a9430948d547e0913437bab991720, type: 2}
@@ -24835,7 +24835,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7098200962076259528
