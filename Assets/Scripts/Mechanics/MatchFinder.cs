@@ -71,6 +71,8 @@ public class MatchFinder : MonoBehaviour
         List<GamePiece> downwardMatches = FindMatches(startX, startY, new Vector2(0, -1));
 
         var combinedMatches = upwardMatches.Union(downwardMatches).ToList();
+        
+        Debug.Log("vertical " + combinedMatches.Count);
 
         return (combinedMatches.Count >= minLength) ? combinedMatches : new List<GamePiece>();
 
@@ -82,6 +84,8 @@ public class MatchFinder : MonoBehaviour
         List<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0));
 
         var combinedMatches = rightMatches.Union(leftMatches).ToList();
+
+        Debug.Log("horizontaş " + combinedMatches.Count);
 
         return (combinedMatches.Count >= minLength) ? combinedMatches : new List<GamePiece>();
 
