@@ -108,13 +108,6 @@ public class SwapManager : MonoBehaviour
 
                     List<GamePiece> piecesToClear = cellAMatches.Union(cellBMatches).ToList().Union(colorMatches).ToList();
                     
-                    Debug.Log("ASD");
-
-                    foreach (var asd in piecesToClear)
-                    {
-                        Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().yIndex + " "
-                                  + asd.GetComponent<GamePiece>().matchValue );
-                    }
                     _boardManager.BoardChecking(piecesToClear);
                     
                     

@@ -37,13 +37,13 @@ public class BoardManager : MonoBehaviour
 
         List<GamePiece> matches = gamePieces;
 
-        Debug.Log("new");
+        /*Debug.Log("new");
 
         foreach (var asd in matches)
         {
             Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().yIndex + " "
                             + asd.GetComponent<GamePiece>().matchValue );
-        }
+        }*/
 
         // store a score multiplier for chain reactions
         _board.scoreMultiplier = 0;
@@ -66,6 +66,13 @@ public class BoardManager : MonoBehaviour
 
         if (_matchFinder.FindAllMatches().Count > 0)
         {
+            Debug.Log("yeto");
+            foreach (var asd in _matchFinder.FindAllMatches())
+            {
+                Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().yIndex + " "
+                          + asd.GetComponent<GamePiece>().matchValue );
+            }
+            
             BoardChecking(_matchFinder.FindAllMatches());
         }
         else
