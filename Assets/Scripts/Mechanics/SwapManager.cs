@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,6 +108,7 @@ public class SwapManager : MonoBehaviour
 
                     List<GamePiece> piecesToClear = cellAMatches.Union(cellBMatches).ToList().Union(colorMatches).ToList();
                     
+
                     _boardManager.BoardChecking(piecesToClear);
                     
                     

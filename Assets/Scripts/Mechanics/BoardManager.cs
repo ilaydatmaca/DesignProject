@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,14 @@ public class BoardManager : MonoBehaviour
         _board.isRefilling = true;
 
         List<GamePiece> matches = gamePieces;
+
+        Debug.Log("new");
+
+        foreach (var asd in matches)
+        {
+            Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().xIndex + " "
+                            + asd.GetComponent<GamePiece>().matchValue );
+        }
 
         // store a score multiplier for chain reactions
         _board.scoreMultiplier = 0;

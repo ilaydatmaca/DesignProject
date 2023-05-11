@@ -86,7 +86,7 @@ public class Board : MonoBehaviour
     
     public void FillBoard()
     {
-        if(PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.IsMasterClient && RoundManager.Instance.player1View.IsMine)
         {
             int maxIterations = 100;
 
@@ -107,7 +107,9 @@ public class Board : MonoBehaviour
 
                             iteration++;
                         }
-                        photonView.RPC("RPC_InitGameObject", RpcTarget.Others, index, i, j);
+                        _clearManager.DestroyAt(i, j);
+
+                        photonView.RPC("RPC_InitGameObject", RpcTarget.All, index, i, j);
                         
                     }
                 }
@@ -193,7 +195,7 @@ public class Board : MonoBehaviour
         {
             for (int j = y - offset; j <= y + offset; j++)
             {
-                if (IsInBorder(i, j))
+                if (IsInBorder(i, j) && AllGamePieces[i, j] != null)
                 {
                     gamePieces.Add(AllGamePieces[i, j]);
                 }

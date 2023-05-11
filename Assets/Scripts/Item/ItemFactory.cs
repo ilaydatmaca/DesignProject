@@ -91,10 +91,14 @@ public class ItemFactory : MonoBehaviour
     
     public void InitGameObject(int index, int x, int y)
     {
-        GameObject randomPiece = Instantiate(cellPrefabs[index], Vector3.zero, Quaternion.identity, transform);
-        _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
-        randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
-        randomPiece.GetComponent<GamePiece>().Fall();
+        if (_board.AllGamePieces[x, y] == null)
+        {
+            //Debug.Log("asd " +  cellPrefabs[index].name + " " + x + " " + y);
+            GameObject randomPiece = Instantiate(cellPrefabs[index], Vector3.zero, Quaternion.identity, transform);
+            _board.AllGamePieces[x, y] = randomPiece.GetComponent<GamePiece>();
+            randomPiece.GetComponent<GamePiece>().Init(_board, x, y );
+            randomPiece.GetComponent<GamePiece>().Fall();
+        }
     }
     
     
