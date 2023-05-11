@@ -305,7 +305,7 @@ MonoBehaviour:
   losingPopup: {fileID: 966813821}
   winningPopup: {fileID: 7098200962605640056}
   drawPopup: {fileID: 1113962295}
-  losingScoreText: {fileID: 1352008204}
+  losingScoreText: {fileID: 1914741428}
   winningScoreText: {fileID: 7098200962894770295}
   drawScoreText: {fileID: 1352008204}
 --- !u!1 &39062852
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   bonusTime: 15
   amountText: {fileID: 1780634086}
   boosterCount: 1
-  particle: {fileID: 0}
+  particle: {fileID: 2104681454}
 --- !u!1 &215397530
 GameObject:
   m_ObjectHideFlags: 0
@@ -8674,7 +8674,7 @@ MonoBehaviour:
   bonusTime: 15
   amountText: {fileID: 449773228}
   boosterCount: 1
-  particle: {fileID: 0}
+  particle: {fileID: 611032937}
 --- !u!1 &889462970
 GameObject:
   m_ObjectHideFlags: 0
