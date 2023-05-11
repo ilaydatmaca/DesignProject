@@ -41,7 +41,7 @@ public class BoardManager : MonoBehaviour
 
         foreach (var asd in matches)
         {
-            Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().xIndex + " "
+            Debug.Log(asd.GetComponent<GamePiece>().xIndex + " " + asd.GetComponent<GamePiece>().yIndex + " "
                             + asd.GetComponent<GamePiece>().matchValue );
         }
 

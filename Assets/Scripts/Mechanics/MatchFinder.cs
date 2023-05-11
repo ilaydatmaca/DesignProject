@@ -108,6 +108,8 @@ public class MatchFinder : MonoBehaviour
                 combinedMatches = combinedMatches.Union(matches).ToList();
             }
         }
+        
+        Debug.Log(combinedMatches.Count());
         return combinedMatches;
     }
 
