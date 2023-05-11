@@ -8,7 +8,7 @@ public class GamePiece : MonoBehaviour {
 	
 	private bool _isMoving;
 	private readonly int _fallOffset = 8;
-	private readonly float _fallTime = 0.1f;
+	private readonly float _fallTime = 0.5f;
 
 	public MatchValue matchValue;
 

@@ -16658,9 +16658,9 @@ MonoBehaviour:
   targetCell: {fileID: 0}
   playerInputEnabled: 1
   isRefilling: 0
-  swapTime: 0.1
+  swapTime: 1
   scoreMultiplier: 1
-  delay: 0.15
+  delay: 1
   photonView: {fileID: 0}
 --- !u!4 &1688913552
 Transform:
